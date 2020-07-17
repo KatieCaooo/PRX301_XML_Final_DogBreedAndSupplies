@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <dog-breed>
+        <dog-domain>https://www.dogbreedslist.info/</dog-domain>
+        <dog-breed-list-url>all-dog-breeds/list_1_</dog-breed-list-url>
+        <dog-breed-detail-url>all-dog-breeds/</dog-breed-detail-url>
+        <dog-breed-page>19</dog-breed-page>
+        <dog-breed-url-suffix>.html</dog-breed-url-suffix>
+    </dog-breed>
+    <dog-supplies>
+        <supplies-domain>https://www.orvis.com/</supplies-domain>
+        <supplies-photo-domain>https://cdn.orvis.com/</supplies-photo-domain>
+        <supplies-bed>dog-beds</supplies-bed>
+        <supplies-collar>personalized-collars</supplies-collar> 
+        <supplies-house>dogs-in-the-house</supplies-house>
+        <supplies-gate>dog-gates</supplies-gate>
+        <supplies-bowl>dog-bowls</supplies-bowl>
+        <supplies-crate>dog-crates</supplies-crate>
+        <supplies-toy>dog-toys</supplies-toy>
+        <supplies-jacket>dog-jackets</supplies-jacket>
+    </dog-supplies>
+</config>

@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="bootstrap.min.css">
+        <link rel="stylesheet" href="main.css">
+        <script>
+            function getXmlHttpObject() {
+                var xmlHttp = null;
+                try {
+                    xmlHttp = new XMLHttpRequest();
+                } catch (exception) {
+                    try {
+                        xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                    } catch (e) {
+                        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                }
+                return xmlHttp;
+
+            }
+            function loadAllDogBreed() {
+                var xmlHttp = getXmlHttpObject();
+                if (xmlHttp === null) {
+                    alert("Your browser does not support AJAX!")
+                }
+                xmlHttp.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        console.log(this.responseText);
+//                                alert("Done");
+                    }
+                }
+                xmlHttp.open("GET", "http://localhost:8080/FinalProject_Service/dog-breed?", true);
+                xmlHttp.send(null);
+            }
+            window.onload = function () {
+                loadAllDogBreed();
+            }
+        </script>
+    </head>
+    <body style="background-color: #4e4c4c">
+        <nav class="navbar navbar-dark bg-dark justify-content-end">
+            <ul class="nav">
+                <li class="nav-item">
+                    <button type="button" class="btn btn-outline-warning" id="welcomeName" style="visibility: hidden"></button>
+                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#loginForm" data-whatever="@fat" id="openLogin">Login</button>
+                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#registerForm" data-whatever="@fat" id="signup">Sign Up</button>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container" id="containerQuestion">
+            <div class="row align-items-center" style="height:100vh;background-color: pink;">
+                <div class="col" style="background-color: pink">
+                    <br/>
+                    <div id="carouselControls" class="carousel slide" data-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <!--experience-->
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://i.pinimg.com/originals/8f/a2/95/8fa295e3a0d02c253cc17a1b1a560b21.jpg" 
+                                             class="card-img-top" alt="experience">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[1/16] Experience</h5>
+                                            <p class="card-text lead">What is your experience with dogs?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="experience" class="card-input-element d-none" value="0" onClick="getExp(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Yes, I own(ed) a dog.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="experience" class="card-input-element d-none" value="1" onClick="getExp(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Have some experence, but not own any dog.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="experience" class="card-input-element d-none" value="2" onClick="getExp(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                New to dogs
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--Home-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://i.ytimg.com/vi/T9c8UIPNxkQ/maxresdefault.jpg" 
+                                             class="card-img-top" alt="Home">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[2/16] Home</h5>
+                                            <p class="card-text lead">What is your home like?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="home" class="card-input-element d-none" value="0" onClick="getHome(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                An apartment
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="home" class="card-input-element d-none" value="1" onClick="getHome(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                A house with a small yard
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="home" class="card-input-element d-none" value="2" onClick="getHome(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                A house with a large yard
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--Children-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://www.cdc.gov/vaccines/programs/vfc/images/kindergarten-kids.jpg" 
+                                             class="card-img-top" alt="Childrend">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[3/16] Children</h5>
+                                            <p class="card-text lead">Are you looking for a child-friendly dog?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="children" class="card-input-element d-none" value="0" onClick="getChild(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Don't mind
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="children" class="card-input-element d-none" value="1" onClick="getChild(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Yes
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="children" class="card-input-element d-none" value="2" onClick="getChild(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                No
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--stranger-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://www.wikihow.com/images/thumb/3/3b/Get-Your-Dog-to-Be-Nice-to-Strangers-Step-1-Version-2.jpg/v4-460px-Get-Your-Dog-to-Be-Nice-to-Strangers-Step-1-Version-2.jpg" 
+                                             class="card-img-top" alt="stranger">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[4/16] Stranger</h5>
+                                            <p class="card-text lead">Are you looking for a stranger-friendly dog?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="stranger" class="card-input-element d-none" value="0" onClick="getStranger(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Don't mind
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="stranger" class="card-input-element d-none" value="1" onClick="getStranger(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Yes
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="stranger" class="card-input-element d-none" value="2" onClick="getStranger(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                No
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--size-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://cdn.shopify.com/s/files/1/2091/5465/files/Dog_Size_Chart_with_Scale.gif?v=1575123349" 
+                                             class="card-img-top" alt="Size Chart">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[5/16] Dog Size</h5>
+                                            <p class="card-text lead">What size dog are you considering?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="size" class="card-input-element d-none" value="Smallest" onClick="getSizeDog(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I prefer super small dogs
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="size" class="card-input-element d-none" value="Small" onClick="getSizeDog(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I prefer small dogs
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="size" class="card-input-element d-none" value="Medium" onClick="getSizeDog(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I prefer medium dogs
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="size" class="card-input-element d-none" value="Large" onClick="getSizeDog(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I prefer large dogs
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="size" class="card-input-element d-none" value="Giant" onClick="getSizeDog(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I prefer giant dogs
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="size" class="card-input-element d-none" value="" onClick="getSizeDog(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Any size is fine
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--barking-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://preferredpetpartners.com/wp-content/uploads/2019/06/barking-dog.jpg" 
+                                             class="card-img-top" alt="Barking">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[6/16] Barking</h5>
+                                            <p class="card-text lead">What is your noise tolerance for barking?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="barking" class="card-input-element d-none" value="1" onClick="getBark(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I'd like a very vocal dog.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="barking" class="card-input-element d-none" value="2" onClick="getBark(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I love dogs that are chatty and vocal.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="barking" class="card-input-element d-none" value="3" onClick="getBark(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I prefer quiet dogs that only bark from time to time.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="barking" class="card-input-element d-none" value="0" onClick="getBark(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Don't mind.
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--Cat-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2012/11/101438745-cat-conjunctivitis-causes.jpg" 
+                                             class="card-img-top" alt="Cat">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[7/16] Cat</h5>
+                                            <p class="card-text lead">Do you current own any cat?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="cat" class="card-input-element d-none" value="0" onClick="getCat(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Yes
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="cat" class="card-input-element d-none" value="1" onClick="getCat(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                No
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--Dog-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://i.insider.com/5df126b679d7570ad2044f3e?width=1100&format=jpeg&auto=webp" 
+                                             class="card-img-top" alt="Dog">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[8/16] Dog</h5>
+                                            <p class="card-text lead">Do you current own any dog?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="dog" class="card-input-element d-none" value="0" onClick="getDog(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Yes
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="dog" class="card-input-element d-none" value="1" onClick="getDog(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                No
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--excercise-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://r.ddmcdn.com/s_f/o_1/APL/uploads/2014/10/fun-ways-to-exercise-dog-01-625x450.jpg" 
+                                             class="card-img-top" alt="Excercise">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[9/16] Excercise</h5>
+                                            <p class="card-text lead">What type of walks would you like to do?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="excercise" class="card-input-element d-none" value="0" onClick="getExc(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I'd like to keep fit together with vigorous walks.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="excercise" class="card-input-element d-none" value="1" onClick="getExc(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I'd like to go on active walks with my dog.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="excercise" class="card-input-element d-none" value="2" onClick="getExc(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I'm looking for a dog to take on gentle walks.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="excercise" class="card-input-element d-none" value="3" onClick="getExc(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I'd like go to fridge.
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--Playful-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://www.smartlivingnetwork.com/uploads/2015032411031515321606374_c6c46ae2db_z.jpg" 
+                                             class="card-img-top" alt="Playful">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[10/16] Playful</h5>
+                                            <p class="card-text lead">What level of mischief do you want your dog?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="playful" class="card-input-element d-none" value="0" onClick="getPlay(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Don't mind.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="playful" class="card-input-element d-none" value="1" onClick="getPlay(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Playful
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="playful" class="card-input-element d-none" value="2" onClick="getPlay(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Naughty sometimes
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="playful" class="card-input-element d-none" value="3" onClick="getPlay(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Serious
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--smart-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://cdn3-www.dogtime.com/assets/uploads/2016/02/dog-smart-reading.jpg" 
+                                             class="card-img-top" alt="smart">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[11/16] Intelligent</h5>
+                                            <p class="card-text lead">How smart would you like your dog to be?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="smart" class="card-input-element d-none" value="0" onClick="getSmart(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Doesn't matter 
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="smart" class="card-input-element d-none" value="1" onClick="getSmart(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Responsive, but no smarter than I am!
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="smart" class="card-input-element d-none" value="2" onClick="getSmart(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Smart enough to keep me on my toes
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--training-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://www.masterdog-training.com/wp-content/uploads/2015/06/07.jpg" 
+                                             class="card-img-top" alt="training">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[12/16] Training</h5>
+                                            <p class="card-text lead">What level of training are you willing to take on?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="training" class="card-input-element d-none" value="0" onClick="getTrain(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I'm an experienced trainer and comfortable with any breed.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="training" class="card-input-element d-none" value="1" onClick="getTrain(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I'm happy with breeds that may need some training.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="training" class="card-input-element d-none" value="2" onClick="getTrain(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I'd feel more comfortable keeping training to the basics.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="training" class="card-input-element d-none" value="3" onClick="getTrain(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Don't think about this.
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--watchdog-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://i.ytimg.com/vi/goH4x2GiPtg/maxresdefault.jpg" 
+                                             class="card-img-top" alt="watchdog">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[13/16] Guardian</h5>
+                                            <p class="card-text lead">Are you looking for a dog to guard you and your property?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="watchdog" class="card-input-element d-none" value="0" onClick="getWatch(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Don't mind.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="watchdog" class="card-input-element d-none" value="1" onClick="getWatch(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Yes. I'd like a dog that barks, alerts, and is physically protective.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="watchdog" class="card-input-element d-none" value="2" onClick="getWatch(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Yes. I'd like a dog that barks and is alert.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="watchdog" class="card-input-element d-none" value="3" onClick="getWatch(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                No
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--Grooming-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://www.123petsoftware.com/wp-content/uploads/2017/05/Pet-Groomer-1.jpg" 
+                                             class="card-img-top" alt="Excercise">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[14/16] Grooming</h5>
+                                            <p class="card-text lead">How much grooming would you be prepared to do?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="grooming" class="card-input-element d-none" value="0" onClick="getGroom(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I can fit in daily grooming sessions.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="grooming" class="card-input-element d-none" value="1" onClick="getGroom(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I can groom my dog once a week.
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="grooming" class="card-input-element d-none" value="2" onClick="getGroom(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                I'm so lazy.
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--shedding-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://www.rover.com/blog/wp-content/uploads/2014/10/shedding-dog-960x540.jpg" 
+                                             class="card-img-top" alt="shedding">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[15/16] Shedding</h5>
+                                            <p class="card-text lead">What is your tolerance for shedding?</p>
+                                        </div>
+                                        <label>
+                                            <input type="radio" name="shedding" class="card-input-element d-none" value="0" onClick="getShed(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Doesn't matter 
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="shedding" class="card-input-element d-none" value="1" onClick="getShed(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Frequent
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="shedding" class="card-input-element d-none" value="2" onClick="getShed(this.value)">
+                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                                Infrequent
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+
+                            <!--budget-->
+                            <div class="carousel-item">
+                                <div class="row" style="width: 100%">
+                                    <div class="col"></div>
+                                    <div class="card" style="width: 50%; align-content: center">
+                                        <img src="https://www.janetbarrcfs.com/sites/default/files/users/janetbarr/Dog-Supplies-Not-Worth-Cost.jpg" 
+                                             class="card-img-top" alt="Budget">
+                                        <div class="card-body">
+                                            <h5 class="card-title">[16/16] Budget</h5>
+                                            <p class="card-text lead">How much will you buy supplies for your dog?</p>
+                                            <p class="card-text lead">(Without food and medicine)</p>
+                                        </div>
+                                        <div class="input-group mb-3" style="padding-left: 20px; padding-right: 20px">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">$</span>
+                                                <span class="input-group-text">00.00</span>
+                                            </div>
+                                            <input type="text" id="budget" pattern= "[0-9](\.0+)?" class="form-control" title="Only number or empty">
+                                        </div>
+                                        <br/>
+                                        <button type="button" class="btn btn-primary btn-lg btn-block" onClick="findDog()">Find my dog</button>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev" style="visibility: hidden" data-keyboard="true">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next" data-keyboard="true">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    <script>
+                        var currentQuestion = 0;
+                        document.getElementsByClassName("carousel-control-next")[0].addEventListener("click", function () {
+                            $(".carousel").carousel("next");
+                            currentQuestion++;
+                            if (currentQuestion !== 0) {
+                                document.getElementsByClassName("carousel-control-prev")[0].style.visibility = "visible";
+                            }
+                            if (currentQuestion === 15) {
+                                document.getElementsByClassName("carousel-control-next")[0].style.visibility = "hidden";
+                            }
+                        });
+
+                        document.getElementsByClassName("carousel-control-prev")[0].addEventListener("click", function () {
+                            $(".carousel").carousel("prev");
+                            currentQuestion--;
+                            if (currentQuestion === 0) {
+                                document.getElementsByClassName("carousel-control-prev")[0].style.visibility = "hidden";
+                            }
+                            if (currentQuestion !== 15) {
+                                document.getElementsByClassName("carousel-control-next")[0].style.visibility = "visible";
+                            }
+                        });
+
+                        var experience = 0;
+                        function getExp(value) {
+                            experience = (value + 1);
+                        }
+                        var home = 0;
+                        function getHome(value) {
+                            home = 3 * (value + 1);
+                        }
+                        var children = 0;
+                        function getChild(value) {
+                            children = 4 * (value + 1);
+                        }
+                        var stranger = 0;
+                        function getStranger(value) {
+                            stranger = 4 * (value + 1);
+                        }
+                        var sizeDog = "";
+                        function getSizeDog(value) {
+                            sizeDog = value;
+                        }
+                        var bark = "";
+                        function getBark(value) {
+                            bark = 2 * (value + 1);
+                        }
+                        var cat = "";
+                        function getCat(value) {
+                            cat = 3 * (value + 1);
+                        }
+                        var dog = "";
+                        function getDog(value) {
+                            dog = 3 * (value + 1);
+                        }
+                        var excercise = "";
+                        function getExc(value) {
+                            excercise = 2 * (value + 1);
+                        }
+                        var playful = "";
+                        function getPlay(value) {
+                            playful = 3 * (value + 1);
+                        }
+                        var smart = "";
+                        function getSmart(value) {
+                            smart = 4 * (value + 1);
+                        }
+                        var training = "";
+                        function getTrain(value) {
+                            training = 3 * (value + 1);
+                        }
+                        var watchdog = "";
+                        function getWatch(value) {
+                            watchdog = 3 * (value + 1);
+                        }
+                        var groom = "";
+                        function getGroom(value) {
+                            groom = 2 * (value + 1);
+                        }
+                        var shed = "";
+                        function getShed(value) {
+                            shed = 2 * (value + 1);
+                        }
+                        var budget = "";
+                        function getBudget() {
+                            budget = document.getElementById("budget").value;
+                        }
+
+                        function findDog() {
+
+                            var xmlHttp = getXmlHttpObject();
+                            if (xmlHttp === null) {
+                                alert("Your browser does not support AJAX!")
+                            }
+                            xmlHttp.onreadystatechange = function () {
+                                if (this.readyState === 4 && this.status === 200) {
+                                    document.getElementById("containerQuestion").style.display = "none";
+                                    document.getElementById("containerResultDog").style.display = "block";
+                                }
+
+                            }
+                            var url = "http://localhost:8080/FinalProject_Service/dog-breed/recommendDog?size=" + sizeDog
+                                    + "&experienceW=" + experience + "&homeW=" + home + "&childrenW=" + children +
+                                    "&strangerW=" + stranger + "&barkW=" + bark + "&catW=" + cat + "&dogW=" + dog +
+                                    "&excerciseW=" + excercise + "&playfulW=" + playful + "&smartW=" + smart +
+                                    "&trainingW=" + training + "&watchdogW=" + watchdog + "&groomW=" + groom + "&shedW=" + shed;
+                            xmlHttp.open("GET", url, true);
+                            xmlHttp.send(null);
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+        <!--Login-->
+        <div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog" style="width: 500px">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="loginLabel">Login</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <label id="warningLogin" style="display: none; color: red">Your username or password is incorrect!</label>
+                                <div class="form-group">
+                                    <label for="id">Username:</label>
+                                    <input type="text" class="form-control" id="idAccount">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd">Password</label>
+                                    <input type="password" class="form-control" id="pwdAccount">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="login()">Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var id;
+            function login() {
+                id = document.getElementById("idAccount").value;
+                var pwd = document.getElementById("pwdAccount").value;
+                var xmlHttp = getXmlHttpObject();
+                if (xmlHttp === null) {
+                    alert("Your browser does not support AJAX!")
+                }
+                xmlHttp.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        document.getElementById("welcomeName").style.visibility = "visible";
+                        document.getElementById("welcomeName").innerHTML = "Welcome, " + id;
+                        document.getElementById("openLogin").click();
+                        document.getElementById("openLogin").style.display = "none";
+                        document.getElementById("signup").style.display = "none";
+                    }
+                    if (this.readyState === 4 && this.status === 500)
+                    {
+                        document.getElementById("warningLogin").style.display = "block";
+                    }
+                }
+                xmlHttp.open("GET", "http://localhost:8080/FinalProject_Service/account?id=" + id + "&pwd=" + pwd, true);
+                xmlHttp.send(null);
+            }
+        </script>
+        <!--Register-->
+        <div class="modal fade" id="registerForm" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog" style="width: 500px">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="loginLabel">Register</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="fullname" class="register">Fullname:</label>
+                                    <input type="text" class="form-control" id="fullnameAccount" class="register">
+                                </div>
+                                <div class="form-group">
+                                    <label for="id" class="register">Username*:</label>
+                                    <input type="text" class="form-control" id="idRegister" class="register" required="true">
+                                    <label class="warningDuplicate" style="display: none; color: red">Duplicate ID, try another please!</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd" class="register">Password*:</label>
+                                    <input type="password" class="form-control" id="pwdRegister" class="register" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cpwd" class="register">Confirm Password*:</label>
+                                    <input type="password" class="form-control" id="cpwdRegister" class="register" required="true">
+                                    <label class="warningConfirm" style="display: none; color: red">Confirm password isn't matched! Try again!</label>
+                                </div>
+                                <input type="text" class="form-control" id="roleRegister" value="2" hidden="true">
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-outline-success btn-lg btn-block" class="register" onclick="register()">Register</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function register() {
+                document.getElementsByClassName("warningConfirm")[0].style.display = "none";
+                document.getElementsByClassName("warningDuplicate")[0].style.display = "none";
+                var pwd;
+                var fullname = document.getElementById("fullnameAccount").value;
+                var id = document.getElementById("idRegister").value;
+                if (document.getElementById("pwdRegister").value === document.getElementById("cpwdRegister").value) {
+                    pwd = document.getElementById("pwdRegister").value;
+                } else {
+                    pwd = null;
+                    document.getElementsByClassName("warningConfirm")[0].style.display = "block";
+                }
+                if (pwd !== null) {
+                    var role = document.getElementById("roleRegister").value;
+                    var xmlHttp = getXmlHttpObject();
+                    if (xmlHttp === null) {
+                        alert("Your browser does not support AJAX!")
+                    }
+                    xmlHttp.onreadystatechange = function () {
+                        if (this.readyState === 4 && this.status === 200) {
+                            if (this.responseText == 1) {
+                                document.getElementById("signup").click();
+                            } else if (this.responseText == 0) {
+                                document.getElementsByClassName("warningDuplicate")[0].style.display = "block";
+                            }
+                        }
+                    }
+                    xmlHttp.open("POST", "http://localhost:8080/FinalProject_Service/account?id=" + id + "&pwd=" + pwd + "&fullname=" + fullname + "&role=" + role, true);
+                    xmlHttp.send(null);
+                }
+                console.log("aaa");
+            }
+        </script>
+
+        <!--Show Dog Result-->
+        <div class="container" id="containerResultDog" style="background-color: cornsilk; ">
+            <div class="row align-items-center">
+                <div class="col-4 align-items-center">
+                    <div class="card" style="width: 90%; height: 90%; align-content: center; margin: 5% 5% 5% 5%;">
+                        <img src="https://www.dogbreedslist.info/uploads/allimg/dog-pictures/Cairn-Terrier-1.jpg" class="card-img-top" style="height: 50%">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="jquery.min.js"></script>
+        <script src="bootstrap.min.js"></script>
+
+    </body>
+</html>

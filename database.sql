@@ -60,6 +60,7 @@ CREATE TABLE `dog_breed` (
   `photo` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `size` varchar(45) DEFAULT NULL,
+  `weight` varchar(45) DEFAULT NULL,
   `puppy` varchar(45) DEFAULT NULL,
   `life_span` varchar(45) DEFAULT NULL,
   `price` float DEFAULT NULL,
@@ -154,4 +155,4 @@ CREATE TABLE `temperament_dog` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-18 18:11:47
+-- Dump completed on 2020-07-18 20:27:19

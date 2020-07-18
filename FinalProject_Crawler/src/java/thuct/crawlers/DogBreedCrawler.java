@@ -222,6 +222,14 @@ public class DogBreedCrawler {
         nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[9]/td[2]", doc, XPathConstants.NODE);
         String lifeSpan = nodeElement.getTextContent();
         breed.setLifeSpan(lifeSpan);
+        //weight
+        nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[12]/td[2]/p[1]", doc, XPathConstants.NODE);
+        String weight = nodeElement.getTextContent();
+        if (weight.contains(":")) {
+            String weightArray[] = weight.split(":");
+            weight = weightArray[1].trim();
+        }
+        breed.setWeight(weight);
 
         //puppy
         nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[14]/td[2]", doc, XPathConstants.NODE);

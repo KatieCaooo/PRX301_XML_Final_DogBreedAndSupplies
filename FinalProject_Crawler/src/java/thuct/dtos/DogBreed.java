@@ -6,8 +6,7 @@
 package thuct.dtos;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "DogBreed.findByPhoto", query = "SELECT d FROM DogBreed d WHERE d.photo = :photo")
     , @NamedQuery(name = "DogBreed.findByName", query = "SELECT d FROM DogBreed d WHERE d.name = :name")
     , @NamedQuery(name = "DogBreed.findBySize", query = "SELECT d FROM DogBreed d WHERE d.size = :size")
+    , @NamedQuery(name = "DogBreed.findByWeight", query = "SELECT d FROM DogBreed d WHERE d.weight = :weight")
     , @NamedQuery(name = "DogBreed.findByPuppy", query = "SELECT d FROM DogBreed d WHERE d.puppy = :puppy")
     , @NamedQuery(name = "DogBreed.findByLifeSpan", query = "SELECT d FROM DogBreed d WHERE d.lifeSpan = :lifeSpan")
     , @NamedQuery(name = "DogBreed.findByPrice", query = "SELECT d FROM DogBreed d WHERE d.price = :price")
@@ -72,6 +72,9 @@ public class DogBreed implements Serializable {
     @Size(max = 45)
     @Column(name = "size")
     private String size;
+    @Size(max = 45)
+    @Column(name = "weight")
+    private String weight;
     @Size(max = 45)
     @Column(name = "puppy")
     private String puppy;
@@ -115,7 +118,7 @@ public class DogBreed implements Serializable {
         @JoinColumn(name = "iddog_breed", referencedColumnName = "iddog_breed")}, inverseJoinColumns = {
         @JoinColumn(name = "idtemperament", referencedColumnName = "idtemperament")})
     @ManyToMany
-    private List<Temperament> temperamentList = new ArrayList<>();
+    private Collection<Temperament> temperamentCollection;
 
     public DogBreed() {
     }
@@ -154,6 +157,14 @@ public class DogBreed implements Serializable {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
     }
 
     public String getPuppy() {
@@ -301,12 +312,12 @@ public class DogBreed implements Serializable {
     }
 
     @XmlTransient
-    public List<Temperament> getTemperamentList() {
-        return temperamentList;
+    public Collection<Temperament> getTemperamentCollection() {
+        return temperamentCollection;
     }
 
-    public void setTemperamentList(List<Temperament> temperamentList) {
-        this.temperamentList = temperamentList;
+    public void setTemperamentCollection(Collection<Temperament> temperamentCollection) {
+        this.temperamentCollection = temperamentCollection;
     }
 
     @Override
@@ -333,5 +344,5 @@ public class DogBreed implements Serializable {
     public String toString() {
         return "thuct.dtos.DogBreed[ iddogBreed=" + iddogBreed + " ]";
     }
-
+    
 }

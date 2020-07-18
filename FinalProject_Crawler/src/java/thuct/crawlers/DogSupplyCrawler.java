@@ -13,6 +13,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -29,6 +32,8 @@ import thuct.utils.XMLUtils;
 public class DogSupplyCrawler {
 
     private static final String configFile = "/web/WEB-INF/config.xml";
+    private static ExecutorService executorService = Executors.newFixedThreadPool(10);
+    private static CompletableFuture[] futures = new CompletableFuture[8];
 
     /**
      * @param args the command line arguments
@@ -52,6 +57,7 @@ public class DogSupplyCrawler {
                 crawlDogInTheHouse(doc, node, url, xPath);
                 crawlDogJacket(doc, node, url, xPath);
                 crawlDogToy(doc, node, url, xPath);
+                CompletableFuture.allOf(futures).join();
                 System.exit(0);
             }
         } catch (Exception e) {
@@ -71,7 +77,7 @@ public class DogSupplyCrawler {
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Beds";
         Category category = setCategoryForSupplies(1, categoryName);
-        crawlSuppiesDetails(doc, url, xPath, category);
+        futures[0] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
     public static void crawlDogBowl(Document doc, Node node, String url, XPath xPath) throws XPathExpressionException, IOException {
@@ -79,7 +85,7 @@ public class DogSupplyCrawler {
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Bowls";
         Category category = setCategoryForSupplies(2, categoryName);
-        crawlSuppiesDetails(doc, url, xPath, category);
+        futures[1] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
     public static void crawlDogCollar(Document doc, Node node, String url, XPath xPath) throws XPathExpressionException, IOException {
@@ -87,7 +93,7 @@ public class DogSupplyCrawler {
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Collars";
         Category category = setCategoryForSupplies(3, categoryName);
-        crawlSuppiesDetails(doc, url, xPath, category);
+        futures[2] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
     public static void crawlDogCrate(Document doc, Node node, String url, XPath xPath) throws XPathExpressionException, IOException {
@@ -95,7 +101,7 @@ public class DogSupplyCrawler {
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Crates";
         Category category = setCategoryForSupplies(4, categoryName);
-        crawlSuppiesDetails(doc, url, xPath, category);
+        futures[3] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
     public static void crawlDogGate(Document doc, Node node, String url, XPath xPath) throws XPathExpressionException, IOException {
@@ -103,7 +109,7 @@ public class DogSupplyCrawler {
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Gates";
         Category category = setCategoryForSupplies(5, categoryName);
-        crawlSuppiesDetails(doc, url, xPath, category);
+        futures[4] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
     public static void crawlDogInTheHouse(Document doc, Node node, String url, XPath xPath) throws XPathExpressionException, IOException {
@@ -111,7 +117,7 @@ public class DogSupplyCrawler {
         url = url + node.getTextContent().trim();
         String categoryName = "Dog In The House";
         Category category = setCategoryForSupplies(6, categoryName);
-        crawlSuppiesDetails(doc, url, xPath, category);
+        futures[5] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
     public static void crawlDogJacket(Document doc, Node node, String url, XPath xPath) throws XPathExpressionException, IOException {
@@ -119,7 +125,7 @@ public class DogSupplyCrawler {
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Jackets";
         Category category = setCategoryForSupplies(7, categoryName);
-        crawlSuppiesDetails(doc, url, xPath, category);
+        futures[6] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
     public static void crawlDogToy(Document doc, Node node, String url, XPath xPath) throws XPathExpressionException, IOException {
@@ -127,7 +133,7 @@ public class DogSupplyCrawler {
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Toys";
         Category category = setCategoryForSupplies(8, categoryName);
-        crawlSuppiesDetails(doc, url, xPath, category);
+        futures[7] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
     public static Category setCategoryForSupplies(int id, String name) {
@@ -144,7 +150,7 @@ public class DogSupplyCrawler {
     }
 
     public static void crawlSuppiesDetails(Document doc, String url, XPath xPath, Category category) throws IOException, XPathExpressionException {
-        
+
     }
 
     public static String getDomainPhoto() {

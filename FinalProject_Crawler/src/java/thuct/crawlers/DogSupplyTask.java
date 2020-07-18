@@ -25,12 +25,20 @@ import thuct.utils.XMLUtils;
  *
  * @author katherinecao
  */
-public class DogBedTask implements Runnable {
+public class DogSupplyTask implements Runnable {
 
     private Document doc;
     private String url;
     private XPath xPath;
     private Category category;
+
+    public DogSupplyTask(Document doc, String url, XPath xPath, Category category) {
+        this.doc = doc;
+        this.url = url;
+        this.xPath = xPath;
+        this.category = category;
+    }
+    
 
     @Override
     public void run() {
@@ -111,9 +119,9 @@ public class DogBedTask implements Runnable {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(DogBedTask.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DogSupplyTask.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(DogBedTask.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DogSupplyTask.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

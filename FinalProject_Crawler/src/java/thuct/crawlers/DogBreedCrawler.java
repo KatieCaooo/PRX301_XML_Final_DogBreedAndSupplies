@@ -12,6 +12,11 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -19,7 +24,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import thuct.daos.DogBreedDAO;
-import thuct.dtos.DogBreed;
 import thuct.utils.XMLUtils;
 
 /**
@@ -29,6 +33,9 @@ import thuct.utils.XMLUtils;
 public class DogBreedCrawler {
 
     private static final String configFile = "/web/WEB-INF/config.xml";
+    public static int count = 0;
+
+    private static ExecutorService service = Executors.newFixedThreadPool(15);
 
     public static void main(String[] args) {
         try {
@@ -139,162 +146,22 @@ public class DogBreedCrawler {
         NodeList nodeLinks = (NodeList) xPath.evaluate("//div[@class='left']/a", doc, XPathConstants.NODESET);
         NodeList nodeNames = (NodeList) xPath.evaluate("//div[@class='left']/a/img", doc, XPathConstants.NODESET);
         NodeList nodePhotos = (NodeList) xPath.evaluate("//div[@class='left']/a/img", doc, XPathConstants.NODESET);
-        int count = 0;
         DogBreedDAO breedDAO = new DogBreedDAO();
         String dogDocument = "";
+        List<CompletableFuture> futures = new ArrayList<>();
         for (int j = 0; j < nodeNames.getLength(); j++) {
-            DogBreed breed = new DogBreed();
-            breed.setName(nodeNames.item(j).getAttributes().getNamedItem("alt").getNodeValue());
-            breed.setPhoto(nodePhotos.item(j).getAttributes().getNamedItem("src").getNodeValue());
-
-            String link = nodeLinks.item(j).getAttributes().getNamedItem("href").getNodeValue();
-            InputStream dogInputStream = getInputStreamForUrl(link);
-
-            dogDocument = getDogDetailsHTML(dogInputStream, dogDocument);
-            //remove special characters
-            dogDocument = dogDocument.replaceAll("&[a-zA-Z0-9#]*;", "");
-
-            doc = XMLUtils.convertStringToDocument(dogDocument);
-            //Information Table02
-            crawlInformation(breed, xPath, doc);
-            //Characteristics Table02
-            crawlCharacteristics(breed, xPath, doc);
-            //insert
-            System.out.println("Inserted " + (count++) + " breeds");
-            breedDAO.insertDogBreed(breed);
-
+            try {
+                futures.add(CompletableFuture.runAsync(new DogBreedTask(nodeNames.item(j), nodePhotos.item(j), nodeLinks.item(j), dogDocument, breedDAO), service));
+            } catch (Exception e) {
+                
+            }
             //delete breed not full fields
 //            List idNotFullList = breedDAO.getIdDogBreedNotFull();
 //            for (int i = 0; i < idNotFullList.size(); i++) {
 //                breedDAO.removeAllDogBreedNotFull(Integer.parseInt(idNotFullList.get(i).toString()));
 //            }
         }
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()])).join();
     }
 
-    public static DogBreed crawlInformation(DogBreed breed, XPath xPath, Document doc) throws XPathExpressionException {
-
-        Node nodeElement;
-
-        //size
-        nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[7]/td[2]", doc, XPathConstants.NODE);
-        String size = nodeElement.getTextContent();
-        size = size.replaceAll("<[a-zA-Z0-9:=\"-/. ]*>", "");
-        breed.setSize(size);
-
-        //life span
-        nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[9]/td[2]", doc, XPathConstants.NODE);
-        String lifeSpan = nodeElement.getTextContent();
-        breed.setLifeSpan(lifeSpan);
-
-        //weight
-        nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[12]/td[2]/p[1]", doc, XPathConstants.NODE);
-        String weight = nodeElement.getTextContent();
-        if (weight.contains(":")) {
-            String weightArray[] = weight.split(":");
-            weight = weightArray[1].trim();
-        }
-        breed.setWeight(weight);
-
-        //puppy
-        nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[14]/td[2]", doc, XPathConstants.NODE);
-        String puppy = nodeElement.getTextContent();
-        breed.setPuppy(puppy);
-
-        //price
-        nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[15]/td[2]", doc, XPathConstants.NODE);
-        String priceString = nodeElement.getTextContent();
-        priceString = priceString.replace("Average ", "");
-        priceString = priceString.replace("USD", "");
-        priceString = priceString.replace("$", "");
-        Float price = 0F;
-        if (priceString.contains("-")) {
-            String priceArray[] = priceString.split("-");
-            priceString = priceArray[1].trim();
-            price = Float.parseFloat(priceString);
-        }
-        breed.setPrice(price);
-        return breed;
-    }
-
-    public static DogBreed crawlCharacteristics(DogBreed breed, XPath xPath, Document doc) throws XPathExpressionException {
-        Node nodeElement;
-        NodeList nodeList = (NodeList) xPath.evaluate("//table[@class='table-02']//td[1]/text()", doc, XPathConstants.NODESET);
-        Float star = 0F;
-        String starString = "";
-        String starArray[];
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            String nameChar = nodeList.item(i).getTextContent().trim();
-            nodeElement = (Node) xPath.evaluate("//table[@class='table-02']/tbody/tr[" + (i + 2) + "]/td[2]/p[1]", doc, XPathConstants.NODE);
-            starString = nodeElement.getAttributes().getNamedItem("class").getNodeValue();
-            starArray = starString.split("-");
-            starString = starArray[1].trim();
-            star = Float.parseFloat(starString);
-
-            switch (nameChar) {
-                case "Adaptability":
-                    breed.setAdaptability(star);
-                    break;
-
-                case "Apartment Friendly":
-                    breed.setApartmentFriendly(star);
-                    break;
-
-                case "Barking Tendencies":
-                    breed.setBarkingTendency(star);
-                    break;
-
-                case "Cat Friendly":
-                    breed.setCatFriendly(star);
-                    break;
-
-                case "Child Friendly":
-                    breed.setChildFriendly(star);
-                    break;
-
-                case "Dog Friendly":
-                    breed.setDogFriendly(star);
-                    break;
-
-                case "Exercise Needs":
-                    breed.setExerciseNeed(star);
-                    break;
-
-                case "Grooming":
-                    breed.setGrooming(star);
-                    break;
-
-                case "Health Issues":
-                    breed.setHealthIssuse(star);
-                    break;
-
-                case "Intelligence":
-                    breed.setIntelligence(star);
-                    break;
-
-                case "Playfulness":
-                    breed.setPlayfulness(star);
-                    break;
-
-                case "Shedding Level":
-                    breed.setSheddingLevel(star);
-                    break;
-
-                case "Stranger Friendly":
-                    breed.setStrangerFriendly(star);
-                    break;
-
-                case "Trainability":
-                    breed.setTrainability(star);
-                    break;
-
-                case "Watchdog Ability":
-                    breed.setWatchdogAbility(star);
-                    break;
-
-                default:
-                    break;
-            }
-        }
-        return breed;
-    }
 }

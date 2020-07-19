@@ -4,10 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/ThuCT/PRX301_XML_Final_DogBreedAndSupplies/FinalProject_Crawler/src/java/thuct/dtos/Category.java</file>
-            <file>file:/D:/ThuCT/PRX301_XML_Final_DogBreedAndSupplies/FinalProject_Crawler/src/java/thuct/crawlers/DogSupplyCrawler.java</file>
-            <file>file:/D:/ThuCT/PRX301_XML_Final_DogBreedAndSupplies/FinalProject_Crawler/src/java/thuct/crawlers/DogBreedCrawler.java</file>
-            <file>file:/D:/ThuCT/PRX301_XML_Final_DogBreedAndSupplies/FinalProject_Crawler/src/java/thuct/dtos/DogBreed.java</file>
+            <file>file:/D:/ThuCT/PRX301_XML_Final_DogBreedAndSupplies/FinalProject_Crawler/src/java/thuct/crawlers/TemperamentClawer.java</file>
+            <file>file:/D:/ThuCT/PRX301_XML_Final_DogBreedAndSupplies/FinalProject_Crawler/src/java/thuct/crawlers/TemperamentInsertTask.java</file>
             <file>file:/D:/ThuCT/PRX301_XML_Final_DogBreedAndSupplies/FinalProject_Crawler/src/java/thuct/daos/TemperamentDAO.java</file>
+            <file>file:/D:/ThuCT/PRX301_XML_Final_DogBreedAndSupplies/FinalProject_Crawler/src/java/thuct/crawlers/DogSupplyCrawler.java</file>
+            <file>file:/D:/ThuCT/PRX301_XML_Final_DogBreedAndSupplies/FinalProject_Crawler/src/java/thuct/crawlers/TemperamentTask.java</file>
+            <file>file:/D:/ThuCT/PRX301_XML_Final_DogBreedAndSupplies/FinalProject_Crawler/src/java/thuct/crawlers/DogBreedCrawler.java</file>
         </group>
     </open-files>
 </project-private>

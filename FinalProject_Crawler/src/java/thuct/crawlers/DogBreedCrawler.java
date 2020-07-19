@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.List;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -20,9 +19,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import thuct.daos.DogBreedDAO;
-import thuct.daos.TemperamentDAO;
 import thuct.dtos.DogBreed;
-import thuct.dtos.Temperament;
 import thuct.utils.XMLUtils;
 
 /**
@@ -82,10 +79,8 @@ public class DogBreedCrawler {
                     }
 
                     doc = XMLUtils.convertStringToDocument(document);
-                    //crawl temperament list
-//                    crawlTemperList(xPath, doc);
                     //crawl Child Pages
-//                    crawlDogDetails(xPath, doc);
+                    crawlDogDetails(xPath, doc);
                 }
 
             }
@@ -140,35 +135,11 @@ public class DogBreedCrawler {
         return document;
     }
 
-    public static void crawlTemperList(XPath xPath, Document doc) throws XPathExpressionException, IOException {
-        TemperamentDAO temperamentDAO = new TemperamentDAO();
-        NodeList nodeLinks = (NodeList) xPath.evaluate("//div[@class='left']/a", doc, XPathConstants.NODESET);
-        String dogDocument = "";
-        for (int j = 0; j < nodeLinks.getLength(); j++) {
-            String link = nodeLinks.item(j).getAttributes().getNamedItem("href").getNodeValue();
-            InputStream dogInputStream = getInputStreamForUrl(link);
-
-            dogDocument = getDogDetailsHTML(dogInputStream, dogDocument);
-            //remove special characters
-            dogDocument = dogDocument.replaceAll("&[a-zA-Z0-9#]*;", "");
-            doc = XMLUtils.convertStringToDocument(dogDocument);
-
-            NodeList nodeList = (NodeList) xPath.evaluate("//table[@class='table-01']/tbody/tr[10]/td[2]/p", doc, XPathConstants.NODESET);
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Temperament temperament = new Temperament();
-
-                String content = nodeList.item(i).getTextContent();
-                temperament.setContent(content);
-                temperamentDAO.insertTemperament(temperament);
-            }
-        }
-    }
-
     public static void crawlDogDetails(XPath xPath, Document doc) throws IOException, XPathExpressionException {
         NodeList nodeLinks = (NodeList) xPath.evaluate("//div[@class='left']/a", doc, XPathConstants.NODESET);
         NodeList nodeNames = (NodeList) xPath.evaluate("//div[@class='left']/a/img", doc, XPathConstants.NODESET);
         NodeList nodePhotos = (NodeList) xPath.evaluate("//div[@class='left']/a/img", doc, XPathConstants.NODESET);
-
+        int count = 0;
         DogBreedDAO breedDAO = new DogBreedDAO();
         String dogDocument = "";
         for (int j = 0; j < nodeNames.getLength(); j++) {
@@ -189,28 +160,20 @@ public class DogBreedCrawler {
             //Characteristics Table02
             crawlCharacteristics(breed, xPath, doc);
             //insert
+            System.out.println("Inserted " + (count++) + " breeds");
             breedDAO.insertDogBreed(breed);
+
             //delete breed not full fields
-            List idNotFullList = breedDAO.getIdDogBreedNotFull();
-            for (int i = 0; i < idNotFullList.size(); i++) {
-                breedDAO.removeAllDogBreedNotFull(Integer.parseInt(idNotFullList.get(i).toString()));
-            }
+//            List idNotFullList = breedDAO.getIdDogBreedNotFull();
+//            for (int i = 0; i < idNotFullList.size(); i++) {
+//                breedDAO.removeAllDogBreedNotFull(Integer.parseInt(idNotFullList.get(i).toString()));
+//            }
         }
     }
 
     public static DogBreed crawlInformation(DogBreed breed, XPath xPath, Document doc) throws XPathExpressionException {
-        NodeList nodeList;
+
         Node nodeElement;
-        //temperament
-        nodeList = (NodeList) xPath.evaluate("//table[@class='table-01']/tbody/tr[10]/td[2]/p", doc, XPathConstants.NODESET);
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            String temperament = nodeList.item(i).getTextContent();
-            TemperamentDAO temperamentDAO = new TemperamentDAO();
-            Temperament t = temperamentDAO.findTemperamentByContent(temperament);
-            if (t != null) {
-                breed.getTemperamentList().add(t);
-            }
-        }
 
         //size
         nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[7]/td[2]", doc, XPathConstants.NODE);
@@ -222,6 +185,7 @@ public class DogBreedCrawler {
         nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[9]/td[2]", doc, XPathConstants.NODE);
         String lifeSpan = nodeElement.getTextContent();
         breed.setLifeSpan(lifeSpan);
+
         //weight
         nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[12]/td[2]/p[1]", doc, XPathConstants.NODE);
         String weight = nodeElement.getTextContent();

@@ -115,12 +115,7 @@ public class DogBreed implements Serializable {
     private Float trainability;
     @Column(name = "watchdog_ability")
     private Float watchdogAbility;
-    @JoinTable(name = "temperament_dog", joinColumns = {
-        @JoinColumn(name = "iddog_breed", referencedColumnName = "iddog_breed")}, inverseJoinColumns = {
-        @JoinColumn(name = "idtemperament", referencedColumnName = "idtemperament")})
-    @ManyToMany
-    private List<Temperament> temperamentList = new ArrayList<>();
-
+ 
     public DogBreed() {
     }
 
@@ -317,15 +312,6 @@ public class DogBreed implements Serializable {
         int hash = 0;
         hash += (iddogBreed != null ? iddogBreed.hashCode() : 0);
         return hash;
-    }
-
-    @XmlTransient
-    public List<Temperament> getTemperamentList() {
-        return temperamentList;
-    }
-
-    public void setTemperamentList(List<Temperament> temperamentList) {
-        this.temperamentList = temperamentList;
     }
 
     @Override

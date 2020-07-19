@@ -6,7 +6,8 @@
 package thuct.dtos;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -118,7 +119,7 @@ public class DogBreed implements Serializable {
         @JoinColumn(name = "iddog_breed", referencedColumnName = "iddog_breed")}, inverseJoinColumns = {
         @JoinColumn(name = "idtemperament", referencedColumnName = "idtemperament")})
     @ManyToMany
-    private Collection<Temperament> temperamentCollection;
+    private List<Temperament> temperamentList = new ArrayList<>();
 
     public DogBreed() {
     }
@@ -311,20 +312,20 @@ public class DogBreed implements Serializable {
         this.watchdogAbility = watchdogAbility;
     }
 
-    @XmlTransient
-    public Collection<Temperament> getTemperamentCollection() {
-        return temperamentCollection;
-    }
-
-    public void setTemperamentCollection(Collection<Temperament> temperamentCollection) {
-        this.temperamentCollection = temperamentCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (iddogBreed != null ? iddogBreed.hashCode() : 0);
         return hash;
+    }
+
+    @XmlTransient
+    public List<Temperament> getTemperamentList() {
+        return temperamentList;
+    }
+
+    public void setTemperamentList(List<Temperament> temperamentList) {
+        this.temperamentList = temperamentList;
     }
 
     @Override
@@ -344,5 +345,5 @@ public class DogBreed implements Serializable {
     public String toString() {
         return "thuct.dtos.DogBreed[ iddogBreed=" + iddogBreed + " ]";
     }
-    
+
 }

@@ -3,8 +3,8 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
-import thu.services.AccountService;
-import thu.services.DogBreedService;
+import thuct.services.AccountService;
+import thuct.services.DogBreedService;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,7 +13,7 @@ import thu.services.DogBreedService;
  */
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 @ApplicationPath("/")
 public class MyApplication extends Application {

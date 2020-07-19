@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thu.utils;
+package thuct.utils;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 public class JPAUtil {
     private static final String PERSISTENCE_UNIT_NAME = "FinalProject_ServicePU";

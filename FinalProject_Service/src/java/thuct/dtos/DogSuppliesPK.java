@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thu.dtos;
+package thuct.dtos;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 @Embeddable
 public class DogSuppliesPK implements Serializable {
@@ -76,7 +76,7 @@ public class DogSuppliesPK implements Serializable {
 
     @Override
     public String toString() {
-        return "thu.dtos.DogSuppliesPK[ iddogSupplies=" + iddogSupplies + ", category=" + category + " ]";
+        return "thuct.dtos.DogSuppliesPK[ iddogSupplies=" + iddogSupplies + ", category=" + category + " ]";
     }
     
 }

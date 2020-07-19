@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 @Entity
 @Table(name = "category")

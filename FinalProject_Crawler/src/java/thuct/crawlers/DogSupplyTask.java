@@ -23,7 +23,7 @@ import thuct.utils.XMLUtils;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 public class DogSupplyTask implements Runnable {
 

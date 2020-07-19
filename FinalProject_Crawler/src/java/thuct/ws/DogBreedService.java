@@ -14,7 +14,7 @@ import thuct.dtos.DogBreed;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 @Path("/dog-breed")
 public class DogBreedService {

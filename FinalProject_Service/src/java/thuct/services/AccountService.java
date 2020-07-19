@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thu.services;
+package thuct.services;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,12 +11,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import thu.daos.AccountDAO;
-import thu.dtos.Account;
+import thuct.daos.AccountDAO;
+import thuct.dtos.Account;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 @Path("/account")
 public class AccountService {

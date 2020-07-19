@@ -14,7 +14,7 @@ import thuct.utils.JPAUtil;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 public class DogBreedDAO {
 

@@ -3,29 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thu.dtos;
+package thuct.dtos;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 @Entity
 @Table(name = "dog_breed")
@@ -36,6 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "DogBreed.findByPhoto", query = "SELECT d FROM DogBreed d WHERE d.photo = :photo")
     , @NamedQuery(name = "DogBreed.findByName", query = "SELECT d FROM DogBreed d WHERE d.name = :name")
     , @NamedQuery(name = "DogBreed.findBySize", query = "SELECT d FROM DogBreed d WHERE d.size = :size")
+    , @NamedQuery(name = "DogBreed.findByWeight", query = "SELECT d FROM DogBreed d WHERE d.weight = :weight")
     , @NamedQuery(name = "DogBreed.findByPuppy", query = "SELECT d FROM DogBreed d WHERE d.puppy = :puppy")
     , @NamedQuery(name = "DogBreed.findByLifeSpan", query = "SELECT d FROM DogBreed d WHERE d.lifeSpan = :lifeSpan")
     , @NamedQuery(name = "DogBreed.findByPrice", query = "SELECT d FROM DogBreed d WHERE d.price = :price")
@@ -71,6 +67,9 @@ public class DogBreed implements Serializable {
     @Size(max = 45)
     @Column(name = "size")
     private String size;
+    @Size(max = 45)
+    @Column(name = "weight")
+    private String weight;
     @Size(max = 45)
     @Column(name = "puppy")
     private String puppy;
@@ -110,12 +109,7 @@ public class DogBreed implements Serializable {
     private Float trainability;
     @Column(name = "watchdog_ability")
     private Float watchdogAbility;
-    @JoinTable(name = "temperament_dog", joinColumns = {
-        @JoinColumn(name = "iddog_breed", referencedColumnName = "iddog_breed")}, inverseJoinColumns = {
-        @JoinColumn(name = "idtemperament", referencedColumnName = "idtemperament")})
-    @ManyToMany
-    private Collection<Temperament> temperamentCollection;
-
+ 
     public DogBreed() {
     }
 
@@ -153,6 +147,14 @@ public class DogBreed implements Serializable {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
     }
 
     public String getPuppy() {
@@ -299,15 +301,6 @@ public class DogBreed implements Serializable {
         this.watchdogAbility = watchdogAbility;
     }
 
-    @XmlTransient
-    public Collection<Temperament> getTemperamentCollection() {
-        return temperamentCollection;
-    }
-
-    public void setTemperamentCollection(Collection<Temperament> temperamentCollection) {
-        this.temperamentCollection = temperamentCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -330,7 +323,7 @@ public class DogBreed implements Serializable {
 
     @Override
     public String toString() {
-        return "thu.dtos.DogBreed[ iddogBreed=" + iddogBreed + " ]";
+        return "thuct.dtos.DogBreed[ iddogBreed=" + iddogBreed + " ]";
     }
-    
+
 }

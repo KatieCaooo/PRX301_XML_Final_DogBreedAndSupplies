@@ -3,33 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thu.daos;
+package thuct.daos;
 
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import thu.dtos.DogBreed;
-import thu.utils.JPAUtil;
+import thuct.dtos.DogBreed;
+import thuct.utils.JPAUtil;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
-public class GenericDAO<T> implements Serializable {
+public class DogBreedDAO implements Serializable {
 
-    private Class<T> type;
-
-    public GenericDAO(Class<T> type) {
-        this.type = type;
-    }
-
-    public List<T> findAll() {
+    public List<DogBreed> getSizeDog(String size) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
-        List<T> result = em.createQuery("Select t from " + type.getSimpleName() + " t").getResultList();
+        List<DogBreed> listSizeDog = em.createQuery("SELECT d FROM DogBreed d WHERE d.size LIKE :size")
+                .setParameter("size", "%" + size + "%").getResultList();
         em.getTransaction().commit();
         em.close();
-        return result;
+        return listSizeDog;
     }
-
 }

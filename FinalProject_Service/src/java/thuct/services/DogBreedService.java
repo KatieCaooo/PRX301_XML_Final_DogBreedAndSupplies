@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thu.services;
+package thuct.services;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,13 +15,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import thu.daos.DogBreedDAO;
-import thu.daos.GenericDAO;
-import thu.dtos.DogBreed;
+import thuct.daos.DogBreedDAO;
+import thuct.daos.GenericDAO;
+import thuct.dtos.DogBreed;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 @Path("/dog-breed")
 public class DogBreedService {

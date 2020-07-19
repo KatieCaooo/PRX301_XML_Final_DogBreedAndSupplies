@@ -11,7 +11,7 @@ import thuct.utils.JPAUtil;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 public class DogSuppliesDAO {
 

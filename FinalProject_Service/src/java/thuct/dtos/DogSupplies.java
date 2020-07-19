@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thu.dtos;
+package thuct.dtos;
 
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 @Entity
 @Table(name = "dog_supplies")
@@ -146,7 +146,7 @@ public class DogSupplies implements Serializable {
 
     @Override
     public String toString() {
-        return "thu.dtos.DogSupplies[ dogSuppliesPK=" + dogSuppliesPK + " ]";
+        return "thuct.dtos.DogSupplies[ dogSuppliesPK=" + dogSuppliesPK + " ]";
     }
     
 }

@@ -12,7 +12,7 @@ import thuct.ws.DogBreedService;
  */
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 @ApplicationPath("/")
 public class MyApplication extends Application {

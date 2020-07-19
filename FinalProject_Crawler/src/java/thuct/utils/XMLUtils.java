@@ -27,7 +27,7 @@ import org.xml.sax.InputSource;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 public class XMLUtils implements Serializable {
 

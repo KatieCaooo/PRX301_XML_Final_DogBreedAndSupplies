@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thu.daos;
+package thuct.daos;
 
 import java.io.Serializable;
 import javax.persistence.EntityManager;
-import thu.dtos.Account;
-import thu.utils.JPAUtil;
+import thuct.dtos.Account;
+import thuct.utils.JPAUtil;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 public class AccountDAO implements Serializable {
 

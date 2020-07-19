@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package thu.dtos;
+package thuct.dtos;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 @Entity
 @Table(name = "category")
@@ -100,7 +100,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "thu.dtos.Category[ idcategory=" + idcategory + " ]";
+        return "thuct.dtos.Category[ idcategory=" + idcategory + " ]";
     }
     
 }

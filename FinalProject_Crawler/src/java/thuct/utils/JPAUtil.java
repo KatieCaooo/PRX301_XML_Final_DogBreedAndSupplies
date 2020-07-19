@@ -10,7 +10,7 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author katherinecao
+ * @author kloecao
  */
 public class JPAUtil {
     private static final String PERSISTENCE_UNIT_NAME = "FinalProjectPU";

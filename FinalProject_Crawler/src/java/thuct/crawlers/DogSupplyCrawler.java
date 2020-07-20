@@ -32,7 +32,7 @@ import thuct.utils.XMLUtils;
 public class DogSupplyCrawler {
 
     private static final String configFile = "/web/WEB-INF/config.xml";
-    private static final ExecutorService executorService = Executors.newFixedThreadPool(10);
+    private static final ExecutorService executorService = Executors.newFixedThreadPool(8);
     private static final CompletableFuture[] futures = new CompletableFuture[8];
     public static int count = 0;
 

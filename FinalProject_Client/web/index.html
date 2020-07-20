@@ -10,8 +10,11 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap.min.css">        
+        <link rel="stylesheet" href="font-awesome.min.css">
         <link rel="stylesheet" href="main.css">
+        <script src="font-awesome.min.js"></script>
+
         <script>
             function getXmlHttpObject() {
                 var xmlHttp = null;
@@ -35,7 +38,7 @@ and open the template in the editor.
                 xmlHttp.onreadystatechange = function () {
                     if (this.readyState === 4 && this.status === 200) {
                         console.log(this.responseText);
-//                                alert("Done");
+                        //    alert("Done");
                     }
                 }
                 xmlHttp.open("GET", "http://localhost:8080/FinalProject_Service/dog-breed?", true);
@@ -76,19 +79,19 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="experience" class="card-input-element d-none" value="0" onClick="getExp(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Yes, I own(ed) a dog.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="experience" class="card-input-element d-none" value="1" onClick="getExp(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Have some experence, but not own any dog.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="experience" class="card-input-element d-none" value="2" onClick="getExp(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 New to dogs
                                             </div>
                                         </label>
@@ -111,19 +114,19 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="home" class="card-input-element d-none" value="0" onClick="getHome(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 An apartment
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="home" class="card-input-element d-none" value="1" onClick="getHome(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 A house with a small yard
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="home" class="card-input-element d-none" value="2" onClick="getHome(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 A house with a large yard
                                             </div>
                                         </label>
@@ -146,19 +149,19 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="children" class="card-input-element d-none" value="0" onClick="getChild(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Don't mind
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="children" class="card-input-element d-none" value="1" onClick="getChild(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Yes
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="children" class="card-input-element d-none" value="2" onClick="getChild(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 No
                                             </div>
                                         </label>
@@ -181,19 +184,19 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="stranger" class="card-input-element d-none" value="0" onClick="getStranger(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Don't mind
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="stranger" class="card-input-element d-none" value="1" onClick="getStranger(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Yes
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="stranger" class="card-input-element d-none" value="2" onClick="getStranger(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 No
                                             </div>
                                         </label>
@@ -216,37 +219,37 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="size" class="card-input-element d-none" value="Smallest" onClick="getSizeDog(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I prefer super small dogs
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="size" class="card-input-element d-none" value="Small" onClick="getSizeDog(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I prefer small dogs
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="size" class="card-input-element d-none" value="Medium" onClick="getSizeDog(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I prefer medium dogs
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="size" class="card-input-element d-none" value="Large" onClick="getSizeDog(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I prefer large dogs
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="size" class="card-input-element d-none" value="Giant" onClick="getSizeDog(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I prefer giant dogs
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="size" class="card-input-element d-none" value="" onClick="getSizeDog(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Any size is fine
                                             </div>
                                         </label>
@@ -269,25 +272,25 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="barking" class="card-input-element d-none" value="1" onClick="getBark(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I'd like a very vocal dog.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="barking" class="card-input-element d-none" value="2" onClick="getBark(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I love dogs that are chatty and vocal.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="barking" class="card-input-element d-none" value="3" onClick="getBark(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I prefer quiet dogs that only bark from time to time.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="barking" class="card-input-element d-none" value="0" onClick="getBark(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Don't mind.
                                             </div>
                                         </label>
@@ -310,13 +313,13 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="cat" class="card-input-element d-none" value="0" onClick="getCat(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Yes
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="cat" class="card-input-element d-none" value="1" onClick="getCat(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 No
                                             </div>
                                         </label>
@@ -339,13 +342,13 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="dog" class="card-input-element d-none" value="0" onClick="getDog(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Yes
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="dog" class="card-input-element d-none" value="1" onClick="getDog(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 No
                                             </div>
                                         </label>
@@ -368,25 +371,25 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="excercise" class="card-input-element d-none" value="0" onClick="getExc(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I'd like to keep fit together with vigorous walks.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="excercise" class="card-input-element d-none" value="1" onClick="getExc(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I'd like to go on active walks with my dog.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="excercise" class="card-input-element d-none" value="2" onClick="getExc(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I'm looking for a dog to take on gentle walks.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="excercise" class="card-input-element d-none" value="3" onClick="getExc(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I'd like go to fridge.
                                             </div>
                                         </label>
@@ -409,25 +412,25 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="playful" class="card-input-element d-none" value="0" onClick="getPlay(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Don't mind.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="playful" class="card-input-element d-none" value="1" onClick="getPlay(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Playful
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="playful" class="card-input-element d-none" value="2" onClick="getPlay(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Naughty sometimes
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="playful" class="card-input-element d-none" value="3" onClick="getPlay(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Serious
                                             </div>
                                         </label>
@@ -450,19 +453,19 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="smart" class="card-input-element d-none" value="0" onClick="getSmart(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Doesn't matter 
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="smart" class="card-input-element d-none" value="1" onClick="getSmart(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Responsive, but no smarter than I am!
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="smart" class="card-input-element d-none" value="2" onClick="getSmart(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Smart enough to keep me on my toes
                                             </div>
                                         </label>
@@ -485,25 +488,25 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="training" class="card-input-element d-none" value="0" onClick="getTrain(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I'm an experienced trainer and comfortable with any breed.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="training" class="card-input-element d-none" value="1" onClick="getTrain(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I'm happy with breeds that may need some training.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="training" class="card-input-element d-none" value="2" onClick="getTrain(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I'd feel more comfortable keeping training to the basics.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="training" class="card-input-element d-none" value="3" onClick="getTrain(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Don't think about this.
                                             </div>
                                         </label>
@@ -526,25 +529,25 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="watchdog" class="card-input-element d-none" value="0" onClick="getWatch(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Don't mind.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="watchdog" class="card-input-element d-none" value="1" onClick="getWatch(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Yes. I'd like a dog that barks, alerts, and is physically protective.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="watchdog" class="card-input-element d-none" value="2" onClick="getWatch(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Yes. I'd like a dog that barks and is alert.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="watchdog" class="card-input-element d-none" value="3" onClick="getWatch(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 No
                                             </div>
                                         </label>
@@ -567,19 +570,19 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="grooming" class="card-input-element d-none" value="0" onClick="getGroom(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I can fit in daily grooming sessions.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="grooming" class="card-input-element d-none" value="1" onClick="getGroom(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I can groom my dog once a week.
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="grooming" class="card-input-element d-none" value="2" onClick="getGroom(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 I'm so lazy.
                                             </div>
                                         </label>
@@ -602,19 +605,19 @@ and open the template in the editor.
                                         </div>
                                         <label>
                                             <input type="radio" name="shedding" class="card-input-element d-none" value="0" onClick="getShed(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Doesn't matter 
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="shedding" class="card-input-element d-none" value="1" onClick="getShed(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Frequent
                                             </div>
                                         </label>
                                         <label>
                                             <input type="radio" name="shedding" class="card-input-element d-none" value="2" onClick="getShed(this.value)">
-                                            <div class="card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Infrequent
                                             </div>
                                         </label>
@@ -927,11 +930,85 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
-        
-        <!--Show Dog Detail Information-->
-        
-        <script src="jquery.min.js"></script>
-        <script src="bootstrap.min.js"></script>
 
+        <!--Show Dog Detail Information-->
+        <div class="container" id="containerDetailDog" style="background-color: #cce5ff">
+            <div class="row justify-items-center" style="padding-top: 50px">
+                <img src="https://www.dogbreedslist.info/uploads/allimg/dog-pictures/Cairn-Terrier-1.jpg" class="rounded mx-auto d-block" style="height: 50%">
+            </div>
+            <div class="row justify-content-center" style="padding-top: 10px; color: #bd2130">
+                <p id="nameDog" class="font-weight-bolder" style="font-size: 50px">aaaa</p>
+            </div>
+            <!--infor-->
+
+            <div class="row justify-content-center">
+                <div class="col-2 infoDog border border-warning font-weight-bold">
+                    Size
+                </div>
+                <div class="col-4 infoDog border border-warning align-middle">
+                    ##
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-2 infoDog border border-warning font-weight-bold">
+                    Average weight
+                </div>
+                <div class="col-4 infoDog border border-warning align-middle">
+                    ##
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-2 infoDog border border-warning font-weight-bold">
+                    Life span
+                </div>
+                <div class="col-4 infoDog border border-warning align-middle">
+                    ##
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-2 infoDog border border-warning font-weight-bold">
+                    Puppy size
+                </div>
+                <div class="col-4 infoDog border border-warning align-middle">
+                    ##
+                </div>
+            </div>
+            <div class="row justify-content-center" style="padding-bottom: 50px">
+                <div class="col-2 infoDog border border-warning font-weight-bold">
+                    Reference price
+                </div>
+                <div class="col-4 infoDog border border-warning align-middle">
+                    ##
+                </div>
+            </div>
+
+            <!--characteristic-->
+            <div class="row justify-content-center" style="padding-top: 10px; color: #28a745">
+                <p id="nameDog" class="font-weight-bolder" style="font-size: 30px">Rate characteristics</p>
+            </div>
+            <div class="row justify-content-center" style="padding-top: 20px">
+                <div class="col-3 infoDog border border-warning font-weight-bold align-content-center">
+                    Adaptability
+                </div>
+                <div class="col-3 infoDog border border-warning font-weight-bold">
+                    Apartment Friendly
+                </div>
+                <div class="col-3 infoDog border border-warning font-weight-bold">
+                    Barking Tendency
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-3 infoDog border border-warning font-weight-bold align-content-center">
+                    Adaptability
+                </div>
+                <div class="col-3 infoDog border border-warning font-weight-bold">
+                    Apartment Friendly
+                </div>
+                <div class="col-3 infoDog border border-warning font-weight-bold">
+                    <i class="fas fa-star checked"></i>
+                </div>
+            </div>
+            <script src="jquery.min.js"></script>
+            <script src="bootstrap.min.js"></script>
     </body>
 </html>

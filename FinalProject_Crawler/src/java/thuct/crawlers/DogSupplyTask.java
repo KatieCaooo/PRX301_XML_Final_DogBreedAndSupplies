@@ -38,7 +38,6 @@ public class DogSupplyTask implements Runnable {
         this.xPath = xPath;
         this.category = category;
     }
-    
 
     @Override
     public void run() {
@@ -46,31 +45,31 @@ public class DogSupplyTask implements Runnable {
             XPath xPath = XMLUtils.createXPath();
             String document = getListSuppliesHTML(url);
             DogSuppliesPK dogSuppliesPK = new DogSuppliesPK();
-            
+
             doc = XMLUtils.convertStringToDocument(document);
-            
+
             NodeList nodeLinks = (NodeList) xPath.evaluate("//div[@id='showavailable']//span[@class='TNAIL_PFImage']/a[1]", doc, XPathConstants.NODESET);
             NodeList nodeNames = (NodeList) xPath.evaluate("//div[@id='showavailable']//span[@class='TNAIL_PFName']/a[1]/text()", doc, XPathConstants.NODESET);
             NodeList nodePhotos = (NodeList) xPath.evaluate("//div[@id='showavailable']//span[@class='TNAIL_PFImage']/a[1]/img", doc, XPathConstants.NODESET);
             NodeList nodeTitles = (NodeList) xPath.evaluate("//div[@id='showavailable']//span[@class='TNAIL_PFImage']/a[1]/img", doc, XPathConstants.NODESET);
-            
+
             String domainPhoto = getDomainPhoto();
-            
+
             for (int i = 0; i < nodeLinks.getLength(); i++) {
                 String link = nodeLinks.item(i).getAttributes().getNamedItem("href").getNodeValue();
                 document = getSuppliesHTML(link);
                 doc = XMLUtils.convertStringToDocument(document);
-                
+
                 DogSuppliesDAO dogSuppliesDAO = new DogSuppliesDAO();
                 NodeList nodeSizes = (NodeList) xPath.evaluate("//li[contains(@class,'PfMember unselected')]//span[@class='name']", doc, XPathConstants.NODESET);
                 NodeList nodePrices = (NodeList) xPath.evaluate("//li[contains(@class,'PfMember unselected')]//span[@class='MemPrice']", doc, XPathConstants.NODESET);
                 NodeList nodeSale = (NodeList) xPath.evaluate("//li[contains(@class,'PfMember unselected')]//span[@class='MemSalePrice']", doc, XPathConstants.NODESET);
                 for (int j = 0; j < nodeSizes.getLength(); j++) {
                     DogSupplies dogSupplies = new DogSupplies();
-                    
+
                     String size = nodeSizes.item(j).getTextContent();
                     dogSupplies.setSize(size);
-                    
+
                     String sizeArray[];
                     sizeArray = size.split(" ");
                     //Set name
@@ -101,7 +100,7 @@ public class DogSupplyTask implements Runnable {
                         priceString = nodeSale.item(j).getTextContent();
                     } else {
                         priceString = nodePrices.item(j).getTextContent();
-                        
+
                     }
                     priceString = priceString.replace("$", "");
                     String priceArray[] = priceString.split("-");
@@ -114,8 +113,10 @@ public class DogSupplyTask implements Runnable {
                     dogSuppliesPK.setCategory(category.getIdcategory());
                     dogSupplies.setDogSuppliesPK(dogSuppliesPK);
                     //insert
+                    System.out.println("Inserted " + (DogSupplyCrawler.count++) + " - " + dogSupplies.getName() + " breeds");
+
                     dogSuppliesDAO.insertDogSupplies(dogSupplies);
-                    
+
                 }
             }
         } catch (IOException ex) {

@@ -57,3 +57,11 @@ label {
         transform: rotateZ(0deg);
     }
 }
+.infoDog{
+    height: 40px;
+    font-size: 1rem;
+    font-family: sans-serif;
+}
+.checked {
+  color: yellow;
+}

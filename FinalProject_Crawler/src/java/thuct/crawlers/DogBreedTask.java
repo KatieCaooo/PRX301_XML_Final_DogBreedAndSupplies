@@ -64,7 +64,7 @@ public class DogBreedTask implements Runnable {
             //Characteristics Table02
             crawlCharacteristics(breed, xPath, doc);
             //insert
-            System.out.println("Inserted " + breed.getName() + " breeds");
+            System.out.println("Inserted " + (DogBreedCrawler.count++) + " - " + breed.getName() + " breeds");
             breedDAO.insertDogBreed(breed);
         } catch (IOException ex) {
             Logger.getLogger(DogBreedTask.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,7 +81,6 @@ public class DogBreedTask implements Runnable {
     }
 
     public DogBreed crawlInformation(DogBreed breed, XPath xPath, Document doc) throws XPathExpressionException {
-
         Node nodeElement;
 
         //size
@@ -109,7 +108,7 @@ public class DogBreedTask implements Runnable {
                 String weightArray[] = weight.split("and");
                 String weightArray1[] = weightArray[0].split(":");
                 weight = weightArray1[1].trim();
-            } 
+            }
         }
         breed.setWeight(weight);
 

@@ -27,11 +27,11 @@ public class DogBreedDAO implements Serializable {
         return listSizeDog;
     }
 
-    public DogBreed getDogID(String id) {
+    public DogBreed getDogID(int id) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
         DogBreed idDog = (DogBreed) em.createQuery("SELECT d FROM DogBreed d WHERE d.iddogBreed = :iddogBreed")
-                .setParameter("iddogBreed", id).getResultList();
+                .setParameter("iddogBreed", id).getSingleResult();
         em.getTransaction().commit();
         em.close();
         return idDog;

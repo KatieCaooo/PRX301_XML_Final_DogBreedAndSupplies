@@ -113,8 +113,8 @@ public class DogBreedService {
 
     @GET
     @Path("/recommendDog/detail")
-    @Produces(MediaType.TEXT_PLAIN)
-    public DogBreed getDetailDog(@QueryParam("id") String id) {
+    @Produces(MediaType.APPLICATION_XML)
+    public DogBreed getDetailDog(@QueryParam("id") int id) {
         DogBreedDAO breedDAO = new DogBreedDAO();
         DogBreed breed = breedDAO.getDogID(id);
         return breed;

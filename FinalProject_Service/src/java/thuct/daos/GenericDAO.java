@@ -8,7 +8,6 @@ package thuct.daos;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import thuct.dtos.DogBreed;
 import thuct.utils.JPAUtil;
 
 /**

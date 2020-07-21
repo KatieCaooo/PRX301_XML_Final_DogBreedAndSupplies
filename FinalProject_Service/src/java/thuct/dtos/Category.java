@@ -6,7 +6,8 @@
 package thuct.dtos;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,7 +45,7 @@ public class Category implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category1")
-    private Collection<DogSupplies> dogSuppliesCollection;
+    private List<DogSupplies> dogSuppliesList = new ArrayList<>();
 
     public Category() {
     }
@@ -70,12 +71,12 @@ public class Category implements Serializable {
     }
 
     @XmlTransient
-    public Collection<DogSupplies> getDogSuppliesCollection() {
-        return dogSuppliesCollection;
+    public List<DogSupplies> getDogSuppliesList() {
+        return dogSuppliesList;
     }
 
-    public void setDogSuppliesCollection(Collection<DogSupplies> dogSuppliesCollection) {
-        this.dogSuppliesCollection = dogSuppliesCollection;
+    public void setDogSuppliesList(List<DogSupplies> dogSuppliesList) {
+        this.dogSuppliesList = dogSuppliesList;
     }
 
     @Override

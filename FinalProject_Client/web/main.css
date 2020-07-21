@@ -63,5 +63,11 @@ label {
     font-family: sans-serif;
 }
 .checked {
-  color: yellow;
+    color: #c69500;
+    text-align: center;
 }
+/*
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}*/

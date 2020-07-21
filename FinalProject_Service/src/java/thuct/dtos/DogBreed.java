@@ -109,7 +109,7 @@ public class DogBreed implements Serializable {
     private Float trainability;
     @Column(name = "watchdog_ability")
     private Float watchdogAbility;
- 
+
     public DogBreed() {
     }
 
@@ -325,5 +325,5 @@ public class DogBreed implements Serializable {
     public String toString() {
         return "thuct.dtos.DogBreed[ iddogBreed=" + iddogBreed + " ]";
     }
-
+    
 }

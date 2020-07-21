@@ -59,6 +59,7 @@ public class DogBreedTask implements Runnable {
             //remove special characters
             dogDocument = dogDocument.replaceAll("&[a-zA-Z0-9#]*;", "");
             Document doc = XMLUtils.convertStringToDocument(dogDocument);
+            String xmlBreed;
             //Information Table02
             crawlInformation(breed, xPath, doc);
             //Characteristics Table02
@@ -80,7 +81,7 @@ public class DogBreedTask implements Runnable {
         }
     }
 
-    public DogBreed crawlInformation(DogBreed breed, XPath xPath, Document doc) throws XPathExpressionException {
+    public DogBreed crawlInformation(String xml, DogBreed breed, XPath xPath, Document doc) throws XPathExpressionException {
         Node nodeElement;
 
         //size
@@ -88,6 +89,7 @@ public class DogBreedTask implements Runnable {
         String size = nodeElement.getTextContent();
         size = size.replaceAll("<[a-zA-Z0-9:=\"-/. ]*>", "");
         breed.setSize(size);
+        xml += "<>"+size+"</>";
 
         //life span
         nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[9]/td[2]", doc, XPathConstants.NODE);

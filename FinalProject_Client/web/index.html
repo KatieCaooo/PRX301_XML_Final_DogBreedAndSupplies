@@ -29,7 +29,6 @@ and open the template in the editor.
                     }
                 }
                 return xmlHttp;
-
             }
             function loadAllDogBreed() {
                 var xmlHttp = getXmlHttpObject();
@@ -651,7 +650,6 @@ and open the template in the editor.
                                 document.getElementsByClassName("carousel-control-next")[0].style.visibility = "hidden";
                             }
                         });
-
                         document.getElementsByClassName("carousel-control-prev")[0].addEventListener("click", function () {
                             $(".carousel").carousel("prev");
                             currentQuestion--;
@@ -662,7 +660,6 @@ and open the template in the editor.
                                 document.getElementsByClassName("carousel-control-next")[0].style.visibility = "visible";
                             }
                         });
-
                         var experience = 0;
                         function getExp(value) {
                             experience = (value + 1);
@@ -798,265 +795,335 @@ and open the template in the editor.
         </script>
 
         <!--Show Dog Detail Information-->
-        <div class="container"  style="background-color: #cce5ff">
-            <div id="containerDetailDog">
-                <div class="row justify-items-center" style="padding-top: 50px">
-                    <img src="https://www.dogbreedslist.info/uploads/allimg/dog-pictures/Cairn-Terrier-1.jpg" class="rounded mx-auto d-block">
-                </div>
-                <div class="row justify-content-center" style="padding-top: 10px; color: #bd2130">
-                    <p id="nameDog" class="font-weight-bolder" style="font-size: 50px">aaaa</p>
-                </div>
-                <!--infor-->
-                <div class="row justify-content-center">
-                    <div class="col-2 infoDog border border-warning font-weight-bold">
-                        Size
-                    </div>
-                    <div class="col-4 infoDog border border-warning align-middle">
-                        ##
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-2 infoDog border border-warning font-weight-bold">
-                        Average weight
-                    </div>
-                    <div class="col-4 infoDog border border-warning align-middle">
-                        ##
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-2 infoDog border border-warning font-weight-bold">
-                        Life span
-                    </div>
-                    <div class="col-4 infoDog border border-warning align-middle">
-                        ##
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-2 infoDog border border-warning font-weight-bold">
-                        Puppy size
-                    </div>
-                    <div class="col-4 infoDog border border-warning align-middle">
-                        ##
-                    </div>
-                </div>
-                <div class="row justify-content-center" style="padding-bottom: 50px">
-                    <div class="col-2 infoDog border border-warning font-weight-bold">
-                        Reference price
-                    </div>
-                    <div class="col-4 infoDog border border-warning align-middle">
-                        ##
-                    </div>
-                </div>
-
-                <!--characteristic-->
-                <div class="row justify-content-center" style="padding-top: 10px; color: #28a745">
-                    <p id="nameDog" class="font-weight-bolder" style="font-size: 30px">Rate characteristics</p>
-                </div>
-                <!--#1-->
-                <div class="row justify-content-center" style="padding-top: 20px;">
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            Adaptability
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            Apartment Friendly
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            Barking Tendency
-                        </p>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                        </p>
-                    </div>
-                </div>
-                <!--#5-->
-                <div class="row justify-content-center" style="padding-top: 20px">
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            Cat Friendly
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            Child Friendly
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            Dog Friendly
-                        </p>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                        </p>
-                    </div>
-                </div>
-                <!--#2-->
-                <div class="row justify-content-center" style="padding-top: 20px">
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            Exercise Need
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            Grooming
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            Health Issuse
-                        </p>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                        </p>
-                    </div>
-                </div>
-                <!--#3-->
-                <div class="row justify-content-center" style="padding-top: 20px">
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            Intelligence
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            Playfulness
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            Shedding Level
-                        </p>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                        </p>
-                    </div>
-                </div>
-                <!--#4-->
-                <div class="row justify-content-center" style="padding-top: 20px">
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            Stranger Friendly
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            Trainability
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">Watchdog Ability</p>
-                    </div>
-                </div>
-                <div class="row justify-content-center" style="padding-bottom: 20px">
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>                       
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-
-                        </p>
-                    </div>
-                    <div class="col-3 infoDog font-weight-bold">
-                        <p class="text-center">
-                            <i class="fas fa-paw fa-2x fa-spin checked"></i>
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="container" id="containerDetailDog" style="background-color: #cce5ff">
+            <!--                <div class="row justify-items-center" style="padding-top: 50px">
+                                <img src="https://www.dogbreedslist.info/uploads/allimg/dog-pictures/Cairn-Terrier-1.jpg" class="rounded mx-auto d-block">
+                            </div>
+                            <div class="row justify-content-center" style="padding-top: 10px; color: #bd2130">
+                                <p id="nameDog" class="font-weight-bolder" style="font-size: 50px">aaaa</p>
+                            </div>
+                            infor
+                            <div class="row justify-content-center">
+                                <div class="col-2 infoDog border border-warning font-weight-bold">Size</div>
+                                <div class="col-4 infoDog border border-warning align-middle">
+                                    ##
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-2 infoDog border border-warning font-weight-bold">Average weight</div>
+                                <div class="col-4 infoDog border border-warning align-middle">
+                                    ##
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-2 infoDog border border-warning font-weight-bold">Life span</div>
+                                <div class="col-4 infoDog border border-warning align-middle">
+                                    ##
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-2 infoDog border border-warning font-weight-bold">Puppy size</div>
+                                <div class="col-4 infoDog border border-warning align-middle">
+                                    ##
+                                </div>
+                            </div>
+                            <div class="row justify-content-center" style="padding-bottom: 50px">
+                                <div class="col-2 infoDog border border-warning font-weight-bold">Reference price</div>
+                                <div class="col-4 infoDog border border-warning align-middle">
+                                    ##
+                                </div>
+                            </div>
+            
+                            characteristic
+                            <div class="row justify-content-center" style="padding-top: 10px; color: #28a745">
+                                <p id="nameDog" class="font-weight-bolder" style="font-size: 30px">Rate characteristics</p>
+                            </div>
+                            #1
+                            <div class="row justify-content-center" style="padding-top: 20px;">
+                                <div class="col-3 infoDog font-weight-bold">Adaptability</div>
+                                <div class="col-3 infoDog font-weight-bold">Apartment Friendly</div>
+                                <div class="col-3 infoDog font-weight-bold">Barking Tendency</div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-3 infoDog">
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                </div>
+                                <div class="col-3 infoDog">
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                </div>
+                                <div class="col-3 infoDog">
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                </div>
+                            </div>
+                            #5
+                            <div class="row justify-content-center" style="padding-top: 20px">
+                                <div class="col-3 infoDog font-weight-bold">Cat Friendly</div>
+                                <div class="col-3 infoDog font-weight-bold">Child Friendly</div>
+                                <div class="col-3 infoDog font-weight-bold">Dog Friendly</div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-3 infoDog">
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                </div>
+                                <div class="col-3 infoDog">
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                </div>
+                                <div class="col-3 infoDog">
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                </div>
+                            </div>
+                            #2
+                            <div class="row justify-content-center" style="padding-top: 20px">
+                                <div class="col-3 infoDog font-weight-bold">Exercise Need</div>
+                                <div class="col-3 infoDog font-weight-bold">Grooming</div>
+                                <div class="col-3 infoDog font-weight-bold">Health Issuse</div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-3 infoDog">
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                </div>
+                                <div class="col-3 infoDog">
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                </div>
+                                <div class="col-3 infoDog">
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                </div>
+                            </div>
+                            #3
+                            <div class="row justify-content-center" style="padding-top: 20px">
+                                <div class="col-3 infoDog font-weight-bold">Intelligence</div>
+                                <div class="col-3 infoDog font-weight-bold">Playfulness</div>
+                                <div class="col-3 infoDog font-weight-bold">Shedding Level</div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-3 infoDog">
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                </div>
+                                <div class="col-3 infoDog">
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                </div>
+                                <div class="col-3 infoDog">
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                </div>
+                            </div>
+                            #4
+                            <div class="row justify-content-center" style="padding-top: 20px">
+                                <div class="col-3 infoDog font-weight-bold">Stranger Friendly</div>
+                                <div class="col-3 infoDog font-weight-bold">Trainability</div>
+                                <div class="col-3 infoDog font-weight-bold">Watchdog Ability</div>
+                            </div>
+                            <div class="row justify-content-center" style="padding-bottom: 20px">
+                                <div class="col-3 infoDog">
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                </div>
+                                <div class="col-3 infoDog">
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>                       
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>
+                                </div>
+                                <div class="col-3 infoDog">                         
+                                    <i class="fas fa-paw fa-2x fa-spin checked"></i>            
+                                </div>                     
+                            </div>           -->
             <script>
                 function dogDetails() {
                     var containerDetail = document.getElementById("containerDetailDog");
-                    var detail="";
+                    var detail = "";
+                    var askBudget = "";
                     var xmlHttp = getXmlHttpObject();
-                            if (xmlHttp === null) {
-                                alert("Your browser does not support AJAX!")
+                    if (xmlHttp === null) {
+                        alert("Your browser does not support   AJAX!")
+                    }
+                    xmlHttp.onreadystatechange = function () {
+                        if (this.readyState === 4 && this.status === 200) {
+                            detail =
+                                    "<div class=\"row justify-items-center\" style=\"padding-top: 50px\">"
+                                    + "<img src=\"" + /*img*/ +"\" class=\"rounded mx-auto d-block\">"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\" style=\"padding-top: 10px; color: #bd2130\">"
+                                    + "<p id=\"nameDog\" class=\"font-weight-bolder\" style=\"font-size: 50px\">" + /*name*/ +"</p>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\">"
+                                    + "<div class=\"col-2 infoDog border border-warning font-weight-bold\">Size</div>"
+                                    + "<div class=\"col-4 infoDog border border-warning align-middle\">"
+//                        + sizedog
+                                    + "</div>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\">"
+                                    + "<div class=\"col-2 infoDog border border-warning font-weight-bold\">Average weight</div>"
+                                    + "<div class=\"col-4 infoDog border border-warning align-middle\">"
+//                        + weight
+                                    + "</div>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\">"
+                                    + "<div class=\"col-2 infoDog border border-warning font-weight-bold\">Life span</div>"
+                                    + "<div class=\"col-4 infoDog border border-warning align-middle\">"
+//                        + life
+                                    + "</div>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\">"
+                                    + "<div class=\"col-2 infoDog border border-warning font-weight-bold\">Puppy size</div>"
+                                    + "<div class=\"col-4 infoDog border border-warning align-middle\">"
+//                        + puppy
+                                    + "</div>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\" style=\"padding-bottom: 50px\">"
+                                    + "<div class=\"col-2 infoDog border border-warning font-weight-bold\">Reference price</div>"
+                                    + "<div class=\"col-4 infoDog border border-warning align-middle\">"
+//                        + price
+                                    + "</div>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\" style=\"padding-top: 10px; color: #28a745\">"
+                                    + "<p id=\"nameDog\" class=\"font-weight-bolder\" style=\"font-size: 30px\">Rate characteristics</p>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\" style=\"padding-top: 20px;\">"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Adaptability</div>"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Apartment Friendly</div>"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Barking Tendency</div>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\">"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div>"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div>"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\" style=\"padding-top: 20px\">"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Cat Friendly</div>"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Child Friendly</div>"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Dog Friendly</div>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\">"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div>"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div>"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\" style=\"padding-top: 20px\">"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Exercise Need</div>"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Grooming</div>"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Health Issuse</div>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\">"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div>"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div>"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\" style=\"padding-top: 20px\">"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Intelligence</div>"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Playfulness</div>"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Shedding Level</div>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\">"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div>"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div>"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\" style=\"padding-top: 20px\">"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Stranger Friendly</div>"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Trainability</div>"
+                                    + "<div class=\"col-3 infoDog font-weight-bold\">Watchdog Ability</div>"
+                                    + "</div>"
+                                    + "<div class=\"row justify-content-center\" style=\"padding-bottom: 20px\">"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div>"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div>"
+                                    + "<div class=\"col-3 infoDog\">"
+                                    //+ for
+                                    + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
+                                    //+ end
+                                    + "</div> "
+                                    + "</div>";
+                            containerDetail.innerHTML = detail;
+                            if (detail !== null) {
+                                askBudget =
+                                        "<div class=\"row justify-content-center\" style=\"padding-top: 10px; padding-bottom: 10px;\">"
+                                        + "<div class=\"card\" style=\"width: 50%; align-content: center\">"
+                                        + "<img src=\"https://www.janetbarrcfs.com/sites/default/files/users/janetbarr/Dog-Supplies-Not-Worth-Cost.jpg\" class = \"card-img-top\" alt=\"Budget\">"
+                                        + "<div class=\"card-body\">"
+                                        + "<p class=\"card-text lead\">How much will you buy supplies for this breed?</p>"
+                                        + "<p class=\"card-text lead\">(Without food and medicine)</p>"
+                                        + "</div>"
+                                        + "<div class=\"input-group mb-3\" style=\"padding-left: 20px; padding-right: 20px\">"
+                                        + "<div class=\"input-group-prepend\">"
+                                        + "<span class=\"input-group-text\">$</span>"
+                                        + "<span class=\"input-group-text\">00.00</span>"
+                                        + "</div>"
+                                        + "<input type=\"text\" id=\"budget\" pattern= \"[0-9](\\.0+)?\" class=\"form-control\" title=\"Only number or empty\">"
+                                        + "</div>"
+                                        + "<button type=\"button\" class=\"btn btn-primary btn-lg btn-block\" onClick=\"\">Suggest supplies for me</button>"
+                                        + "</div>"
+                                        + "</div>";
+                                containerDetail.innerHTML+=askBudget;
                             }
-                            xmlHttp.onreadystatechange = function () {
-                                if (this.readyState === 4 && this.status === 200) {
-                                    
-                                }
-                            }
-                            var url = "http://localhost:8080/FinalProject_Service/dog-breed/recommendDog/detail?id=" + id;
-                            xmlHttp.open("GET", url, true);
-                            xmlHttp.send(null);
-                    containerDetail.innerHTML=detail;
+                        }
+                    }
+                    var url = "http://localhost:8080/FinalProject_Service/dog-breed/recommendDog/detail?id=" + id;
+                    xmlHttp.open("GET", url, true);
+                    xmlHttp.send(null);
                 }
 
             </script>
-            <div class="row justify-content-center" style="padding-top: 10px; padding-bottom: 10px;">
-                <!--budget-->
+<!--            <div class="row justify-content-center" style="padding-top: 10px; padding-bottom: 10px;">
+                budget
                 <div class="card" style="width: 50%; align-content: center">
                     <img src="https://www.janetbarrcfs.com/sites/default/files/users/janetbarr/Dog-Supplies-Not-Worth-Cost.jpg" 
                          class="card-img-top" alt="Budget">
                     <div class="card-body">
-                        <p class="card-text lead">How much will you buy supplies for this breed?</p>
+                        <p class="card-text lead">How much will you buy supplies for this breed?
                         <p class="card-text lead">(Without food and medicine)</p>
                     </div>
                     <div class="input-group mb-3" style="padding-left: 20px; padding-right: 20px">
@@ -1068,7 +1135,7 @@ and open the template in the editor.
                     </div>
                     <button type="button" class="btn btn-primary btn-lg btn-block" onClick="">Suggest supplies for me</button>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div class="container" id="suggestSupplies">
             <div class="row">

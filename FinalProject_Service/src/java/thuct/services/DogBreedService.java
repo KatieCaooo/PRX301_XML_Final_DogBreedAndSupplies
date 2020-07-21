@@ -109,7 +109,14 @@ public class DogBreedService {
         public Float getScore() {
             return score;
         }
-
     }
 
+    @GET
+    @Path("/recommendDog/detail")
+    @Produces(MediaType.TEXT_PLAIN)
+    public DogBreed getDetailDog(@QueryParam("id") String id) {
+        DogBreedDAO breedDAO = new DogBreedDAO();
+        DogBreed breed = breedDAO.getDogID(id);
+        return breed;
+    }
 }

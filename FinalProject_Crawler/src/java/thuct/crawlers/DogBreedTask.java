@@ -64,6 +64,7 @@ public class DogBreedTask implements Runnable {
             crawlInformation(breed, xPath, doc);
             //Characteristics Table02
             crawlCharacteristics(breed, xPath, doc);
+            
             //insert
             System.out.println("Inserted " + (DogBreedCrawler.count++) + " - " + breed.getName() + " breeds");
             breedDAO.insertDogBreed(breed);
@@ -89,7 +90,7 @@ public class DogBreedTask implements Runnable {
         String size = nodeElement.getTextContent();
         size = size.replaceAll("<[a-zA-Z0-9:=\"-/. ]*>", "");
         breed.setSize(size);
-        xml += "<>"+size+"</>";
+        xml += "<>" + size + "</>";
 
         //life span
         nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[9]/td[2]", doc, XPathConstants.NODE);

@@ -105,40 +105,40 @@ public class DogBreedService {
             switch (childrenW) {
                 case 3:
                     if (listSizeResult.get(i).getChildFriendly() < 4) {
-                        childS = (-1) * (5 - listSizeResult.get(i).getChildFriendly()) * (4 + childrenW);
+                        childS = (-1) * (5 - listSizeResult.get(i).getChildFriendly()) * (5 + childrenW);
                     } else {
-                        childS = listSizeResult.get(i).getChildFriendly() * (4 + childrenW);
+                        childS = listSizeResult.get(i).getChildFriendly() * (5 + childrenW);
                     }
                     break;
                 case 2:
                     if (listSizeResult.get(i).getChildFriendly() < 3) {
-                        childS = (-1) * (5 - listSizeResult.get(i).getChildFriendly()) * (4 + childrenW);
+                        childS = (-1) * (5 - listSizeResult.get(i).getChildFriendly()) * (5 + childrenW);
                     } else {
-                        childS = listSizeResult.get(i).getChildFriendly() * (4 + childrenW);
+                        childS = listSizeResult.get(i).getChildFriendly() * (5 + childrenW);
                     }
                     break;
                 default:
-                    childS = listSizeResult.get(i).getChildFriendly() * (4 + childrenW);
+                    childS = listSizeResult.get(i).getChildFriendly() * (5 + childrenW);
                     break;
             }
 //            stranger
             switch (strangerW) {
                 case 3:
                     if (listSizeResult.get(i).getStrangerFriendly() < 4) {
-                        strangerS = (-1) * (5 - listSizeResult.get(i).getStrangerFriendly()) * (3 + strangerW);
+                        strangerS = (-1) * (5 - listSizeResult.get(i).getStrangerFriendly()) * (5 + strangerW);
                     } else {
-                        strangerS = listSizeResult.get(i).getStrangerFriendly() * (3 + strangerW);
+                        strangerS = listSizeResult.get(i).getStrangerFriendly() * (5 + strangerW);
                     }
                     break;
                 case 2:
                     if (listSizeResult.get(i).getStrangerFriendly() < 3) {
-                        strangerS = (-1) * (5 - listSizeResult.get(i).getStrangerFriendly()) * (3 + strangerW);
+                        strangerS = (-1) * (5 - listSizeResult.get(i).getStrangerFriendly()) * (5 + strangerW);
                     } else {
-                        strangerS = listSizeResult.get(i).getStrangerFriendly() * (3 + strangerW);
+                        strangerS = listSizeResult.get(i).getStrangerFriendly() * (5 + strangerW);
                     }
                     break;
                 default:
-                    strangerS = listSizeResult.get(i).getStrangerFriendly() * (3 + strangerW);
+                    strangerS = (-1) * (5 - listSizeResult.get(i).getStrangerFriendly()) * (5 + strangerW);
                     break;
             }
 //             bark
@@ -185,7 +185,7 @@ public class DogBreedService {
 //            dog
             if (dogW == 2) {
                 if (listSizeResult.get(i).getDogFriendly() < 3) {
-                    healthS = (-1) * (5 - listSizeResult.get(i).getDogFriendly()) * (3 + dogW);
+                    dogS = (-1) * (5 - listSizeResult.get(i).getDogFriendly()) * (3 + dogW);
                 } else {
                     dogS = listSizeResult.get(i).getDogFriendly() * (3 + dogW);
                 }
@@ -328,18 +328,20 @@ public class DogBreedService {
                 case 4:
                 case 3:
                     if (listSizeResult.get(i).getExerciseNeed() < 4) {
-                        excerS = (-1) * (5 - listSizeResult.get(i).getExerciseNeed()) * (3 + excerciseW);
+                        excerS = (-1) * (5 - listSizeResult.get(i).getExerciseNeed()) * (4 + excerciseW);
                     } else {
-                        excerS = listSizeResult.get(i).getExerciseNeed() * (3 + excerciseW);
-                    }   break;
+                        excerS = listSizeResult.get(i).getExerciseNeed() * (4 + excerciseW);
+                    }
+                    break;
                 case 2:
                     if (listSizeResult.get(i).getExerciseNeed() < 3) {
-                        excerS = (-1) * (5 - listSizeResult.get(i).getExerciseNeed()) * (3 + excerciseW);
+                        excerS = (-1) * (5 - listSizeResult.get(i).getExerciseNeed()) * (4 + excerciseW);
                     } else {
-                        excerS = listSizeResult.get(i).getExerciseNeed() * (3 + excerciseW);
-                    }   break;
+                        excerS = listSizeResult.get(i).getExerciseNeed() * (4 + excerciseW);
+                    }
+                    break;
                 default:
-                    excerS = (-1) * (5 - listSizeResult.get(i).getExerciseNeed()) * (3 + excerciseW);
+                    excerS = (-1) * (5 - listSizeResult.get(i).getExerciseNeed()) * (4 + excerciseW);
                     break;
             }
 

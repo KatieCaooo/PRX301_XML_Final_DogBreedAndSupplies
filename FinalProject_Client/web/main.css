@@ -24,8 +24,8 @@ label {
 }
 
 .card-input-element:checked+.card::after {
-    content: '\e5ca';
-    color: #AFB8EA;
+    content: '\2714';
+    color: orange;
     font-family: 'Material Icons';
     font-size: 24px;
     -webkit-animation-name: fadeInCheckbox;
@@ -66,4 +66,20 @@ label {
 .checked {
     color: #c69500;
     text-align: center;
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
+@keyframes spin {
+    0%{
+        transform: rotate(-20deg);
+    }
+    50% {
+        transform: rotate(20deg);
+    }
+    100% {
+        transform: rotate(-20deg);
+    }
+}
+

@@ -34,7 +34,7 @@ public class DogBreedCrawler {
 
     private static final String configFile = "/web/WEB-INF/config.xml";
     public static int count = 0;
-
+    public static int errorCount = 0;
     private static ExecutorService service = Executors.newFixedThreadPool(15);
 
     public static void main(String[] args) {
@@ -153,7 +153,7 @@ public class DogBreedCrawler {
             try {
                 futures.add(CompletableFuture.runAsync(new DogBreedTask(nodeNames.item(j), nodePhotos.item(j), nodeLinks.item(j), dogDocument, breedDAO), service));
             } catch (Exception e) {
-                
+
             }
         }
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()])).join();

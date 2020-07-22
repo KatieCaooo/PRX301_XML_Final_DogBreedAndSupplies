@@ -5,6 +5,7 @@
  */
 package thuct.crawlers;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -12,16 +13,28 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 import static thuct.crawlers.DogBreedCrawler.getDogDetailsHTML;
 import static thuct.crawlers.DogBreedCrawler.getInputStreamForUrl;
 import thuct.daos.DogBreedDAO;
 import thuct.dtos.DogBreed;
+import thuct.utils.FileUtil;
 import thuct.utils.XMLUtils;
 
 /**
@@ -51,7 +64,9 @@ public class DogBreedTask implements Runnable {
 
         try {
             XPath xPath = XMLUtils.createXPath();
-            String xmlBreed = "<dogBreed>\n";
+            String dtdPath = System.getProperty("user.dir") + "/web/WEB-INF/dogBreed.dtd";
+            String dtd = FileUtil.readLineByLine(dtdPath);
+            String xmlBreed = "<!DOCTYPE dogBreed [\n" + dtd + "]>\n<dogBreed>\n";
             breed.setName(nodeName.getAttributes().getNamedItem("alt").getNodeValue());
             xmlBreed += "<name>" + nodeName.getAttributes().getNamedItem("alt").getNodeValue() + "</name>\n";
             breed.setPhoto(nodePhoto.getAttributes().getNamedItem("src").getNodeValue());
@@ -69,9 +84,14 @@ public class DogBreedTask implements Runnable {
             JAXBContext jAXBContext = JAXBContext.newInstance(DogBreed.class);
             Unmarshaller um = jAXBContext.createUnmarshaller();
             DogBreed tmp = (DogBreed) um.unmarshal(new StringReader(xmlBreed));
-            //insert
-            System.out.println("Inserted " + (DogBreedCrawler.count++) + " - " + breed.getName() + " breeds");
-//            breedDAO.insertDogBreed(breed);
+            String schemaPath = System.getProperty("user.dir") + "/web/WEB-INF/dogBreed.xsd";
+            if (checkXMLWithDTD(xmlBreed) && checkXMLWithSchema(xmlBreed, schemaPath)) {
+                //insert
+                System.out.println("Inserted " + (++DogBreedCrawler.count) + " - " + breed.getName() + " breeds");
+                breedDAO.insertDogBreed(tmp);
+            } else {
+                System.out.println("Not passed " + (++DogBreedCrawler.errorCount) + " - " + breed.getName() + " breeds");
+            }
         } catch (IOException ex) {
             Logger.getLogger(DogBreedTask.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -247,6 +267,50 @@ public class DogBreedTask implements Runnable {
         }
         xmlResult += "</dogBreed>";
         return xmlResult;
+    }
+
+    public boolean checkXMLWithSchema(String xml, String schemaPath) throws SAXException, IOException {
+        boolean valid = true;
+        SchemaFactory schemafactory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
+        File schemaFile = new File(schemaPath);
+        Schema schemaSchema = schemafactory.newSchema(schemaFile);
+        Validator schemaValidator = schemaSchema.newValidator();
+        try {
+            schemaValidator.validate(new StreamSource(new StringReader(xml)));
+        } catch (SAXException e) {
+            valid = false;
+        }
+        return valid;
+    }
+
+    public boolean checkXMLWithDTD(String xml) throws ParserConfigurationException, IOException {
+        DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
+        domFactory.setValidating(true);
+        DocumentBuilder builder = domFactory.newDocumentBuilder();
+        builder.setErrorHandler(new ErrorHandler() {
+            @Override
+            public void warning(SAXParseException exception) throws SAXException {
+                throw exception; //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void error(SAXParseException exception) throws SAXException {
+                throw exception; //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void fatalError(SAXParseException exception) throws SAXException {
+                throw exception; //To change body of generated methods, choose Tools | Templates.
+            }
+
+        });
+        boolean valid = true;
+        try {
+            builder.parse(new InputSource(new StringReader(xml)));
+        } catch (SAXException ex) {
+            valid = false;
+        }
+        return valid;
     }
 
 }

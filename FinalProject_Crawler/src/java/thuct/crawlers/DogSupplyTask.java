@@ -67,29 +67,30 @@ public class DogSupplyTask implements Runnable {
                 for (int j = 0; j < nodeSizes.getLength(); j++) {
                     DogSupplies dogSupplies = new DogSupplies();
                     String sizeSupplies = nodeSizes.item(j).getTextContent();
+                    String size;
                     int indexSizeSupplies;
                     if (sizeSupplies.contains("X-Small")) {
                         indexSizeSupplies = sizeSupplies.indexOf("X-Small");
-                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 7);
+                        size = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 7);
                     } else if (sizeSupplies.contains("Small")) {
                         indexSizeSupplies = sizeSupplies.indexOf("Small");
-                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 5);
+                        size = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 5);
                     } else if (sizeSupplies.contains("Medium")) {
                         indexSizeSupplies = sizeSupplies.indexOf("Medium");
-                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 6);
+                        size = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 6);
                     } else if (sizeSupplies.contains("XLarge")) {
                         indexSizeSupplies = sizeSupplies.indexOf("XLarge");
-                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 6);
+                        size = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 6);
                     } else if (sizeSupplies.contains("X-large")) {
                         indexSizeSupplies = sizeSupplies.indexOf("X-large");
-                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 7);
+                        size = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 7);
                     } else if (sizeSupplies.contains("Large")) {
                         indexSizeSupplies = sizeSupplies.indexOf("Large");
-                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 5);
+                        size = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 5);
                     } else {
-                        sizeSupplies = "For all dogs";
+                        size = "For all dogs";
                     }
-                    dogSupplies.setSize(sizeSupplies);
+                    dogSupplies.setSize(size);
 
                     //Set name
                     String name = nodeNames.item(i).getTextContent();
@@ -97,12 +98,10 @@ public class DogSupplyTask implements Runnable {
                         System.out.println("AAA");
                     }
                     name = name.replace("\n", "").trim();
-                    if (sizeSupplies.contains("\"") || sizeSupplies.contains("\'")) {
-                        dogSupplies.setName("[" + sizeSupplies + "] " + name);
-                    } else if (sizeSupplies.equals("For all dogs")) {
+                    if (size.equals("For all dogs")) {
                         dogSupplies.setName(name);
                     } else {
-                        dogSupplies.setName("[" + sizeSupplies + "] " + name);
+                        dogSupplies.setName("[" + size + "] " + name);
                     }
                     //Set photo
                     String photo = nodePhotos.item(i).getAttributes().getNamedItem("src").getNodeValue();
@@ -111,7 +110,7 @@ public class DogSupplyTask implements Runnable {
                     dogSupplies.setPhoto(photo);
                     //Set title
                     String title = nodeTitles.item(i).getAttributes().getNamedItem("title").getNodeValue();
-                    dogSupplies.setContent(title);
+                    dogSupplies.setContent("[" + sizeSupplies + "]\n" + title);
                     //Set price
                     String priceString = "";
                     if (nodePrices.item(j) == null) {

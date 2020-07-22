@@ -780,6 +780,10 @@ and open the template in the editor.
                 var content = "";
                 var breedNodes = dogBreedResultDom.firstChild.children;
                 for (var i = 0; i < breedNodes.length; i++) {
+                    var priceDog = breedNodes[i].children[9].firstChild.nodeValue;
+                    if (priceDog === 0 || priceDog === null) {
+                        priceDog === "Unknown";
+                    }
                     content +=
                             "<div class=\"col-4 align-items-center\">" +
                             "<div class=\"card\" style=\"width: 90%; height: 90%; align-content: center; margin: 5% 5% 5% 5%;\">" +
@@ -789,7 +793,7 @@ and open the template in the editor.
                             "<p class=\"card-text\">Reference price: $" + breedNodes[i].children[15].firstChild.nodeValue + "</p>" +
                             "</div>" +
                             "<div class=\"card-footer text-center\">" +
-                            "<button class=\"btn btn-primary\" onClick=\"dogDetails(" + breedNodes[i].children[9].firstChild.nodeValue + ")\">Details</button>" +
+                            "<button class=\"btn btn-primary\" onClick=\"dogDetails(" + priceDog + ")\">Details</button>" +
                             "</div>" +
                             "</div>" +
                             "</div>";
@@ -830,6 +834,10 @@ and open the template in the editor.
                 var detail = "";
                 var askBudget = "";
                 var breedNode = dogBreedDetailDom.firstChild;
+                var priceDog = breedNode.children[15].firstChild.nodeValue;
+                if (priceDog === 0 || priceDog === null) {
+                    priceDog === "Unknown";
+                }
                 detail =
                         "<div class=\"row justify-items-center\" style=\"padding-top: 50px\">"
                         + "<img src=\"" + breedNode.children[13].firstChild.nodeValue + "\" class=\"rounded mx-auto d-block\">"
@@ -864,7 +872,7 @@ and open the template in the editor.
                         + "<div class=\"row justify-content-center\" style=\"padding-bottom: 50px\">"
                         + "<div class=\"col-2 infoDog border border-warning font-weight-bold\">Reference price</div>"
                         + "<div class=\"col-4 infoDog border border-warning align-middle\">"
-                        + breedNode.children[15].firstChild.nodeValue
+                        + "$"+priceDog
                         + "</div>"
                         + "</div>"
                         + "<div class=\"row justify-content-center\" style=\"padding-top: 10px; color: #28a745\">"
@@ -877,19 +885,16 @@ and open the template in the editor.
                         + "</div>"
                         + "<div class=\"row justify-content-center\">"
                         + "<div class=\"col-3 infoDog\">";
-//                Adaptability
                 for (i = 0; i < breedNode.children[0].firstChild.nodeValue; i++) {
                     detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
                 }
                 detail += "</div>"
                         + "<div class=\"col-3 infoDog\">";
-//                Apartment Friendly
                 for (i = 0; i < breedNode.children[1].firstChild.nodeValue; i++) {
                     detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
                 }
                 detail += "</div>"
                         + "<div class=\"col-3 infoDog\">";
-//                Barking Tendency
                 for (i = 0; i < breedNode.children[2].firstChild.nodeValue; i++) {
                     detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
                 }
@@ -1012,7 +1017,7 @@ and open the template in the editor.
 
         </div>
         <script>
-            
+
         </script>
 
 

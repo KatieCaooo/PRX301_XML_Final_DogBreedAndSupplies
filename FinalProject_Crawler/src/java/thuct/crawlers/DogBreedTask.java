@@ -7,8 +7,11 @@ package thuct.crawlers;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -48,23 +51,27 @@ public class DogBreedTask implements Runnable {
 
         try {
             XPath xPath = XMLUtils.createXPath();
+            String xmlBreed = "<dogBreed>\n";
             breed.setName(nodeName.getAttributes().getNamedItem("alt").getNodeValue());
+            xmlBreed += "<name>" + nodeName.getAttributes().getNamedItem("alt").getNodeValue() + "</name>\n";
             breed.setPhoto(nodePhoto.getAttributes().getNamedItem("src").getNodeValue());
+            xmlBreed += "<photo>" + nodePhoto.getAttributes().getNamedItem("src").getNodeValue() + "</photo>\n";
             String link = nodeLink.getAttributes().getNamedItem("href").getNodeValue();
             dogInputStream = getInputStreamForUrl(link);
             dogDocument = getDogDetailsHTML(dogInputStream, dogDocument);
             //remove special characters
             dogDocument = dogDocument.replaceAll("&[a-zA-Z0-9#]*;", "");
             Document doc = XMLUtils.convertStringToDocument(dogDocument);
-            String xmlBreed;
             //Information Table02
-            crawlInformation(breed, xPath, doc);
+            xmlBreed = crawlInformation(xmlBreed, breed, xPath, doc);
             //Characteristics Table02
-            crawlCharacteristics(breed, xPath, doc);
-
+            xmlBreed = crawlCharacteristics(xmlBreed, breed, xPath, doc);
+            JAXBContext jAXBContext = JAXBContext.newInstance(DogBreed.class);
+            Unmarshaller um = jAXBContext.createUnmarshaller();
+            DogBreed tmp = (DogBreed) um.unmarshal(new StringReader(xmlBreed));
             //insert
             System.out.println("Inserted " + (DogBreedCrawler.count++) + " - " + breed.getName() + " breeds");
-            breedDAO.insertDogBreed(breed);
+//            breedDAO.insertDogBreed(breed);
         } catch (IOException ex) {
             Logger.getLogger(DogBreedTask.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -79,7 +86,8 @@ public class DogBreedTask implements Runnable {
         }
     }
 
-    public DogBreed crawlInformation(String xml, DogBreed breed, XPath xPath, Document doc) throws XPathExpressionException {
+    public String crawlInformation(String xmlBreed, DogBreed breed, XPath xPath, Document doc) throws XPathExpressionException {
+        String xmlResult = xmlBreed;
         Node nodeElement;
 
         //size
@@ -87,12 +95,13 @@ public class DogBreedTask implements Runnable {
         String size = nodeElement.getTextContent();
         size = size.replaceAll("<[a-zA-Z0-9:=\"-/. ]*>", "");
         breed.setSize(size);
-        xml += "<>" + size + "</>";
+        xmlResult += "<size>" + size + "</size>\n";
 
         //life span
         nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[9]/td[2]", doc, XPathConstants.NODE);
         String lifeSpan = nodeElement.getTextContent();
         breed.setLifeSpan(lifeSpan);
+        xmlResult += "<lifeSpan>" + lifeSpan + "</lifeSpan>\n";
 
         //weight
         nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[12]/td[2]", doc, XPathConstants.NODE);
@@ -113,6 +122,7 @@ public class DogBreedTask implements Runnable {
             }
         }
         breed.setWeight(weight);
+        xmlResult += "<weight>" + weight + "</weight>\n";
 
         //puppy
         nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[14]/td[2]", doc, XPathConstants.NODE);
@@ -121,6 +131,7 @@ public class DogBreedTask implements Runnable {
             puppy = "Unknown";
         }
         breed.setPuppy(puppy);
+        xmlResult += "<puppy>" + puppy + "</puppy>\n";
 
         //price
         nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[15]/td[2]", doc, XPathConstants.NODE);
@@ -135,10 +146,12 @@ public class DogBreedTask implements Runnable {
             price = Float.parseFloat(priceString);
         }
         breed.setPrice(price);
-        return breed;
+        xmlResult += "<price>" + price + "</price>\n";
+        return xmlResult;
     }
 
-    public DogBreed crawlCharacteristics(DogBreed breed, XPath xPath, Document doc) throws XPathExpressionException {
+    public String crawlCharacteristics(String xmlBreed, DogBreed breed, XPath xPath, Document doc) throws XPathExpressionException {
+        String xmlResult = xmlBreed;
         Node nodeElement;
         NodeList nodeList = (NodeList) xPath.evaluate("//table[@class='table-02']//td[1]/text()", doc, XPathConstants.NODESET);
         Float star = 0F;
@@ -155,69 +168,85 @@ public class DogBreedTask implements Runnable {
             switch (nameChar) {
                 case "Adaptability":
                     breed.setAdaptability(star);
+                    xmlResult += "<adaptability>" + star + "</adaptability>\n";
                     break;
 
                 case "Apartment Friendly":
                     breed.setApartmentFriendly(star);
+                    xmlResult += "<apartmentFriendly>" + star + "</apartmentFriendly>\n";
                     break;
 
                 case "Barking Tendencies":
                     breed.setBarkingTendency(star);
+                    xmlResult += "<barkingTendency>" + star + "</barkingTendency>\n";
                     break;
 
                 case "Cat Friendly":
                     breed.setCatFriendly(star);
+                    xmlResult += "<catFriendly>" + star + "</catFriendly>\n";
                     break;
 
                 case "Child Friendly":
                     breed.setChildFriendly(star);
+                    xmlResult += "<childFriendly>" + star + "</childFriendly>\n";
                     break;
 
                 case "Dog Friendly":
                     breed.setDogFriendly(star);
+                    xmlResult += "<dogFriendly>" + star + "</dogFriendly>\n";
                     break;
 
                 case "Exercise Needs":
                     breed.setExerciseNeed(star);
+                    xmlResult += "<exerciseNeed>" + star + "</exerciseNeed>\n";
                     break;
 
                 case "Grooming":
                     breed.setGrooming(star);
+                    xmlResult += "<grooming>" + star + "</grooming>\n";
                     break;
 
                 case "Health Issues":
                     breed.setHealthIssuse(star);
+                    xmlResult += "<healthIssuse>" + star + "</healthIssuse>\n";
                     break;
 
                 case "Intelligence":
                     breed.setIntelligence(star);
+                    xmlResult += "<intelligence>" + star + "</intelligence>\n";
                     break;
 
                 case "Playfulness":
                     breed.setPlayfulness(star);
+                    xmlResult += "<playfulness>" + star + "</playfulness>\n";
                     break;
 
                 case "Shedding Level":
                     breed.setSheddingLevel(star);
+                    xmlResult += "<sheddingLevel>" + star + "</sheddingLevel>\n";
                     break;
 
                 case "Stranger Friendly":
                     breed.setStrangerFriendly(star);
+                    xmlResult += "<strangerFriendly>" + star + "</strangerFriendly>\n";
                     break;
 
                 case "Trainability":
                     breed.setTrainability(star);
+                    xmlResult += "<trainability>" + star + "</trainability>\n";
                     break;
 
                 case "Watchdog Ability":
                     breed.setWatchdogAbility(star);
+                    xmlResult += "<watchdogAbility>" + star + "</watchdogAbility>\n";
                     break;
 
                 default:
                     break;
             }
         }
-        return breed;
+        xmlResult += "</dogBreed>";
+        return xmlResult;
     }
 
 }

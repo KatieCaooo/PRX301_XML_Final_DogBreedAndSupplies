@@ -32,8 +32,8 @@ import thuct.utils.XMLUtils;
 public class DogSupplyCrawler {
 
     private static final String configFile = "/web/WEB-INF/config.xml";
-    private static final ExecutorService executorService = Executors.newFixedThreadPool(8);
-    private static final CompletableFuture[] futures = new CompletableFuture[8];
+    private static final ExecutorService executorService = Executors.newFixedThreadPool(7);
+    private static final CompletableFuture[] futures = new CompletableFuture[7];
     public static int count = 0;
 
     /**
@@ -63,6 +63,8 @@ public class DogSupplyCrawler {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.exit(0);
+
     }
 
     public static InputStream getInputStreamForUrl(String urlSupply) throws MalformedURLException, IOException {

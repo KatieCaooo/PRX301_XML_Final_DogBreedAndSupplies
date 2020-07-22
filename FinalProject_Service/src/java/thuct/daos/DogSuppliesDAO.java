@@ -17,27 +17,14 @@ import thuct.utils.JPAUtil;
  */
 public class DogSuppliesDAO implements Serializable {
 
-    public List<DogSupplies> getBedBySize(String sizeDog) {
+    public List<DogSupplies> getSupplies(String sizeDog) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
 
-        List<DogSupplies> suppliesBed = em.createQuery("SELECT d FROM DogSupplies d WHERE d.size LIKE :size AND d.dogSuppliesPK.category = :category")
-                .setParameter("size", sizeDog).setParameter("category", 1).getResultList();
-
+        List<DogSupplies> suppliesBed = em.createQuery("SELECT d FROM DogSupplies d WHERE d.size IN (:size, 'For all dogs') ORDER BY d.dogSuppliesPK.category ASC")
+                .setParameter("size", sizeDog).getResultList();
         em.getTransaction().commit();
         em.close();
         return suppliesBed;
-    }
-
-    public List<DogSupplies> getAnotherSupplies() {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        em.getTransaction().begin();
-
-        List<DogSupplies> supplies = em.createQuery("SELECT d FROM DogSupplies d WHERE d.dogSuppliesPK.category != :category")
-                .setParameter("category", 1).getResultList();
-
-        em.getTransaction().commit();
-        em.close();
-        return supplies;
     }
 }

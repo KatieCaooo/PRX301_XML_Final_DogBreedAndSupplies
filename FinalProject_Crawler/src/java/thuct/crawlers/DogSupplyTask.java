@@ -61,32 +61,31 @@ public class DogSupplyTask implements Runnable {
                 doc = XMLUtils.convertStringToDocument(document);
 
                 DogSuppliesDAO dogSuppliesDAO = new DogSuppliesDAO();
-                NodeList nodeSizes = (NodeList) xPath.evaluate("//li[contains(@class,'PfMember unselected')]//span[@class='name']", doc, XPathConstants.NODESET);
-                NodeList nodePrices = (NodeList) xPath.evaluate("//li[contains(@class,'PfMember unselected')]//span[@class='MemPrice']", doc, XPathConstants.NODESET);
-                NodeList nodeSale = (NodeList) xPath.evaluate("//li[contains(@class,'PfMember unselected')]//span[@class='MemSalePrice']", doc, XPathConstants.NODESET);
+                NodeList nodeSizes = (NodeList) xPath.evaluate("//div[contains(@id,'pf_Members')]//span[@class='name']", doc, XPathConstants.NODESET);
+                NodeList nodePrices = (NodeList) xPath.evaluate("//div[contains(@id,'pf_Members')]//span[@class='MemPrice']", doc, XPathConstants.NODESET);
+                NodeList nodeSale = (NodeList) xPath.evaluate("//div[contains(@id,'pf_Members')]//span[@class='MemSalePrice']", doc, XPathConstants.NODESET);
                 for (int j = 0; j < nodeSizes.getLength(); j++) {
                     DogSupplies dogSupplies = new DogSupplies();
-
                     String sizeSupplies = nodeSizes.item(j).getTextContent();
                     int indexSizeSupplies;
-                    if (sizeSupplies.contains("X-Small") && !sizeSupplies.contains("Small")) {
+                    if (sizeSupplies.contains("X-Small")) {
                         indexSizeSupplies = sizeSupplies.indexOf("X-Small");
                         sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 7);
-                    } else if (sizeSupplies.contains("Small") && !sizeSupplies.contains("X-Small")) {
+                    } else if (sizeSupplies.contains("Small")) {
                         indexSizeSupplies = sizeSupplies.indexOf("Small");
                         sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 5);
                     } else if (sizeSupplies.contains("Medium")) {
                         indexSizeSupplies = sizeSupplies.indexOf("Medium");
                         sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 6);
-                    } else if (sizeSupplies.contains("Large") && !sizeSupplies.contains("X-Large") && !sizeSupplies.contains("XLarge")) {
-                        indexSizeSupplies = sizeSupplies.indexOf("Large");
-                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 5);
-                    } else if (!sizeSupplies.contains("Large") && sizeSupplies.contains("X-Large") && !sizeSupplies.contains("XLarge")) {
-                        indexSizeSupplies = sizeSupplies.indexOf("X-Large");
-                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 7);
-                    } else if (!sizeSupplies.contains("Large") && !sizeSupplies.contains("X-Large") && sizeSupplies.contains("XLarge")) {
+                    } else if (sizeSupplies.contains("XLarge")) {
                         indexSizeSupplies = sizeSupplies.indexOf("XLarge");
                         sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 6);
+                    } else if (sizeSupplies.contains("X-large")) {
+                        indexSizeSupplies = sizeSupplies.indexOf("X-large");
+                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 7);
+                    } else if (sizeSupplies.contains("Large")) {
+                        indexSizeSupplies = sizeSupplies.indexOf("Large");
+                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 5);
                     } else {
                         sizeSupplies = "For all dogs";
                     }
@@ -94,6 +93,9 @@ public class DogSupplyTask implements Runnable {
 
                     //Set name
                     String name = nodeNames.item(i).getTextContent();
+                    if (name.equals("Orvis Memory Foam Bolster Dog Bed")) {
+                        System.out.println("AAA");
+                    }
                     name = name.replace("\n", "").trim();
                     if (sizeSupplies.contains("\"") || sizeSupplies.contains("\'")) {
                         dogSupplies.setName("[" + sizeSupplies + "] " + name);

@@ -5,13 +5,13 @@
  */
 package thuct.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import org.hibernate.annotations.OrderBy;
 import thuct.daos.DogSuppliesDAO;
 import thuct.dtos.DogSupplies;
 
@@ -28,7 +28,6 @@ public class SuppliesService {
     public static List<DogSupplies> listSuggestSupplies(@QueryParam("sizeDog") String sizeDog,
             @QueryParam("priceHope") String priceHope) {
         DogSuppliesDAO dogSuppliesDAO = new DogSuppliesDAO();
-        List<DogSupplies> listSuppliesResult = dogSuppliesDAO.getAnotherSupplies();
         String sizeBed;
         switch (sizeDog) {
             case "Smallest":
@@ -44,14 +43,13 @@ public class SuppliesService {
                 sizeBed = "Large";
                 break;
             case "Giant":
-                sizeBed = "X-Large";
+                sizeBed = "X%Large";
                 break;
             default:
                 sizeBed = "";
                 break;
         }
-        listSuppliesResult.addAll(dogSuppliesDAO.getBedBySize(sizeBed));
-
+        List<DogSupplies> listSuppliesResult = dogSuppliesDAO.getSupplies(sizeBed);
         return listSuppliesResult;
     }
 

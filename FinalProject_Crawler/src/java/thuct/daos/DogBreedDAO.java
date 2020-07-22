@@ -75,35 +75,35 @@ public class DogBreedDAO {
         entityManager.close();
     }
 
-    public void removeAllDogBreedNotFull(int id) {
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-        entityManager.clear();
-        entityManager.getTransaction().begin();
-
-        Query query = entityManager.createQuery("DELETE FROM DogBreed d"
-                + " WHERE d.iddogBreed=:iddogBreed").setParameter("iddogBreed", id);
-        int executeUpdate = query.executeUpdate();
-
-        entityManager.getTransaction().commit();
-        entityManager.close();
-    }
-
-    public List getIdDogBreedNotFull() {
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-        entityManager.clear();
-        entityManager.getTransaction().begin();
-
-        List id = (List) entityManager.createQuery("SELECT d.iddogBreed"
-                + " FROM DogBreed d"
-                + " WHERE d.apartmentFriendly + d.adaptability + d.barkingTendency "
-                + " + d.catFriendly + d.childFriendly + d.dogFriendly "
-                + " + d.exerciseNeed + d.grooming + d.healthIssuse "
-                + " + d.intelligence + d.playfulness + d.sheddingLevel "
-                + " + d.strangerFriendly + d.trainability + d.watchdogAbility = :number "
-                + " OR d.price = :number").setParameter("number", 0F).getResultList();
-
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        return id;
-    }
+//    public void removeAllDogBreedNotFull(int id) {
+//        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+//        entityManager.clear();
+//        entityManager.getTransaction().begin();
+//
+//        Query query = entityManager.createQuery("DELETE FROM DogBreed d"
+//                + " WHERE d.iddogBreed=:iddogBreed").setParameter("iddogBreed", id);
+//        int executeUpdate = query.executeUpdate();
+//
+//        entityManager.getTransaction().commit();
+//        entityManager.close();
+//    }
+//
+//    public List getIdDogBreedNotFull() {
+//        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+//        entityManager.clear();
+//        entityManager.getTransaction().begin();
+//
+//        List id = (List) entityManager.createQuery("SELECT d.iddogBreed"
+//                + " FROM DogBreed d"
+//                + " WHERE d.apartmentFriendly + d.adaptability + d.barkingTendency "
+//                + " + d.catFriendly + d.childFriendly + d.dogFriendly "
+//                + " + d.exerciseNeed + d.grooming + d.healthIssuse "
+//                + " + d.intelligence + d.playfulness + d.sheddingLevel "
+//                + " + d.strangerFriendly + d.trainability + d.watchdogAbility = :number "
+//                + " OR d.price = :number").setParameter("number", 0F).getResultList();
+//
+//        entityManager.getTransaction().commit();
+//        entityManager.close();
+//        return id;
+//    }
 }

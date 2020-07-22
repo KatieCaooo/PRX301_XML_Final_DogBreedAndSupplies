@@ -48,9 +48,6 @@ public class DogBreedTask implements Runnable {
 
         try {
             XPath xPath = XMLUtils.createXPath();
-            if (nodeName.getAttributes().getNamedItem("alt").getNodeValue().equals("Rat Terrier")) {
-                System.out.println("AAAAAAAAAAA");
-            }
             breed.setName(nodeName.getAttributes().getNamedItem("alt").getNodeValue());
             breed.setPhoto(nodePhoto.getAttributes().getNamedItem("src").getNodeValue());
             String link = nodeLink.getAttributes().getNamedItem("href").getNodeValue();
@@ -64,7 +61,7 @@ public class DogBreedTask implements Runnable {
             crawlInformation(breed, xPath, doc);
             //Characteristics Table02
             crawlCharacteristics(breed, xPath, doc);
-            
+
             //insert
             System.out.println("Inserted " + (DogBreedCrawler.count++) + " - " + breed.getName() + " breeds");
             breedDAO.insertDogBreed(breed);
@@ -100,7 +97,9 @@ public class DogBreedTask implements Runnable {
         //weight
         nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[12]/td[2]", doc, XPathConstants.NODE);
         String weight = nodeElement.getTextContent();
-        if (weight.contains(":")) {
+        if (weight == "") {
+            weight = "Unknown";
+        } else if (weight.contains(":")) {
             if (weight.contains("\n")) {
                 String weightArray[] = weight.split("\n");
                 weight = weightArray[1].substring(weightArray[1].indexOf(" ") + 1).trim();
@@ -118,6 +117,9 @@ public class DogBreedTask implements Runnable {
         //puppy
         nodeElement = (Node) xPath.evaluate("//table[@class='table-01']/tbody/tr[14]/td[2]", doc, XPathConstants.NODE);
         String puppy = nodeElement.getTextContent();
+        if (puppy == "") {
+            puppy = "Unknown";
+        }
         breed.setPuppy(puppy);
 
         //price

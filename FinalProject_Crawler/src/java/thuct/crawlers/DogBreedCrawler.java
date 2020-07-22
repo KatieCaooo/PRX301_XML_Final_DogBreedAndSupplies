@@ -155,11 +155,6 @@ public class DogBreedCrawler {
             } catch (Exception e) {
                 
             }
-            //delete breed not full fields
-//            List idNotFullList = breedDAO.getIdDogBreedNotFull();
-//            for (int i = 0; i < idNotFullList.size(); i++) {
-//                breedDAO.removeAllDogBreedNotFull(Integer.parseInt(idNotFullList.get(i).toString()));
-//            }
         }
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()])).join();
     }

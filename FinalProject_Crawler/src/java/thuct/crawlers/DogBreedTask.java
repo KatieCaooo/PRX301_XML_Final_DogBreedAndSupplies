@@ -66,6 +66,7 @@ public class DogBreedTask implements Runnable {
             xmlBreed = crawlInformation(xmlBreed, breed, xPath, doc);
             //Characteristics Table02
             xmlBreed = crawlCharacteristics(xmlBreed, breed, xPath, doc);
+            
             JAXBContext jAXBContext = JAXBContext.newInstance(DogBreed.class);
             Unmarshaller um = jAXBContext.createUnmarshaller();
             DogBreed tmp = (DogBreed) um.unmarshal(new StringReader(xmlBreed));

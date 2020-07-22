@@ -133,7 +133,6 @@ public class DogSupplyTask implements Runnable {
                     System.out.println("Inserted " + (DogSupplyCrawler.count++) + " - " + dogSupplies.getName() + " breeds");
 
                     dogSuppliesDAO.insertDogSupplies(dogSupplies);
-
                 }
             }
         } catch (IOException ex) {

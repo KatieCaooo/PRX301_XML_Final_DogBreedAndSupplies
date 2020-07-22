@@ -51,42 +51,306 @@ public class DogBreedService {
             @QueryParam("groomW") int groomW,
             @QueryParam("shedW") int shedW) {
         int adapW, healthW;
-        if (experienceW == 3) {
-            adapW = 17;
-            healthW = 17;
-        } else if (experienceW == 2) {
-            adapW = experienceW * 5;
-            healthW = experienceW * 5;
-        } else {
-            adapW = 8;
-            healthW = 8;
-        }
+
+        adapW = healthW = experienceW;
         DogBreedDAO breedDAO = new DogBreedDAO();
         List<DogBreed> listSizeResult = breedDAO.getSizeDog(size);
         List<DogBreedScore> listDogScore = new ArrayList<>();
+        Float adapS = null, homeS = null, childS = null, strangerS = null,
+                barkS = null, healthS = null, dogS = null, catS = null,
+                trainingS = null, watchdogS = null, groomS = null, shedS = null,
+                smartS = null, playfulS = null, excerS = null;
         for (int i = 0; i < listSizeResult.size(); i++) {
-            Float adapS = listSizeResult.get(i).getAdaptability() * adapW;
-            Float homeS = listSizeResult.get(i).getApartmentFriendly() * homeW;
-            Float childS = listSizeResult.get(i).getChildFriendly() * childrenW;
-            Float strangerS = listSizeResult.get(i).getStrangerFriendly() * strangerW;
-            Float barkS = listSizeResult.get(i).getBarkingTendency() * barkW;
-            Float healthS = listSizeResult.get(i).getHealthIssuse() * healthW;
-            Float dogS = listSizeResult.get(i).getDogFriendly() * dogW;
-            Float catS = listSizeResult.get(i).getCatFriendly() * catW;
-            Float trainingS = listSizeResult.get(i).getTrainability() * trainingW;
-            Float watchdogS = listSizeResult.get(i).getWatchdogAbility() * watchdogW;
-            Float groomS = listSizeResult.get(i).getGrooming() * groomW;
-            Float shedS = listSizeResult.get(i).getSheddingLevel() * shedW;
-            Float smartS = listSizeResult.get(i).getIntelligence() * smartW;
-            Float playfulS = listSizeResult.get(i).getPlayfulness() * playfulW;
-            Float excerS = listSizeResult.get(i).getExerciseNeed() * excerciseW;
+//            adap
+            switch (adapW) {
+                case 3:
+                    if (listSizeResult.get(i).getAdaptability() < 4) {
+                        adapS = (-1) * (5 - listSizeResult.get(i).getAdaptability()) * (4 + adapW);
+                    } else {
+                        adapS = listSizeResult.get(i).getAdaptability() * (4 + adapW);
+                    }
+                    break;
+                case 2:
+                    if (listSizeResult.get(i).getAdaptability() < 3) {
+                        adapS = (-1) * (5 - listSizeResult.get(i).getAdaptability()) * (4 + adapW);
+                    } else {
+                        adapS = listSizeResult.get(i).getAdaptability() * (4 + adapW);
+                    }
+                    break;
+                default:
+                    adapS = listSizeResult.get(i).getAdaptability() * (4 + adapW);
+                    break;
+            }
+//            home
+            switch (homeW) {
+                case 3:
+                    if (listSizeResult.get(i).getApartmentFriendly() < 4) {
+                        homeS = (-1) * (5 - listSizeResult.get(i).getApartmentFriendly()) * (4 + homeW);
+                    } else {
+                        homeS = listSizeResult.get(i).getApartmentFriendly() * (4 + homeW);
+                    }
+                    break;
+                case 2:
+                    if (listSizeResult.get(i).getApartmentFriendly() < 3) {
+                        homeS = (-1) * (5 - listSizeResult.get(i).getApartmentFriendly()) * (4 + homeW);
+                    } else {
+                        homeS = listSizeResult.get(i).getApartmentFriendly() * (4 + homeW);
+                    }
+                    break;
+                default:
+                    homeS = listSizeResult.get(i).getApartmentFriendly() * (4 + homeW);
+                    break;
+            }
+//            child
+            switch (childrenW) {
+                case 3:
+                    if (listSizeResult.get(i).getChildFriendly() < 4) {
+                        childS = (-1) * (5 - listSizeResult.get(i).getChildFriendly()) * (4 + childrenW);
+                    } else {
+                        childS = listSizeResult.get(i).getChildFriendly() * (4 + childrenW);
+                    }
+                    break;
+                case 2:
+                    if (listSizeResult.get(i).getChildFriendly() < 3) {
+                        childS = (-1) * (5 - listSizeResult.get(i).getChildFriendly()) * (4 + childrenW);
+                    } else {
+                        childS = listSizeResult.get(i).getChildFriendly() * (4 + childrenW);
+                    }
+                    break;
+                default:
+                    childS = listSizeResult.get(i).getChildFriendly() * (4 + childrenW);
+                    break;
+            }
+//            stranger
+            switch (strangerW) {
+                case 3:
+                    if (listSizeResult.get(i).getStrangerFriendly() < 4) {
+                        strangerS = (-1) * (5 - listSizeResult.get(i).getStrangerFriendly()) * (3 + strangerW);
+                    } else {
+                        strangerS = listSizeResult.get(i).getStrangerFriendly() * (3 + strangerW);
+                    }
+                    break;
+                case 2:
+                    if (listSizeResult.get(i).getStrangerFriendly() < 3) {
+                        strangerS = (-1) * (5 - listSizeResult.get(i).getStrangerFriendly()) * (3 + strangerW);
+                    } else {
+                        strangerS = listSizeResult.get(i).getStrangerFriendly() * (3 + strangerW);
+                    }
+                    break;
+                default:
+                    strangerS = listSizeResult.get(i).getStrangerFriendly() * (3 + strangerW);
+                    break;
+            }
+//             bark
+            switch (barkW) {
+                case 3:
+                    if (listSizeResult.get(i).getBarkingTendency() < 4) {
+                        barkS = (-1) * (5 - listSizeResult.get(i).getBarkingTendency()) * (2 + barkW);
+                    } else {
+                        barkS = listSizeResult.get(i).getBarkingTendency() * (2 + barkW);
+                    }
+                    break;
+                case 2:
+                    if (listSizeResult.get(i).getBarkingTendency() < 3) {
+                        barkS = (-1) * (5 - listSizeResult.get(i).getBarkingTendency()) * (2 + barkW);
+                    } else {
+                        barkS = listSizeResult.get(i).getBarkingTendency() * (2 + barkW);
+                    }
+                    break;
+                default:
+                    barkS = (-1) * (5 - listSizeResult.get(i).getBarkingTendency()) * (2 + barkW);
+                    break;
+            }
+
+//            health
+            switch (healthW) {
+                case 3:
+                    if (listSizeResult.get(i).getHealthIssuse() < 4) {
+                        healthS = (-1) * (5 - listSizeResult.get(i).getHealthIssuse()) * (4 + healthW);
+                    } else {
+                        healthS = listSizeResult.get(i).getHealthIssuse() * (4 + healthW);
+                    }
+                    break;
+                case 2:
+                    if (listSizeResult.get(i).getHealthIssuse() < 3) {
+                        healthS = (-1) * (5 - listSizeResult.get(i).getHealthIssuse()) * (4 + healthW);
+                    } else {
+                        healthS = listSizeResult.get(i).getHealthIssuse() * (4 + healthW);
+                    }
+                    break;
+                default:
+                    healthS = listSizeResult.get(i).getHealthIssuse() * (4 + healthW);
+                    break;
+            }
+//            dog
+            if (dogW == 2) {
+                if (listSizeResult.get(i).getDogFriendly() < 3) {
+                    healthS = (-1) * (5 - listSizeResult.get(i).getDogFriendly()) * (3 + dogW);
+                } else {
+                    dogS = listSizeResult.get(i).getDogFriendly() * (3 + dogW);
+                }
+            } else {
+                dogS = listSizeResult.get(i).getDogFriendly() * (3 + dogW);
+            }
+//            cat
+            if (catW == 2) {
+                if (listSizeResult.get(i).getCatFriendly() < 3) {
+                    healthS = (-1) * (5 - listSizeResult.get(i).getCatFriendly()) * (3 + catW);
+                } else {
+                    catS = listSizeResult.get(i).getCatFriendly() * (3 + catW);
+                }
+            } else {
+                catS = listSizeResult.get(i).getCatFriendly() * (3 + catW);
+            }
+//            training
+            switch (trainingW) {
+                case 3:
+                    if (listSizeResult.get(i).getTrainability() < 4) {
+                        trainingS = (-1) * (5 - listSizeResult.get(i).getTrainability()) * (4 + trainingW);
+                    } else {
+                        trainingS = listSizeResult.get(i).getTrainability() * (4 + trainingW);
+                    }
+                    break;
+                case 2:
+                    if (listSizeResult.get(i).getTrainability() < 3) {
+                        trainingS = (-1) * (5 - listSizeResult.get(i).getTrainability()) * (4 + trainingW);
+                    } else {
+                        trainingS = listSizeResult.get(i).getTrainability() * (4 + trainingW);
+                    }
+                    break;
+                default:
+                    trainingS = listSizeResult.get(i).getTrainability() * (4 + trainingW);
+                    break;
+            }
+//            watchdog
+            switch (watchdogW) {
+                case 3:
+                    if (listSizeResult.get(i).getWatchdogAbility() < 4) {
+                        watchdogS = (-1) * (5 - listSizeResult.get(i).getWatchdogAbility()) * (4 + watchdogW);
+                    } else {
+                        watchdogS = listSizeResult.get(i).getWatchdogAbility() * (4 + watchdogW);
+                    }
+                    break;
+                case 2:
+                    if (listSizeResult.get(i).getWatchdogAbility() < 3) {
+                        watchdogS = (-1) * (5 - listSizeResult.get(i).getWatchdogAbility()) * (4 + watchdogW);
+                    } else {
+                        watchdogS = listSizeResult.get(i).getWatchdogAbility() * (4 + watchdogW);
+                    }
+                    break;
+                default:
+                    watchdogS = (-1) * (5 - listSizeResult.get(i).getWatchdogAbility()) * (4 + watchdogW);
+                    break;
+            }
+//            groom
+            switch (groomW) {
+                case 3:
+                    if (listSizeResult.get(i).getGrooming() < 4) {
+                        groomS = (-1) * (5 - listSizeResult.get(i).getGrooming()) * (2 + groomW);
+                    } else {
+                        groomS = listSizeResult.get(i).getGrooming() * (2 + groomW);
+                    }
+                    break;
+                case 2:
+                    if (listSizeResult.get(i).getGrooming() < 3) {
+                        groomS = (-1) * (5 - listSizeResult.get(i).getGrooming()) * (2 + groomW);
+                    } else {
+                        groomS = listSizeResult.get(i).getGrooming() * (2 + groomW);
+                    }
+                    break;
+                default:
+                    groomS = (-1) * (listSizeResult.get(i).getGrooming()) * (2 + groomW);
+                    break;
+            }
+
+//            shed
+            switch (shedW) {
+                case 3:
+                    if (listSizeResult.get(i).getSheddingLevel() < 4) {
+                        shedS = (-1) * (5 - listSizeResult.get(i).getSheddingLevel()) * (2 + shedW);
+                    } else {
+                        shedS = listSizeResult.get(i).getSheddingLevel() * (2 + shedW);
+                    }
+                    break;
+                case 2:
+                    if (listSizeResult.get(i).getSheddingLevel() < 3) {
+                        shedS = (-1) * (5 - listSizeResult.get(i).getSheddingLevel()) * (2 + shedW);
+                    } else {
+                        shedS = listSizeResult.get(i).getSheddingLevel() * (2 + shedW);
+                    }
+                    break;
+                default:
+                    shedS = (-1) * (listSizeResult.get(i).getSheddingLevel()) * (2 + shedW);
+                    break;
+            }
+//            smart
+            switch (smartW) {
+                case 3:
+                    if (listSizeResult.get(i).getIntelligence() < 4) {
+                        smartS = (-1) * (5 - listSizeResult.get(i).getIntelligence()) * (4 + smartW);
+                    } else {
+                        smartS = listSizeResult.get(i).getIntelligence() * (4 + smartW);
+                    }
+                    break;
+                case 2:
+                    if (listSizeResult.get(i).getIntelligence() < 3) {
+                        smartS = (-1) * (5 - listSizeResult.get(i).getIntelligence()) * (4 + smartW);
+                    } else {
+                        smartS = listSizeResult.get(i).getIntelligence() * (4 + smartW);
+                    }
+                    break;
+                default:
+                    smartS = listSizeResult.get(i).getIntelligence() * (4 + smartW);
+                    break;
+            }
+//            playful
+            switch (playfulW) {
+                case 3:
+                    if (listSizeResult.get(i).getPlayfulness() < 4) {
+                        playfulS = (-1) * (5 - listSizeResult.get(i).getPlayfulness()) * (3 + playfulW);
+                    } else {
+                        playfulS = listSizeResult.get(i).getPlayfulness() * (3 + playfulW);
+                    }
+                    break;
+                case 2:
+                    if (listSizeResult.get(i).getPlayfulness() < 3) {
+                        playfulS = (-1) * (5 - listSizeResult.get(i).getPlayfulness()) * (3 + playfulW);
+                    } else {
+                        playfulS = listSizeResult.get(i).getPlayfulness() * (3 + playfulW);
+                    }
+                    break;
+                default:
+                    playfulS = (-1) * (5 - listSizeResult.get(i).getPlayfulness()) * (3 + playfulW);
+                    break;
+            }
+//          excer
+            switch (excerciseW) {
+                case 4:
+                case 3:
+                    if (listSizeResult.get(i).getExerciseNeed() < 4) {
+                        excerS = (-1) * (5 - listSizeResult.get(i).getExerciseNeed()) * (3 + excerciseW);
+                    } else {
+                        excerS = listSizeResult.get(i).getExerciseNeed() * (3 + excerciseW);
+                    }   break;
+                case 2:
+                    if (listSizeResult.get(i).getExerciseNeed() < 3) {
+                        excerS = (-1) * (5 - listSizeResult.get(i).getExerciseNeed()) * (3 + excerciseW);
+                    } else {
+                        excerS = listSizeResult.get(i).getExerciseNeed() * (3 + excerciseW);
+                    }   break;
+                default:
+                    excerS = (-1) * (5 - listSizeResult.get(i).getExerciseNeed()) * (3 + excerciseW);
+                    break;
+            }
+
             Float avgScore = (adapS + homeS + catS + childS + strangerS + barkS + healthS + dogS + trainingS + watchdogS + groomS + shedS + smartS + playfulS + excerS)
                     / (adapW + homeW + catW + childrenW + strangerW + barkW + healthW + dogW + trainingW + watchdogW + groomW + shedW + smartW + playfulW + excerciseW);
             listDogScore.add(new DogBreedScore(listSizeResult.get(i), avgScore));
         }
-        Collections.sort(listDogScore, (DogBreedScore o1, DogBreedScore o2) -> o1.getScore().compareTo(o2.getScore()));
+        System.out.println("a");
+        Collections.sort(listDogScore, (DogBreedScore o1, DogBreedScore o2) -> o2.getScore().compareTo(o1.getScore()));
         List<DogBreed> listResult = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 12; i++) {
             listResult.add(listDogScore.get(i).getDogBreed());
         }
         return listResult;

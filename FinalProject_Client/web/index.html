@@ -638,75 +638,78 @@ and open the template in the editor.
                                 document.getElementsByClassName("carousel-control-next")[0].style.visibility = "visible";
                             }
                         });
+                        function autoSwipe(){
+                            document.getElementsByClassName("carousel-control-next")[0].click()
+                        }
                         var experience = 0;
                         function getExp(value) {
                             experience = value;
-                            document.getElementsByClassName("carousel-control-next")[0].click();
+                            setTimeout(autoSwipe,1000);
                         }
                         var home = 0;
                         function getHome(value) {
                             home = value;
-                            document.getElementsByClassName("carousel-control-next")[0].click();
+                            setTimeout(autoSwipe,1000);
                         }
                         var children = 0;
                         function getChild(value) {
                             children = value;
-                            document.getElementsByClassName("carousel-control-next")[0].click();
+                            setTimeout(autoSwipe,1000);
                         }
                         var stranger = 0;
                         function getStranger(value) {
                             stranger = value;
-                            document.getElementsByClassName("carousel-control-next")[0].click();
+                            setTimeout(autoSwipe,1000);
                         }
                         var sizeDog = "";
                         function getSizeDog(value) {
                             sizeDog = value;
-                            document.getElementsByClassName("carousel-control-next")[0].click();
+                            setTimeout(autoSwipe,1000);
                         }
                         var bark = "";
                         function getBark(value) {
                             bark = value;
-                            document.getElementsByClassName("carousel-control-next")[0].click();
+                            setTimeout(autoSwipe,1000);
                         }
                         var cat = "";
                         function getCat(value) {
                             cat = value;
-                            document.getElementsByClassName("carousel-control-next")[0].click();
+                            setTimeout(autoSwipe,1000);
                         }
                         var dog = "";
                         function getDog(value) {
                             dog = value;
-                            document.getElementsByClassName("carousel-control-next")[0].click();
+                            setTimeout(autoSwipe,1000);
                         }
                         var excercise = "";
                         function getExc(value) {
                             excercise = value;
-                            document.getElementsByClassName("carousel-control-next")[0].click();
+                            setTimeout(autoSwipe,1000);
                         }
                         var playful = "";
                         function getPlay(value) {
                             playful = value;
-                            document.getElementsByClassName("carousel-control-next")[0].click();
+                            setTimeout(autoSwipe,1000);
                         }
                         var smart = "";
                         function getSmart(value) {
                             smart = value;
-                            document.getElementsByClassName("carousel-control-next")[0].click();
+                            setTimeout(autoSwipe,1000);
                         }
                         var training = "";
                         function getTrain(value) {
                             training = value;
-                            document.getElementsByClassName("carousel-control-next")[0].click();
+                            setTimeout(autoSwipe,1000);
                         }
                         var watchdog = "";
                         function getWatch(value) {
                             watchdog = value;
-                            document.getElementsByClassName("carousel-control-next")[0].click();
+                            setTimeout(autoSwipe,1000);
                         }
                         var groom = "";
                         function getGroom(value) {
                             groom = value;
-                            document.getElementsByClassName("carousel-control-next")[0].click();
+                            setTimeout(autoSwipe,1000);
                         }
                         var shed = "";
                         function getShed(value) {
@@ -863,17 +866,17 @@ and open the template in the editor.
                         + "<div class=\"row justify-content-center\">"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[0].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\"></i>";
                 }
                 detail += "</div>"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[1].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\"></i>";
                 }
                 detail += "</div>"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[2].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\"></i>";
                 }
                 detail += "</div>"
                         + "</div>"
@@ -885,17 +888,17 @@ and open the template in the editor.
                         + "<div class=\"row justify-content-center\">"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[3].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\"></i>";
                 }
                 detail += "</div>"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[4].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\"></i>";
                 }
                 detail += "</div>"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[5].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\"></i>";
                 }
                 detail += "</div>"
                         + "</div>"
@@ -907,17 +910,17 @@ and open the template in the editor.
                         + "<div class=\"row justify-content-center\">"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[6].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\"></i>";
                 }
                 detail += "</div>"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[7].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\"></i>";
                 }
                 detail += "</div>"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[8].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\"></i>";
                 }
                 detail += "</div>"
                         + "</div>"
@@ -929,17 +932,17 @@ and open the template in the editor.
                         + "<div class=\"row justify-content-center\">"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[10].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\"></i>";
                 }
                 detail += "</div>"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[14].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\"></i>";
                 }
                 detail += "</div>"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[17].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\"></i>";
                 }
                 detail += "</div>"
                         + "</div>"
@@ -951,17 +954,17 @@ and open the template in the editor.
                         + "<div class=\"row justify-content-center\" style=\"padding-bottom: 20px\">"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[19].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\"></i>";
                 }
                 detail += "</div>"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[20].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\"></i>";
                 }
                 detail += "</div>"
                         + "<div class=\"col-3 infoDog\">";
                 for (i = 0; i < breedNode.children[21].firstChild.nodeValue; i++) {
-                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\" style=\"padding-right:3px\"></i>";
+                    detail += "<i class=\"fas fa-paw fa-2x checked\" style=\"padding-right:3px\"></i>";
                 }
                 detail += "</div>"
                         + "</div>";

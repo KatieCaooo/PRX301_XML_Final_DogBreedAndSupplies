@@ -664,58 +664,72 @@ and open the template in the editor.
                         var experience = 0;
                         function getExp(value) {
                             experience = (value + 1);
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var home = 0;
                         function getHome(value) {
                             home = 3 * (value + 1);
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var children = 0;
                         function getChild(value) {
                             children = 4 * (value + 1);
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var stranger = 0;
                         function getStranger(value) {
                             stranger = 4 * (value + 1);
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var sizeDog = "";
                         function getSizeDog(value) {
                             sizeDog = value;
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var bark = "";
                         function getBark(value) {
                             bark = 2 * (value + 1);
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var cat = "";
                         function getCat(value) {
                             cat = 3 * (value + 1);
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var dog = "";
                         function getDog(value) {
                             dog = 3 * (value + 1);
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var excercise = "";
                         function getExc(value) {
                             excercise = 2 * (value + 1);
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var playful = "";
                         function getPlay(value) {
                             playful = 3 * (value + 1);
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var smart = "";
                         function getSmart(value) {
                             smart = 4 * (value + 1);
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var training = "";
                         function getTrain(value) {
                             training = 3 * (value + 1);
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var watchdog = "";
                         function getWatch(value) {
                             watchdog = 3 * (value + 1);
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var groom = "";
                         function getGroom(value) {
                             groom = 2 * (value + 1);
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var shed = "";
                         function getShed(value) {
@@ -863,20 +877,23 @@ and open the template in the editor.
                         + "</div>"
                         + "<div class=\"row justify-content-center\">"
                         + "<div class=\"col-3 infoDog\">";
+//                Adaptability
                 for (i = 0; i < breedNode.children[0].firstChild.nodeValue; i++) {
                     detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
                 }
                 detail += "</div>"
-                        + "<div class=\"col-3 infoDog\">"
-                        //+ for
-                        + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
-                        //+ end
-                        + "</div>"
-                        + "<div class=\"col-3 infoDog\">"
-                        //+ for
-                        + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
-                        //+ end
-                        + "</div>"
+                        + "<div class=\"col-3 infoDog\">";
+//                Apartment Friendly
+                for (i = 0; i < breedNode.children[1].firstChild.nodeValue; i++) {
+                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                }
+                detail += "</div>"
+                        + "<div class=\"col-3 infoDog\">";
+//                Barking Tendency
+                for (i = 0; i < breedNode.children[2].firstChild.nodeValue; i++) {
+                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                }
+                detail += "</div>"
                         + "</div>"
                         + "<div class=\"row justify-content-center\" style=\"padding-top: 20px\">"
                         + "<div class=\"col-3 infoDog font-weight-bold\">Cat Friendly</div>"
@@ -884,21 +901,21 @@ and open the template in the editor.
                         + "<div class=\"col-3 infoDog font-weight-bold\">Dog Friendly</div>"
                         + "</div>"
                         + "<div class=\"row justify-content-center\">"
-                        + "<div class=\"col-3 infoDog\">"
-                        //+ for
-                        + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
-                        //+ end
-                        + "</div>"
-                        + "<div class=\"col-3 infoDog\">"
-                        //+ for
-                        + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
-                        //+ end
-                        + "</div>"
-                        + "<div class=\"col-3 infoDog\">"
-                        //+ for
-                        + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
-                        //+ end
-                        + "</div>"
+                        + "<div class=\"col-3 infoDog\">";
+                for (i = 0; i < breedNode.children[3].firstChild.nodeValue; i++) {
+                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                }
+                detail += "</div>"
+                        + "<div class=\"col-3 infoDog\">";
+                for (i = 0; i < breedNode.children[4].firstChild.nodeValue; i++) {
+                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                }
+                detail += "</div>"
+                        + "<div class=\"col-3 infoDog\">";
+                for (i = 0; i < breedNode.children[5].firstChild.nodeValue; i++) {
+                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                }
+                detail += "</div>"
                         + "</div>"
                         + "<div class=\"row justify-content-center\" style=\"padding-top: 20px\">"
                         + "<div class=\"col-3 infoDog font-weight-bold\">Exercise Need</div>"
@@ -906,21 +923,21 @@ and open the template in the editor.
                         + "<div class=\"col-3 infoDog font-weight-bold\">Health Issuse</div>"
                         + "</div>"
                         + "<div class=\"row justify-content-center\">"
-                        + "<div class=\"col-3 infoDog\">"
-                        //+ for
-                        + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
-                        //+ end
-                        + "</div>"
-                        + "<div class=\"col-3 infoDog\">"
-                        //+ for
-                        + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
-                        //+ end
-                        + "</div>"
-                        + "<div class=\"col-3 infoDog\">"
-                        //+ for
-                        + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
-                        //+ end
-                        + "</div>"
+                        + "<div class=\"col-3 infoDog\">";
+                for (i = 0; i < breedNode.children[6].firstChild.nodeValue; i++) {
+                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                }
+                detail += "</div>"
+                        + "<div class=\"col-3 infoDog\">";
+                for (i = 0; i < breedNode.children[7].firstChild.nodeValue; i++) {
+                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                }
+                detail += "</div>"
+                        + "<div class=\"col-3 infoDog\">";
+                for (i = 0; i < breedNode.children[8].firstChild.nodeValue; i++) {
+                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                }
+                detail += "</div>"
                         + "</div>"
                         + "<div class=\"row justify-content-center\" style=\"padding-top: 20px\">"
                         + "<div class=\"col-3 infoDog font-weight-bold\">Intelligence</div>"
@@ -928,21 +945,21 @@ and open the template in the editor.
                         + "<div class=\"col-3 infoDog font-weight-bold\">Shedding Level</div>"
                         + "</div>"
                         + "<div class=\"row justify-content-center\">"
-                        + "<div class=\"col-3 infoDog\">"
-                        //+ for
-                        + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
-                        //+ end
-                        + "</div>"
-                        + "<div class=\"col-3 infoDog\">"
-                        //+ for
-                        + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
-                        //+ end
-                        + "</div>"
-                        + "<div class=\"col-3 infoDog\">"
-                        //+ for
-                        + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
-                        //+ end
-                        + "</div>"
+                        + "<div class=\"col-3 infoDog\">";
+                for (i = 0; i < breedNode.children[10].firstChild.nodeValue; i++) {
+                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                }
+                detail += "</div>"
+                        + "<div class=\"col-3 infoDog\">";
+                for (i = 0; i < breedNode.children[14].firstChild.nodeValue; i++) {
+                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                }
+                detail += "</div>"
+                        + "<div class=\"col-3 infoDog\">";
+                for (i = 0; i < breedNode.children[17].firstChild.nodeValue; i++) {
+                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                }
+                detail += "</div>"
                         + "</div>"
                         + "<div class=\"row justify-content-center\" style=\"padding-top: 20px\">"
                         + "<div class=\"col-3 infoDog font-weight-bold\">Stranger Friendly</div>"
@@ -950,21 +967,21 @@ and open the template in the editor.
                         + "<div class=\"col-3 infoDog font-weight-bold\">Watchdog Ability</div>"
                         + "</div>"
                         + "<div class=\"row justify-content-center\" style=\"padding-bottom: 20px\">"
-                        + "<div class=\"col-3 infoDog\">"
-                        //+ for
-                        + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
-                        //+ end
-                        + "</div>"
-                        + "<div class=\"col-3 infoDog\">"
-                        //+ for
-                        + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
-                        //+ end
-                        + "</div>"
-                        + "<div class=\"col-3 infoDog\">"
-                        //+ for
-                        + "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>"
-                        //+ end
-                        + "</div> "
+                        + "<div class=\"col-3 infoDog\">";
+                for (i = 0; i < breedNode.children[19].firstChild.nodeValue; i++) {
+                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                }
+                detail += "</div>"
+                        + "<div class=\"col-3 infoDog\">";
+                for (i = 0; i < breedNode.children[20].firstChild.nodeValue; i++) {
+                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                }
+                detail += "</div>"
+                        + "<div class=\"col-3 infoDog\">";
+                for (i = 0; i < breedNode.children[21].firstChild.nodeValue; i++) {
+                    detail += "<i class=\"fas fa-paw fa-2x fa-spin checked\"></i>";
+                }
+                detail += "</div> "
                         + "</div>";
                 containerDetail.innerHTML = detail;
                 if (detail !== null) {

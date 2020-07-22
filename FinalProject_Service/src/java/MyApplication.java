@@ -5,6 +5,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import thuct.services.AccountService;
 import thuct.services.DogBreedService;
+import thuct.services.SuppliesService;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,6 +24,7 @@ public class MyApplication extends Application {
         HashSet h = new HashSet<Class<?>>();
         h.add(DogBreedService.class);
         h.add(AccountService.class);
+        h.add(SuppliesService.class);
         return h;
     }
 

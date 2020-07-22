@@ -67,24 +67,40 @@ public class DogSupplyTask implements Runnable {
                 for (int j = 0; j < nodeSizes.getLength(); j++) {
                     DogSupplies dogSupplies = new DogSupplies();
 
-                    String size = nodeSizes.item(j).getTextContent();
-                    dogSupplies.setSize(size);
+                    String sizeSupplies = nodeSizes.item(j).getTextContent();
+                    int indexSizeSupplies;
+                    if (sizeSupplies.contains("X-Small") && !sizeSupplies.contains("Small")) {
+                        indexSizeSupplies = sizeSupplies.indexOf("X-Small");
+                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 7);
+                    } else if (sizeSupplies.contains("Small") && !sizeSupplies.contains("X-Small")) {
+                        indexSizeSupplies = sizeSupplies.indexOf("Small");
+                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 5);
+                    } else if (sizeSupplies.contains("Medium")) {
+                        indexSizeSupplies = sizeSupplies.indexOf("Medium");
+                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 6);
+                    } else if (sizeSupplies.contains("Large") && !sizeSupplies.contains("X-Large") && !sizeSupplies.contains("XLarge")) {
+                        indexSizeSupplies = sizeSupplies.indexOf("Large");
+                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 5);
+                    } else if (!sizeSupplies.contains("Large") && sizeSupplies.contains("X-Large") && !sizeSupplies.contains("XLarge")) {
+                        indexSizeSupplies = sizeSupplies.indexOf("X-Large");
+                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 7);
+                    } else if (!sizeSupplies.contains("Large") && !sizeSupplies.contains("X-Large") && sizeSupplies.contains("XLarge")) {
+                        indexSizeSupplies = sizeSupplies.indexOf("XLarge");
+                        sizeSupplies = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 6);
+                    } else {
+                        sizeSupplies = "For all dogs";
+                    }
+                    dogSupplies.setSize(sizeSupplies);
 
-                    String sizeArray[];
-                    sizeArray = size.split(" ");
                     //Set name
                     String name = nodeNames.item(i).getTextContent();
                     name = name.replace("\n", "").trim();
-                    if (size.contains("\"") || size.contains("\'")) {
-                        dogSupplies.setName("[" + size + "] " + name);
-                    } else if (sizeArray[0].equals("Small")
-                            || sizeArray[0].equals("Medium")
-                            || sizeArray[0].equals("Large")
-                            || sizeArray[0].equals("X-large")
-                            || sizeArray[0].equals("X-Small")) {
-                        dogSupplies.setName("[" + sizeArray[0] + "] " + name);
-                    } else {
+                    if (sizeSupplies.contains("\"") || sizeSupplies.contains("\'")) {
+                        dogSupplies.setName("[" + sizeSupplies + "] " + name);
+                    } else if (sizeSupplies.equals("For all dogs")) {
                         dogSupplies.setName(name);
+                    } else {
+                        dogSupplies.setName("[" + sizeSupplies + "] " + name);
                     }
                     //Set photo
                     String photo = nodePhotos.item(i).getAttributes().getNamedItem("src").getNodeValue();

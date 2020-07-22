@@ -55,7 +55,6 @@ public class DogSupplyCrawler {
                 crawlDogCollar(doc, node, url, xPath);
                 crawlDogCrate(doc, node, url, xPath);
                 crawlDogGate(doc, node, url, xPath);
-                crawlDogInTheHouse(doc, node, url, xPath);
                 crawlDogJacket(doc, node, url, xPath);
                 crawlDogToy(doc, node, url, xPath);
                 CompletableFuture.allOf(futures).join();
@@ -113,20 +112,12 @@ public class DogSupplyCrawler {
         futures[4] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
-    public static void crawlDogInTheHouse(Document doc, Node node, String url, XPath xPath) throws XPathExpressionException, IOException {
-        node = (Node) xPath.evaluate("//supplies-house", doc, XPathConstants.NODE);
-        url = url + node.getTextContent().trim();
-        String categoryName = "Dog In The House";
-        Category category = setCategoryForSupplies(6, categoryName);
-        futures[5] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
-    }
-
     public static void crawlDogJacket(Document doc, Node node, String url, XPath xPath) throws XPathExpressionException, IOException {
         node = (Node) xPath.evaluate("//supplies-jacket", doc, XPathConstants.NODE);
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Jackets";
         Category category = setCategoryForSupplies(7, categoryName);
-        futures[6] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
+        futures[5] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
     public static void crawlDogToy(Document doc, Node node, String url, XPath xPath) throws XPathExpressionException, IOException {
@@ -134,7 +125,7 @@ public class DogSupplyCrawler {
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Toys";
         Category category = setCategoryForSupplies(8, categoryName);
-        futures[7] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
+        futures[6] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
     public static Category setCategoryForSupplies(int id, String name) {

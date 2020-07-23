@@ -16,6 +16,9 @@ and open the template in the editor.
         <script src="font-awesome.min.js"></script>
 
         <script>
+            var idaccount = "";
+            var name = "";
+            var role = 0;
             var row = 0;
             var item = 3;
             var dogBreedResultDom;
@@ -50,6 +53,30 @@ and open the template in the editor.
 //            window.onload = function () {
 //                loadAllDogBreed();
 //            }
+            function setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            }
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            function delete_cookie(name) {
+                document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+            }
         </script>
     </head>
     <body style="background-color: #4e4c4c">
@@ -1072,10 +1099,13 @@ and open the template in the editor.
                 xmlHttp.onreadystatechange = function () {
                     if (this.readyState === 4 && this.status === 200) {
                         document.getElementById("welcomeName").style.visibility = "visible";
-                        document.getElementById("welcomeName").innerHTML = "Welcome, " + id;
+                        document.getElementById("welcomeName").innerHTML = "Welcome, " + idAccount;
                         document.getElementById("openLogin").click();
                         document.getElementById("openLogin").style.display = "none";
                         document.getElementById("signup").style.display = "none";
+                        setCookie('idaccount', idAccount, 365);
+                        setCookie('name', xmlDom.firstChild.children[1].firstChild.nodeValue, 365);
+                        setCookie('role', xmlDom.firstChild.children[3].firstChild.nodeValue, 365);
                     }
                     if (this.readyState === 4 && this.status === 500)
                     {
@@ -1160,6 +1190,26 @@ and open the template in the editor.
                     xmlHttp.send(null);
                 }
                 console.log("aaa");
+            }
+            function logout() {
+                delete_cookie('idaccount');
+                delete_cookie('name');
+                delete_cookie('role');
+            }
+            window.onload = function () {
+                idaccount = getCookie("idaccount");
+                name = getCookie("name");
+                role = getCookie("role");
+                if (idaccount != "" && name != "") {
+                    document.getElementById("welcomeName").style.visibility = "visible";
+                    document.getElementById("welcomeName").innerHTML = "Welcome, " + name;
+                    if (role == 1) {
+
+                    }
+                } else {
+
+
+                }
             }
         </script>
         <script src="jquery.min.js"></script>

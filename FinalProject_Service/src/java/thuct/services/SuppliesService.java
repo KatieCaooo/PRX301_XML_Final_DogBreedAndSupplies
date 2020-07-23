@@ -70,8 +70,6 @@ public class SuppliesService {
         }
 
         Float currentSum = 0F;
-        Float pricePossible = 0F;
-        Float priceRadio = 0F;
         int position = 0;
         int sizeList = 0;
         if (priceHope >= maxPrice) {
@@ -92,8 +90,8 @@ public class SuppliesService {
             Float priceExcess = priceHope; //Tiền thừa hiện = HOPE
             for (int i = 1; i < 8; i++) { //chạy category
                 if (currentSum < priceHope) { //Nếu tiền tạm tính < HOPE
-                    position = 0;//set về 0 khi chạy category mới
                     priceHopeList = dogSuppliesDAO.getSuppliesForPrice(sizeSupplies, i, priceExcess);//Lấy list hàng từ tiền có thể mua
+                    position = getRandomNumber(0, priceHopeList.size() - 1);//set về 0 khi chạy category mới
                     while (sizeList < i && position < priceHopeList.size()) { //Nếu listSuppliesResult < vòng lặp thì chạy && position list<size priceHopeList
                         if (priceHopeList.get(position).getPrice() <= priceExcess) { //nếu tiền của thứ đó <= có thể mua
                             currentSum += priceHopeList.get(position).getPrice(); //tính tiền
@@ -112,4 +110,7 @@ public class SuppliesService {
         return listSuppliesResult;
     }
 
+    public static int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
 }

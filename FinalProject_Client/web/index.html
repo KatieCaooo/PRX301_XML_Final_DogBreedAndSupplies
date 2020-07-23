@@ -423,7 +423,7 @@ and open the template in the editor.
                                 <div class="row" style="width: 100%">
                                     <div class="col"></div>
                                     <div class="card" style="width: 50%; align-content: center">
-                                        <img src="https://www.smartlivingnetwork.com/uploads/2015032411031515321606374_c6c46ae2db_z.jpg" 
+                                        <img src="https://miro.medium.com/max/750/1*6BzlMlJGTUJd35OkMmrKQw.jpeg" 
                                              class="card-img-top" alt="Playful">
                                         <div class="card-body">
                                             <h5 class="card-title">[10/15] Playful</h5>
@@ -846,7 +846,7 @@ and open the template in the editor.
                 xmlHttp.open("GET", url, true);
                 xmlHttp.send(null);
             }
-            function drawDogDetails(idDog) {
+            function drawDogDetails() {
                 var containerDetail = document.getElementById("containerDetailDog");
                 var detail = "";
                 var askBudget = "";
@@ -1022,7 +1022,7 @@ and open the template in the editor.
                             + "</div>"
                             + "<input type=\"text\" id=\"budget\" pattern= \"[0-9](\\.0+)?\" class=\"form-control\" title=\"Only number or empty\">"
                             + "</div>"
-                            + "<button type=\"button\" class=\"btn btn-primary btn-lg btn-block\" onClick=\"\">Suggest supplies for me</button>"
+                            + "<button type=\"button\" class=\"btn btn-primary btn-lg btn-block\" onClick=\"getSupplies()\">Suggest supplies for me</button>"
                             + "</div>"
                             + "</div>";
                     containerDetail.innerHTML += askBudget;
@@ -1034,9 +1034,47 @@ and open the template in the editor.
 
         </div>
         <script>
-            var budget = "";
-            function getBudget() {
-                budget = document.getElementById("budget").value;
+            function getSupplies() {
+                var budget = document.getElementById("budget").value;
+                var xmlHttp = getXmlHttpObject();
+                if (xmlHttp === null) {
+                    alert("Your browser does not support   AJAX!")
+                }
+                xmlHttp.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        document.getElementById("suggestSupplies").style.display = "block";
+                        var parser = new DOMParser();
+                        dogSuppliesDom = parser.parseFromString(this.responseText, "text/xml");
+                        drawSuppliesList();
+                        var containerDetail = document.getElementById("containerDetailDog");
+                        containerDetail.scrollIntoView();
+                    }
+                }
+
+                var url = "http://localhost:8080/FinalProject_Service/dog-supplies/recommendDog/recommendSupplies?sizeDog=" + sizeDog + "&priceHope=" + budget;
+                xmlHttp.open("GET", url, true);
+                xmlHttp.send(null);
+            }
+            function drawSuppliesList() {
+                var container = document.getElementById("suggestSupplies");
+                var combo = "";
+                var suppliesNodes = dogSuppliesDom.firstChild.children;
+                for (var i = 0; i < suppliesNodes.length; i++) {
+                    combo +=
+                            "<div class=\"col-4 align-items-center\">" +
+                            "<div class=\"card\" style=\"width: 90%; height: 90%; align-content: center; margin: 5% 5% 5% 5%;\">" +
+                            "<img src=\"" + suppliesNodes[i].children[13].firstChild.nodeValue + "\" class=\"card-img-top\" style=\"height: 50%\">" +
+                            "<div class=\"card-body\">" +
+                            "<h5 class=\"card-title\">" + suppliesNodes[i].children[12].firstChild.nodeValue + "</h5>" +
+                            "<p class=\"card-text\">Reference price: $" + suppliesNodes[i].children[15].firstChild.nodeValue + "</p>" +
+                            "</div>" +
+                            "<div class=\"card-footer text-center\">" +
+                            "<button class=\"btn btn-primary\" onClick=\"dogDetails(" + priceDog + ")\">Details</button>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>";
+                }
+                container.innerHTML = container.innerHTML + content;
             }
         </script>
 

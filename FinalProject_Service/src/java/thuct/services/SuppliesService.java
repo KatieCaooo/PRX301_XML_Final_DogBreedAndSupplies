@@ -31,7 +31,7 @@ public class SuppliesService {
         String sizeSupplies;
         switch (sizeDog) {
             case "Smallest":
-                sizeSupplies = "X-small";
+                sizeSupplies = "X-Small";
                 break;
             case "Small":
                 sizeSupplies = "Small";
@@ -55,7 +55,7 @@ public class SuppliesService {
         List<DogSupplies> minPriceList = new ArrayList<>();
         Float minPrice = 0F;
         for (int i = 0; i < 7; i++) {
-            dogSupplies = dogSuppliesDAO.getMinPrice(sizeDog, i);
+            dogSupplies = dogSuppliesDAO.getMinPrice(sizeSupplies, i);
             minPriceList.add(dogSupplies);
             minPrice += dogSupplies.getPrice();
         }
@@ -63,7 +63,7 @@ public class SuppliesService {
         List<DogSupplies> maxPriceList = new ArrayList<>();
         Float maxPrice = 0F;
         for (int i = 0; i < 7; i++) {
-            dogSupplies = dogSuppliesDAO.getMaxPrice(sizeDog, i);
+            dogSupplies = dogSuppliesDAO.getMaxPrice(sizeSupplies, i);
             maxPriceList.add(dogSupplies);
             maxPrice += dogSupplies.getPrice();
         }
@@ -77,7 +77,7 @@ public class SuppliesService {
             listSuppliesResult = minPriceList;
         } else if (priceHope < minPrice) {
             for (int i = 1; i < 8; i++) {
-                dogSupplies = dogSuppliesDAO.getMinPrice(sizeDog, i);
+                dogSupplies = dogSuppliesDAO.getMinPrice(sizeSupplies, i);
                 currentSum += dogSupplies.getPrice();
                 if (currentSum <= priceHope) {
                     listSuppliesResult.add(dogSupplies);
@@ -90,7 +90,7 @@ public class SuppliesService {
             for (int i = 1; i < 8; i++) {
                 pricePossible = maxPriceList.get(i).getPrice() * priceRadio;
                 for (int j = 1; j < 8; j++) {
-                    dogSupplies = dogSuppliesDAO.getSuppliesForPrice(sizeDog, j, pricePossible);
+                    dogSupplies = dogSuppliesDAO.getSuppliesForPrice(sizeSupplies, j, pricePossible);
                     listSuppliesResult.add(dogSupplies);
                 }
             }

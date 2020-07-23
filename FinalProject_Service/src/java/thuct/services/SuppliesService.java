@@ -51,10 +51,11 @@ public class SuppliesService {
         }
         List<DogSupplies> listSuppliesResult = new ArrayList<>();
         DogSupplies dogSupplies;
+        List<DogSupplies> priceHopeList = new ArrayList<>();
 
         List<DogSupplies> minPriceList = new ArrayList<>();
         Float minPrice = 0F;
-        for (int i = 0; i < 7; i++) {
+        for (int i = 1; i < 8; i++) {
             dogSupplies = dogSuppliesDAO.getMinPrice(sizeSupplies, i);
             minPriceList.add(dogSupplies);
             minPrice += dogSupplies.getPrice();
@@ -62,7 +63,7 @@ public class SuppliesService {
 
         List<DogSupplies> maxPriceList = new ArrayList<>();
         Float maxPrice = 0F;
-        for (int i = 0; i < 7; i++) {
+        for (int i = 1; i < 8; i++) {
             dogSupplies = dogSuppliesDAO.getMaxPrice(sizeSupplies, i);
             maxPriceList.add(dogSupplies);
             maxPrice += dogSupplies.getPrice();
@@ -71,6 +72,8 @@ public class SuppliesService {
         Float currentSum = 0F;
         Float pricePossible = 0F;
         Float priceRadio = 0F;
+        int num = 0;
+        int sizeList = -1;
         if (priceHope >= maxPrice) {
             listSuppliesResult = maxPriceList;
         } else if (priceHope == minPrice) {
@@ -85,17 +88,30 @@ public class SuppliesService {
                     currentSum -= dogSupplies.getPrice();
                 }
             }
-        } else if (priceHope < maxPrice) {
-            priceRadio = maxPrice / priceHope;
-            for (int i = 1; i < 8; i++) {
-                pricePossible = maxPriceList.get(i).getPrice() * priceRadio;
-                for (int j = 1; j < 8; j++) {
-                    dogSupplies = dogSuppliesDAO.getSuppliesForPrice(sizeSupplies, j, pricePossible);
-                    listSuppliesResult.add(dogSupplies);
+        } else if (priceHope < maxPrice) { //nếu giá mong muốn < MAX
+            Float priceExcess = priceHope; //Tiền thừa hiện = HOPE
+            for (int i = 0; i < 7; i++) {
+                if (currentSum < priceHope) { //Nếu tiền tạm tính < HOPE
+                    while (sizeList < i) { //Nếu listSuppliesResult < vòng lặp thì chạy
+                        priceRadio = maxPrice / priceExcess; //Tỉ lệ giữa MAX với EXCESS
+                        pricePossible = maxPriceList.get(i).getPrice() * priceRadio; //Tiền có thể dùng để mua
+                        priceHopeList = dogSuppliesDAO.getSuppliesForPrice(sizeSupplies, (i + 1), pricePossible);//Lấy list hàng từ tiền có thể mua
+                        if (priceHopeList.get(num).getPrice() <= pricePossible) { //nếu tiền của thứ đó <= có thể mua
+                            currentSum += priceHopeList.get(num).getPrice(); //tính tiền
+                            if (currentSum <= priceExcess) { //nhỏ hơn tiền thừa 
+                                listSuppliesResult.add(priceHopeList.get(num)); //mua
+                                sizeList++; //listSuppliesResult tăng
+                                priceExcess = priceHope - currentSum; //tính tiền thừa
+                            } else {//nếu không đủ tiền thì không mua
+                                currentSum -= priceHopeList.get(num).getPrice();//trừ tiền lại
+                                num +=0; //tăng position của priceHopeList để duyệt lại
+                            }
+                        }
+                    }
                 }
             }
+            System.out.println("priceExcess " + priceExcess);
         }
-
         return listSuppliesResult;
     }
 

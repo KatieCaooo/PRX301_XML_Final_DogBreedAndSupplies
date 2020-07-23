@@ -17,21 +17,20 @@ import thuct.utils.JPAUtil;
  */
 public class DogSuppliesDAO implements Serializable {
 
-    public DogSupplies getSuppliesForPrice(String sizeDog, int category, Float price) {
+    public List<DogSupplies> getSuppliesForPrice(String sizeDog, int category, Float price) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
 
-        DogSupplies priceSupplies = (DogSupplies) em.createQuery(
+        List<DogSupplies> priceSupplies =  em.createQuery(
                 "SELECT d FROM DogSupplies d "
                 + "WHERE d.size IN (:size, 'For all dogs') "
                 + "AND d.dogSuppliesPK.category = :category "
-                + "AND d.price <= :price"
-                + "ORDER BY d.price DESC "
-                + "LIMIT 1")
+                + "AND d.price <= :price "
+                + "ORDER BY d.price DESC")
                 .setParameter("size", sizeDog)
                 .setParameter("category", category)
                 .setParameter("price", price)
-                .getSingleResult();
+                .getResultList();
         em.getTransaction().commit();
         em.close();
         return priceSupplies;
@@ -45,9 +44,11 @@ public class DogSuppliesDAO implements Serializable {
                 "SELECT d FROM DogSupplies d "
                 + "WHERE d.size IN (:size, 'For all dogs') "
                 + "AND d.dogSuppliesPK.category = :category "
-                + "ORDER BY d.price DESC "
-                + "LIMIT 1")
-                .setParameter("size", sizeDog).setParameter("category", category).getSingleResult();
+                + "ORDER BY d.price DESC")
+                .setMaxResults(1)
+                .setParameter("size", sizeDog)
+                .setParameter("category", category)
+                .getSingleResult();
         em.getTransaction().commit();
         em.close();
         return maxPrice;
@@ -61,9 +62,11 @@ public class DogSuppliesDAO implements Serializable {
                 "SELECT d FROM DogSupplies d "
                 + "WHERE d.size IN (:size, 'For all dogs') "
                 + "AND d.dogSuppliesPK.category = :category "
-                + "ORDER BY d.price ASC "
-                + "LIMIT 1")
-                .setParameter("size", sizeDog).setParameter("category", category).getSingleResult();
+                + "ORDER BY d.price ASC")
+                .setMaxResults(1)
+                .setParameter("size", sizeDog)
+                .setParameter("category", category)
+                .getSingleResult();
         em.getTransaction().commit();
         em.close();
         return minPrice;

@@ -92,10 +92,10 @@ public class SuppliesService {
             Float priceExcess = priceHope; //Tiền thừa hiện = HOPE
             for (int i = 1; i < 8; i++) {
                 if (currentSum < priceHope) { //Nếu tiền tạm tính < HOPE
+                    priceRadio = maxPrice / priceExcess; //Tỉ lệ giữa MAX với EXCESS
+                    pricePossible = maxPriceList.get(i).getPrice() * priceRadio; //Tiền có thể dùng để mua
+                    priceHopeList = dogSuppliesDAO.getSuppliesForPrice(sizeSupplies, i, pricePossible);//Lấy list hàng từ tiền có thể mua
                     while (sizeList < i) { //Nếu listSuppliesResult < vòng lặp thì chạy
-                        priceRadio = maxPrice / priceExcess; //Tỉ lệ giữa MAX với EXCESS
-                        pricePossible = maxPriceList.get(i).getPrice() * priceRadio; //Tiền có thể dùng để mua
-                        priceHopeList = dogSuppliesDAO.getSuppliesForPrice(sizeSupplies, i, pricePossible);//Lấy list hàng từ tiền có thể mua
                         if (priceHopeList.get(num).getPrice() <= pricePossible) { //nếu tiền của thứ đó <= có thể mua
                             currentSum += priceHopeList.get(num).getPrice(); //tính tiền
                             if (currentSum <= priceExcess) { //nhỏ hơn tiền thừa 
@@ -104,7 +104,7 @@ public class SuppliesService {
                                 priceExcess = priceHope - currentSum; //tính tiền thừa
                             } else {//nếu không đủ tiền thì không mua
                                 currentSum -= priceHopeList.get(num).getPrice();//trừ tiền lại
-                                num +=0; //tăng position của priceHopeList để duyệt lại
+                                num += 0; //tăng position của priceHopeList để duyệt lại
                             }
                         }
                     }

@@ -17,14 +17,56 @@ import thuct.utils.JPAUtil;
  */
 public class DogSuppliesDAO implements Serializable {
 
-    public List<DogSupplies> getSupplies(String sizeDog) {
+    public DogSupplies getSuppliesForPrice(String sizeDog, int category, Float price) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
 
-        List<DogSupplies> suppliesBed = em.createQuery("SELECT d FROM DogSupplies d WHERE d.size IN (:size, 'For all dogs') ORDER BY d.dogSuppliesPK.category ASC")
-                .setParameter("size", sizeDog).getResultList();
+        DogSupplies priceSupplies = (DogSupplies) em.createQuery(
+                "SELECT d FROM DogSupplies d "
+                + "WHERE d.size IN (:size, 'For all dogs') "
+                + "AND d.dogSuppliesPK.category = :category "
+                + "AND d.price <= :price"
+                + "ORDER BY d.price DESC "
+                + "LIMIT 1")
+                .setParameter("size", sizeDog)
+                .setParameter("category", category)
+                .setParameter("price", price)
+                .getSingleResult();
         em.getTransaction().commit();
         em.close();
-        return suppliesBed;
+        return priceSupplies;
     }
+
+    public DogSupplies getMaxPrice(String sizeDog, int category) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        em.getTransaction().begin();
+
+        DogSupplies maxPrice = (DogSupplies) em.createQuery(
+                "SELECT d FROM DogSupplies d "
+                + "WHERE d.size IN (:size, 'For all dogs') "
+                + "AND d.dogSuppliesPK.category = :category "
+                + "ORDER BY d.price DESC "
+                + "LIMIT 1")
+                .setParameter("size", sizeDog).setParameter("category", category).getSingleResult();
+        em.getTransaction().commit();
+        em.close();
+        return maxPrice;
+    }
+
+    public DogSupplies getMinPrice(String sizeDog, int category) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        em.getTransaction().begin();
+
+        DogSupplies minPrice = (DogSupplies) em.createQuery(
+                "SELECT d FROM DogSupplies d "
+                + "WHERE d.size IN (:size, 'For all dogs') "
+                + "AND d.dogSuppliesPK.category = :category "
+                + "ORDER BY d.price ASC "
+                + "LIMIT 1")
+                .setParameter("size", sizeDog).setParameter("category", category).getSingleResult();
+        em.getTransaction().commit();
+        em.close();
+        return minPrice;
+    }
+
 }

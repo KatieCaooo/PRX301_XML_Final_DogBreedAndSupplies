@@ -42,7 +42,7 @@ public class DogSupplyTask implements Runnable {
     @Override
     public void run() {
         try {
-            XPath xPath = XMLUtils.createXPath();
+            xPath = XMLUtils.createXPath();
             String document = getListSuppliesHTML(url);
             DogSuppliesPK dogSuppliesPK = new DogSuppliesPK();
 
@@ -68,25 +68,18 @@ public class DogSupplyTask implements Runnable {
                     DogSupplies dogSupplies = new DogSupplies();
                     String sizeSupplies = nodeSizes.item(j).getTextContent();
                     String size;
-                    int indexSizeSupplies;
                     if (sizeSupplies.contains("X-Small")) {
-                        indexSizeSupplies = sizeSupplies.indexOf("X-Small");
-                        size = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 7);
+                        size = "X-Small";
                     } else if (sizeSupplies.contains("Small")) {
-                        indexSizeSupplies = sizeSupplies.indexOf("Small");
-                        size = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 5);
+                        size = "Small";
                     } else if (sizeSupplies.contains("Medium")) {
-                        indexSizeSupplies = sizeSupplies.indexOf("Medium");
-                        size = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 6);
+                        size = "Medium";
                     } else if (sizeSupplies.contains("XLarge")) {
-                        indexSizeSupplies = sizeSupplies.indexOf("XLarge");
-                        size = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 6);
+                        size = "X-Large";
                     } else if (sizeSupplies.contains("X-large")) {
-                        indexSizeSupplies = sizeSupplies.indexOf("X-large");
-                        size = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 7);
+                        size = "X-Large";
                     } else if (sizeSupplies.contains("Large")) {
-                        indexSizeSupplies = sizeSupplies.indexOf("Large");
-                        size = sizeSupplies.substring(indexSizeSupplies, indexSizeSupplies + 5);
+                        size = "Large";
                     } else {
                         size = "For all dogs";
                     }
@@ -115,12 +108,6 @@ public class DogSupplyTask implements Runnable {
                     //Set price
                     String priceString = "";
                     if (nodePrices.item(j) == null) {
-                        if(nodeSale == null){
-                            System.out.println("");
-                        }
-                        if(nodeSale.item(i)==null){
-                            System.out.println("");
-                        }
                         priceString = nodeSale.item(j).getTextContent();
                     } else {
                         priceString = nodePrices.item(j).getTextContent();

@@ -748,13 +748,22 @@ and open the template in the editor.
 
 
         <!--Show Dog Result List-->
-        <div class="container" id="containerResultDog" style="background-color: cornsilk; display: none">
+        <div class="container" id="containerResultDog" style="background-color: cornsilk; display: none;">
+            <div class="row justify-content-center" style="color: #bd2130; font-size: 50px;">
+                <p class="font-weight-bolder">Dog Breeds For You</p>
+            </div>
             <div class="row align-items-center" id="dogListResult">
 
+            </div>        
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4" style="padding-bottom: 20px;">
+                    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="loadMore()" style="width: 300px;">Load more</button>
+                </div>
+                <div class="col-4"></div>
             </div>
-             <button type="button" class="btn btn-primary btn-lg btn-block" onclick="loadMore()">Load more.</button>
         </div>
-       
+
         <script>
             function drawDogListResult() {
                 var container = document.getElementById("dogListResult");

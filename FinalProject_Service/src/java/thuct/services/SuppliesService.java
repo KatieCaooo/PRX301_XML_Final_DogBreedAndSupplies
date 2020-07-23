@@ -5,6 +5,7 @@
  */
 package thuct.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -25,30 +26,76 @@ public class SuppliesService {
     @Path("/recommendSupplies")
     @Produces(MediaType.APPLICATION_XML)
     public static List<DogSupplies> listSuggestSupplies(@QueryParam("sizeDog") String sizeDog,
-            @QueryParam("priceHope") String priceHope) {
+            @QueryParam("priceHope") Float priceHope) {
         DogSuppliesDAO dogSuppliesDAO = new DogSuppliesDAO();
-        String sizeBed;
+        String sizeSupplies;
         switch (sizeDog) {
             case "Smallest":
-                sizeBed = "X-small";
+                sizeSupplies = "X-small";
                 break;
             case "Small":
-                sizeBed = "Small";
+                sizeSupplies = "Small";
                 break;
             case "Medium":
-                sizeBed = "Medium";
+                sizeSupplies = "Medium";
                 break;
             case "Large":
-                sizeBed = "Large";
+                sizeSupplies = "Large";
                 break;
             case "Giant":
-                sizeBed = "X%Large";
+                sizeSupplies = "X-Large";
                 break;
             default:
-                sizeBed = "";
+                sizeSupplies = "";
                 break;
         }
-        List<DogSupplies> listSuppliesResult = dogSuppliesDAO.getSupplies(sizeBed);
+        List<DogSupplies> listSuppliesResult = new ArrayList<>();
+        DogSupplies dogSupplies;
+
+        List<DogSupplies> minPriceList = new ArrayList<>();
+        Float minPrice = 0F;
+        for (int i = 0; i < 7; i++) {
+            dogSupplies = dogSuppliesDAO.getMinPrice(sizeDog, i);
+            minPriceList.add(dogSupplies);
+            minPrice += dogSupplies.getPrice();
+        }
+
+        List<DogSupplies> maxPriceList = new ArrayList<>();
+        Float maxPrice = 0F;
+        for (int i = 0; i < 7; i++) {
+            dogSupplies = dogSuppliesDAO.getMaxPrice(sizeDog, i);
+            maxPriceList.add(dogSupplies);
+            maxPrice += dogSupplies.getPrice();
+        }
+
+        Float currentSum = 0F;
+        Float pricePossible = 0F;
+        Float priceRadio = 0F;
+        if (priceHope >= maxPrice) {
+            listSuppliesResult = maxPriceList;
+        } else if (priceHope == minPrice) {
+            listSuppliesResult = minPriceList;
+        } else if (priceHope < minPrice) {
+            for (int i = 1; i < 8; i++) {
+                dogSupplies = dogSuppliesDAO.getMinPrice(sizeDog, i);
+                currentSum += dogSupplies.getPrice();
+                if (currentSum <= priceHope) {
+                    listSuppliesResult.add(dogSupplies);
+                } else {
+                    currentSum -= dogSupplies.getPrice();
+                }
+            }
+        } else if (priceHope < maxPrice) {
+            priceRadio = maxPrice / priceHope;
+            for (int i = 1; i < 8; i++) {
+                pricePossible = maxPriceList.get(i).getPrice() * priceRadio;
+                for (int j = 1; j < 8; j++) {
+                    dogSupplies = dogSuppliesDAO.getSuppliesForPrice(sizeDog, j, pricePossible);
+                    listSuppliesResult.add(dogSupplies);
+                }
+            }
+        }
+
         return listSuppliesResult;
     }
 

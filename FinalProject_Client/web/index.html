@@ -84,14 +84,9 @@ and open the template in the editor.
                                                 Yes, I own(ed) a dog.
                                             </div>
                                         </label>
+
                                         <label>
                                             <input type="radio" name="experience" class="card-input-element d-none" value="2" onClick="getExp(this.value)">
-                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
-                                                Have some experence, but not own any dog.
-                                            </div>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="experience" class="card-input-element d-none" value="3" onClick="getExp(this.value)">
                                             <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 New to dogs
                                             </div>
@@ -149,12 +144,6 @@ and open the template in the editor.
                                             <p class="card-text lead">Are you looking for a child-friendly dog?</p>
                                         </div>
                                         <label>
-                                            <input type="radio" name="children" class="card-input-element d-none" value="2" onClick="getChild(this.value)">
-                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
-                                                Don't mind
-                                            </div>
-                                        </label>
-                                        <label>
                                             <input type="radio" name="children" class="card-input-element d-none" value="3" onClick="getChild(this.value)">
                                             <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Yes
@@ -164,6 +153,12 @@ and open the template in the editor.
                                             <input type="radio" name="children" class="card-input-element d-none" value="1" onClick="getChild(this.value)">
                                             <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 No
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="children" class="card-input-element d-none" value="2" onClick="getChild(this.value)">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
+                                                Don't mind
                                             </div>
                                         </label>
                                     </div>
@@ -184,12 +179,6 @@ and open the template in the editor.
                                             <p class="card-text lead">Are you looking for a stranger-friendly dog?</p>
                                         </div>
                                         <label>
-                                            <input type="radio" name="stranger" class="card-input-element d-none" value="2" onClick="getStranger(this.value)">
-                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
-                                                Don't mind
-                                            </div>
-                                        </label>
-                                        <label>
                                             <input type="radio" name="stranger" class="card-input-element d-none" value="3" onClick="getStranger(this.value)">
                                             <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 Yes
@@ -199,6 +188,12 @@ and open the template in the editor.
                                             <input type="radio" name="stranger" class="card-input-element d-none" value="1" onClick="getStranger(this.value)">
                                             <div class="card card-body d-flex flex-row justify-content-between align-items-center">
                                                 No
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="stranger" class="card-input-element d-none" value="2" onClick="getStranger(this.value)">
+                                            <div class="card card-body d-flex flex-row justify-content-between align-items-center">
+                                                Don't mind
                                             </div>
                                         </label>
                                     </div>
@@ -493,7 +488,7 @@ and open the template in the editor.
                                                 I'd feel more comfortable keeping training to the basics.
                                             </div>
                                         </label>
-                                        
+
                                     </div>
                                     <div class="col"></div>
                                 </div>
@@ -638,78 +633,78 @@ and open the template in the editor.
                                 document.getElementsByClassName("carousel-control-next")[0].style.visibility = "visible";
                             }
                         });
-                        function autoSwipe(){
+                        function autoSwipe() {
                             document.getElementsByClassName("carousel-control-next")[0].click()
                         }
                         var experience = 0;
                         function getExp(value) {
                             experience = value;
-                            setTimeout(autoSwipe,1000);
+                            setTimeout(autoSwipe, 500);
                         }
                         var home = 0;
                         function getHome(value) {
                             home = value;
-                            setTimeout(autoSwipe,1000);
+                            setTimeout(autoSwipe, 500);
                         }
                         var children = 0;
                         function getChild(value) {
                             children = value;
-                            setTimeout(autoSwipe,1000);
+                            setTimeout(autoSwipe, 500);
                         }
                         var stranger = 0;
                         function getStranger(value) {
                             stranger = value;
-                            setTimeout(autoSwipe,1000);
+                            setTimeout(autoSwipe, 500);
                         }
                         var sizeDog = "";
                         function getSizeDog(value) {
                             sizeDog = value;
-                            setTimeout(autoSwipe,1000);
+                            setTimeout(autoSwipe, 500);
                         }
                         var bark = "";
                         function getBark(value) {
                             bark = value;
-                            setTimeout(autoSwipe,1000);
+                            setTimeout(autoSwipe, 500);
                         }
                         var cat = "";
                         function getCat(value) {
                             cat = value;
-                            setTimeout(autoSwipe,1000);
+                            setTimeout(autoSwipe, 500);
                         }
                         var dog = "";
                         function getDog(value) {
                             dog = value;
-                            setTimeout(autoSwipe,1000);
+                            setTimeout(autoSwipe, 500);
                         }
                         var excercise = "";
                         function getExc(value) {
                             excercise = value;
-                            setTimeout(autoSwipe,1000);
+                            setTimeout(autoSwipe, 500);
                         }
                         var playful = "";
                         function getPlay(value) {
                             playful = value;
-                            setTimeout(autoSwipe,1000);
+                            setTimeout(autoSwipe, 500);
                         }
                         var smart = "";
                         function getSmart(value) {
                             smart = value;
-                            setTimeout(autoSwipe,1000);
+                            setTimeout(autoSwipe, 500);
                         }
                         var training = "";
                         function getTrain(value) {
                             training = value;
-                            setTimeout(autoSwipe,1000);
+                            setTimeout(autoSwipe, 500);
                         }
                         var watchdog = "";
                         function getWatch(value) {
                             watchdog = value;
-                            setTimeout(autoSwipe,1000);
+                            setTimeout(autoSwipe, 500);
                         }
                         var groom = "";
                         function getGroom(value) {
                             groom = value;
-                            setTimeout(autoSwipe,1000);
+                            setTimeout(autoSwipe, 500);
                         }
                         var shed = "";
                         function getShed(value) {

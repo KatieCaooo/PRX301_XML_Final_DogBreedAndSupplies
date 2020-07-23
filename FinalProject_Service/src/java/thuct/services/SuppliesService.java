@@ -72,8 +72,8 @@ public class SuppliesService {
         Float currentSum = 0F;
         Float pricePossible = 0F;
         Float priceRadio = 0F;
-        int num = 0;
-        int sizeList = -1;
+        int position = 0;
+        int sizeList = 0;
         if (priceHope >= maxPrice) {
             listSuppliesResult = maxPriceList;
         } else if (priceHope == minPrice) {
@@ -90,21 +90,22 @@ public class SuppliesService {
             }
         } else if (priceHope < maxPrice) { //nếu giá mong muốn < MAX
             Float priceExcess = priceHope; //Tiền thừa hiện = HOPE
-            for (int i = 1; i < 8; i++) {
+            for (int i = 1; i < 8; i++) { //chạy category
                 if (currentSum < priceHope) { //Nếu tiền tạm tính < HOPE
+                    position = 0;//set về 0 khi chạy category mới
                     priceRadio = maxPrice / priceExcess; //Tỉ lệ giữa MAX với EXCESS
                     pricePossible = maxPriceList.get(i).getPrice() * priceRadio; //Tiền có thể dùng để mua
                     priceHopeList = dogSuppliesDAO.getSuppliesForPrice(sizeSupplies, i, pricePossible);//Lấy list hàng từ tiền có thể mua
-                    while (sizeList < i) { //Nếu listSuppliesResult < vòng lặp thì chạy
-                        if (priceHopeList.get(num).getPrice() <= pricePossible) { //nếu tiền của thứ đó <= có thể mua
-                            currentSum += priceHopeList.get(num).getPrice(); //tính tiền
+                    while (sizeList < i && position < priceHopeList.size()) { //Nếu listSuppliesResult < vòng lặp thì chạy && position list<size priceHopeList
+                        if (priceHopeList.get(position).getPrice() <= pricePossible) { //nếu tiền của thứ đó <= có thể mua
+                            currentSum += priceHopeList.get(position).getPrice(); //tính tiền
                             if (currentSum <= priceExcess) { //nhỏ hơn tiền thừa 
-                                listSuppliesResult.add(priceHopeList.get(num)); //mua
+                                listSuppliesResult.add(priceHopeList.get(position)); //mua
                                 sizeList++; //listSuppliesResult tăng
                                 priceExcess = priceHope - currentSum; //tính tiền thừa
                             } else {//nếu không đủ tiền thì không mua
-                                currentSum -= priceHopeList.get(num).getPrice();//trừ tiền lại
-                                num += 0; //tăng position của priceHopeList để duyệt lại
+                                currentSum -= priceHopeList.get(position).getPrice();//trừ tiền lại
+                                position += 0; //tăng position của priceHopeList để duyệt lại
                             }
                         }
                     }

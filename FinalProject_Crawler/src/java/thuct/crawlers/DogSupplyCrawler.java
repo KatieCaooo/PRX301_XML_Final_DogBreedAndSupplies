@@ -78,7 +78,7 @@ public class DogSupplyCrawler {
         node = (Node) xPath.evaluate("//supplies-bed", doc, XPathConstants.NODE);
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Beds";
-        Category category = setCategoryForSupplies(1, categoryName);
+        Category category = setCategoryForSupplies(4, categoryName);
         futures[0] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
@@ -86,7 +86,7 @@ public class DogSupplyCrawler {
         node = (Node) xPath.evaluate("//supplies-bowl", doc, XPathConstants.NODE);
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Bowls";
-        Category category = setCategoryForSupplies(2, categoryName);
+        Category category = setCategoryForSupplies(3, categoryName);
         futures[1] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
@@ -94,7 +94,7 @@ public class DogSupplyCrawler {
         node = (Node) xPath.evaluate("//supplies-collar", doc, XPathConstants.NODE);
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Collars";
-        Category category = setCategoryForSupplies(3, categoryName);
+        Category category = setCategoryForSupplies(1, categoryName);
         futures[2] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
@@ -102,7 +102,7 @@ public class DogSupplyCrawler {
         node = (Node) xPath.evaluate("//supplies-crate", doc, XPathConstants.NODE);
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Crates";
-        Category category = setCategoryForSupplies(4, categoryName);
+        Category category = setCategoryForSupplies(5, categoryName);
         futures[3] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
@@ -110,7 +110,7 @@ public class DogSupplyCrawler {
         node = (Node) xPath.evaluate("//supplies-gate", doc, XPathConstants.NODE);
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Gates";
-        Category category = setCategoryForSupplies(5, categoryName);
+        Category category = setCategoryForSupplies(6, categoryName);
         futures[4] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 
@@ -126,7 +126,7 @@ public class DogSupplyCrawler {
         node = (Node) xPath.evaluate("//supplies-toy", doc, XPathConstants.NODE);
         url = url + node.getTextContent().trim();
         String categoryName = "Dog Toys";
-        Category category = setCategoryForSupplies(8, categoryName);
+        Category category = setCategoryForSupplies(2, categoryName);
         futures[6] = CompletableFuture.runAsync(new DogSupplyTask(doc, url, xPath, category), executorService);
     }
 

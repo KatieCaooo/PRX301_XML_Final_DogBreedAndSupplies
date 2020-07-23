@@ -61,9 +61,9 @@ public class DogSupplyTask implements Runnable {
                 doc = XMLUtils.convertStringToDocument(document);
 
                 DogSuppliesDAO dogSuppliesDAO = new DogSuppliesDAO();
-                NodeList nodeSizes = (NodeList) xPath.evaluate("//div[contains(@id,'pf_Members')]//span[@class='name']", doc, XPathConstants.NODESET);
-                NodeList nodePrices = (NodeList) xPath.evaluate("//div[contains(@id,'pf_Members')]//span[@class='MemPrice']", doc, XPathConstants.NODESET);
-                NodeList nodeSale = (NodeList) xPath.evaluate("//div[contains(@id,'pf_Members')]//span[@class='MemSalePrice']", doc, XPathConstants.NODESET);
+                NodeList nodeSizes = (NodeList) xPath.evaluate("//li[contains(@class,'PfMember unselected')]//span[@class='name']", doc, XPathConstants.NODESET);
+                NodeList nodePrices = (NodeList) xPath.evaluate("//li[contains(@class,'PfMember unselected')]//span[@class='MemPrice']", doc, XPathConstants.NODESET);
+                NodeList nodeSale = (NodeList) xPath.evaluate("//li[contains(@class,'PfMember unselected')]//span[@class='MemSalePrice']", doc, XPathConstants.NODESET);
                 for (int j = 0; j < nodeSizes.getLength(); j++) {
                     DogSupplies dogSupplies = new DogSupplies();
                     String sizeSupplies = nodeSizes.item(j).getTextContent();
@@ -94,14 +94,15 @@ public class DogSupplyTask implements Runnable {
 
                     //Set name
                     String name = nodeNames.item(i).getTextContent();
-                    if (name.equals("Orvis Memory Foam Bolster Dog Bed")) {
-                        System.out.println("AAA");
-                    }
+
                     name = name.replace("\n", "").trim();
                     if (size.equals("For all dogs")) {
                         dogSupplies.setName(name);
                     } else {
                         dogSupplies.setName("[" + size + "] " + name);
+                    }
+                    if (name.contains("Shotshell Collar and Leash breeds")) {
+                        System.out.println("a");
                     }
                     //Set photo
                     String photo = nodePhotos.item(i).getAttributes().getNamedItem("src").getNodeValue();
@@ -114,14 +115,21 @@ public class DogSupplyTask implements Runnable {
                     //Set price
                     String priceString = "";
                     if (nodePrices.item(j) == null) {
+                        if(nodeSale == null){
+                            System.out.println("");
+                        }
+                        if(nodeSale.item(i)==null){
+                            System.out.println("");
+                        }
                         priceString = nodeSale.item(j).getTextContent();
                     } else {
                         priceString = nodePrices.item(j).getTextContent();
-
                     }
                     priceString = priceString.replace("$", "");
-                    String priceArray[] = priceString.split("-");
-                    priceString = priceArray[priceArray.length - 1];
+                    if (priceString.contains("-")) {
+                        String priceArray[] = priceString.split("-");
+                        priceString = priceArray[priceArray.length - 1];
+                    }
                     Float price = Float.parseFloat(priceString);
                     dogSupplies.setPrice(price);
                     //set category

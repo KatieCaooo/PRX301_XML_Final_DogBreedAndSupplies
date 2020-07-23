@@ -51,6 +51,8 @@ public class DogBreedService {
     @Path("/recommendDog")
     @Produces(MediaType.APPLICATION_XML)
     public List<DogBreed> getRecommendDog(
+            @QueryParam("item") int item,
+            @QueryParam("row") int row,
             @QueryParam("size") String size,
             @QueryParam("experienceW") int experienceW,
             @QueryParam("homeW") int homeW,
@@ -415,7 +417,7 @@ public class DogBreedService {
         System.out.println("a");
         Collections.sort(listDogScore, (DogBreedScore o1, DogBreedScore o2) -> o2.getScore().compareTo(o1.getScore()));
         List<DogBreed> listResult = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
+        for (int i = row * item; i < row * item + item; i++) {
             listResult.add(listDogScore.get(i).getDogBreed());
         }
         return listResult;

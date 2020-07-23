@@ -16,6 +16,8 @@ and open the template in the editor.
         <script src="font-awesome.min.js"></script>
 
         <script>
+            var row = 0;
+            var item = 3;
             var dogBreedResultDom;
             var dogBreedDetailDom;
             function getXmlHttpObject() {
@@ -730,9 +732,14 @@ and open the template in the editor.
                                     + "&experienceW=" + experience + "&homeW=" + home + "&childrenW=" + children +
                                     "&strangerW=" + stranger + "&barkW=" + bark + "&catW=" + cat + "&dogW=" + dog +
                                     "&excerciseW=" + excercise + "&playfulW=" + playful + "&smartW=" + smart +
-                                    "&trainingW=" + training + "&watchdogW=" + watchdog + "&groomW=" + groom + "&shedW=" + shed;
+                                    "&trainingW=" + training + "&watchdogW=" + watchdog + "&groomW=" + groom + "&shedW=" + shed +
+                                    "&row=" + row + "&item=" + item;
                             xmlHttp.open("GET", url, true);
                             xmlHttp.send(null);
+                        }
+                        function loadMore() {
+                            row++;
+                            findDog();
                         }
                     </script>
                 </div>
@@ -745,7 +752,9 @@ and open the template in the editor.
             <div class="row align-items-center" id="dogListResult">
 
             </div>
+             <button type="button" class="btn btn-primary btn-lg btn-block" onclick="loadMore()">Load more.</button>
         </div>
+       
         <script>
             function drawDogListResult() {
                 var container = document.getElementById("dogListResult");
@@ -770,7 +779,7 @@ and open the template in the editor.
                             "</div>" +
                             "</div>";
                 }
-                container.innerHTML = content;
+                container.innerHTML = container.innerHTML + content;
             }
         </script>
 

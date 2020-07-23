@@ -105,7 +105,7 @@ public class SuppliesService {
                                 priceExcess = priceHope - currentSum; //tính tiền thừa
                             } else {//nếu không đủ tiền thì không mua
                                 currentSum -= priceHopeList.get(position).getPrice();//trừ tiền lại
-                                position += 0; //tăng position của priceHopeList để duyệt lại
+                                position += 1; //tăng position của priceHopeList để duyệt lại
                             }
                         }
                     }

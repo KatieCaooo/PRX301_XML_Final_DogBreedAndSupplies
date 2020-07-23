@@ -710,10 +710,7 @@ and open the template in the editor.
                         function getShed(value) {
                             shed = value;
                         }
-                        var budget = "";
-                        function getBudget() {
-                            budget = document.getElementById("budget").value;
-                        }
+
 
                         function findDog() {
                             var xmlHttp = getXmlHttpObject();
@@ -992,7 +989,10 @@ and open the template in the editor.
 
         </div>
         <script>
-
+            var budget = "";
+            function getBudget() {
+                budget = document.getElementById("budget").value;
+            }
         </script>
 
 
@@ -1104,7 +1104,6 @@ and open the template in the editor.
                             </form>
                         </div>
                         <div class="modal-footer">
-
                             <button type="button" class="btn btn-outline-success btn-lg btn-block" class="register" onclick="register()">Register</button>
                         </div>
                     </div>

@@ -84,6 +84,9 @@ public class DogSupplyTask implements Runnable {
                         size = "For all dogs";
                     }
                     dogSupplies.setSize(size);
+                    
+                    //linkbuy
+                    dogSupplies.setLinkBuy(link);
 
                     //Set name
                     String name = nodeNames.item(i).getTextContent();

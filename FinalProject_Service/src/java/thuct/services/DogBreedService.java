@@ -14,7 +14,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import thuct.daos.DogBreedDAO;
-import thuct.daos.GenericDAO;
 import thuct.dtos.DogBreed;
 
 /**
@@ -46,7 +45,6 @@ public class DogBreedService {
 //        GenericDAO<DogBreed> genericDAO = new GenericDAO<>(DogBreed.class);
 //        return genericDAO.findAll();
 //    }
-
     @GET
     @Path("/recommendDog")
     @Produces(MediaType.APPLICATION_XML)

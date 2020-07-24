@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "DogSupplies.findByContent", query = "SELECT d FROM DogSupplies d WHERE d.content = :content")
     , @NamedQuery(name = "DogSupplies.findBySize", query = "SELECT d FROM DogSupplies d WHERE d.size = :size")
     , @NamedQuery(name = "DogSupplies.findByPrice", query = "SELECT d FROM DogSupplies d WHERE d.price = :price")
-    , @NamedQuery(name = "DogSupplies.findByCategory", query = "SELECT d FROM DogSupplies d WHERE d.dogSuppliesPK.category = :category")})
+    , @NamedQuery(name = "DogSupplies.findByCategory", query = "SELECT d FROM DogSupplies d WHERE d.dogSuppliesPK.category = :category")
+    , @NamedQuery(name = "DogSupplies.findByLinkBuy", query = "SELECT d FROM DogSupplies d WHERE d.linkBuy = :linkBuy")})
 public class DogSupplies implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,6 +54,9 @@ public class DogSupplies implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "price")
     private Float price;
+    @Size(max = 255)
+    @Column(name = "linkBuy")
+    private String linkBuy;
     @JoinColumn(name = "category", referencedColumnName = "idcategory", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Category category1;
@@ -114,6 +118,14 @@ public class DogSupplies implements Serializable {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public String getLinkBuy() {
+        return linkBuy;
+    }
+
+    public void setLinkBuy(String linkBuy) {
+        this.linkBuy = linkBuy;
     }
 
     public Category getCategory1() {

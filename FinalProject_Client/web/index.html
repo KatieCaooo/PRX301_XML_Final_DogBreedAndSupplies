@@ -65,10 +65,10 @@ and open the template in the editor.
                 var ca = decodedCookie.split(';');
                 for (var i = 0; i < ca.length; i++) {
                     var c = ca[i];
-                    while (c.charAt(0) == ' ') {
+                    while (c.charAt(0) === ' ') {
                         c = c.substring(1);
                     }
-                    if (c.indexOf(name) == 0) {
+                    if (c.indexOf(name) === 0) {
                         return c.substring(name.length, c.length);
                     }
                 }
@@ -663,7 +663,7 @@ and open the template in the editor.
                             }
                         });
                         function autoSwipe() {
-                            document.getElementsByClassName("carousel-control-next")[0].click()
+                            document.getElementsByClassName("carousel-control-next")[0].click();
                         }
                         var experience = 0;
                         function getExp(value) {
@@ -744,7 +744,7 @@ and open the template in the editor.
                         function findDog() {
                             var xmlHttp = getXmlHttpObject();
                             if (xmlHttp === null) {
-                                alert("Your browser does not support AJAX!")
+                                alert("Your browser does not support AJAX!");
                             }
                             xmlHttp.onreadystatechange = function () {
                                 if (this.readyState === 4 && this.status === 200) {
@@ -754,7 +754,7 @@ and open the template in the editor.
                                     dogBreedResultDom = parser.parseFromString(this.responseText, "text/xml");
                                     drawDogListResult();
                                 }
-                            }
+                            };
                             var url = "http://localhost:8080/FinalProject_Service/dog-breed/recommendDog?size=" + sizeDog
                                     + "&experienceW=" + experience + "&homeW=" + home + "&childrenW=" + children +
                                     "&strangerW=" + stranger + "&barkW=" + bark + "&catW=" + cat + "&dogW=" + dog +
@@ -797,23 +797,28 @@ and open the template in the editor.
                 var content = "";
                 var breedNodes = dogBreedResultDom.firstChild.children;
                 for (var i = 0; i < breedNodes.length; i++) {
-                    var priceDog = breedNodes[i].children[9].firstChild.nodeValue;
+                    var priceDog = breedNodes[i].children[15].firstChild.nodeValue;
                     if (priceDog === 0 || priceDog === null) {
                         priceDog === "Unknown";
                     }
+                    var idDog = breedNodes[i].children[9].firstChild.nodeValue;
                     content +=
-                            "<div class=\"col-4 align-items-center\">" +
-                            "<div class=\"card\" style=\"width: 90%; height: 90%; align-content: center; margin: 5% 5% 5% 5%;\">" +
-                            "<img src=\"" + breedNodes[i].children[13].firstChild.nodeValue + "\" class=\"card-img-top\" style=\"height: 50%\">" +
-                            "<div class=\"card-body\">" +
-                            "<h5 class=\"card-title\">" + breedNodes[i].children[12].firstChild.nodeValue + "</h5>" +
-                            "<p class=\"card-text\">Reference price: $" + breedNodes[i].children[15].firstChild.nodeValue + "</p>" +
-                            "</div>" +
-                            "<div class=\"card-footer text-center\">" +
-                            "<button class=\"btn btn-primary\" onClick=\"dogDetails(" + priceDog + ")\">Details</button>" +
-                            "</div>" +
-                            "</div>" +
-                            "</div>";
+                            "<div class=\"col-4 align-items-center\">"
+                            + "<div class=\"card\" style=\"width: 90%; height: 90%; align-content: center; margin: 5% 5% 5% 5%;\">"
+                            + "<img src=\"" + breedNodes[i].children[13].firstChild.nodeValue + "\" class=\"card-img-top\" style=\"height: 50%\">"
+                            + "<div class=\"card-body\">"
+                            + "<h5 class=\"card-title\">"
+                            + breedNodes[i].children[12].firstChild.nodeValue
+                            + "</h5>"
+                            + "<p class=\"card-text\">Reference price: $"
+                            + priceDog
+                            + "</p>"
+                            + "</div>"
+                            + "<div class=\"card-footer text-center\">"
+                            + "<button class=\"btn btn-primary\" onClick=\"dogDetails(" + idDog + ")\">Details</button>"
+                            + "</div>"
+                            + "</div>"
+                            + "</div>";
                 }
                 container.innerHTML = container.innerHTML + content;
             }
@@ -829,7 +834,7 @@ and open the template in the editor.
             function dogDetails(idDog) {
                 var xmlHttp = getXmlHttpObject();
                 if (xmlHttp === null) {
-                    alert("Your browser does not support   AJAX!")
+                    alert("Your browser does not support AJAX!");
                 }
                 xmlHttp.onreadystatechange = function () {
                     if (this.readyState === 4 && this.status === 200) {
@@ -840,7 +845,7 @@ and open the template in the editor.
                         var containerDetail = document.getElementById("containerDetailDog");
                         containerDetail.scrollIntoView();
                     }
-                }
+                };
 
                 var url = "http://localhost:8080/FinalProject_Service/dog-breed/recommendDog/detail?idDog=" + idDog;
                 xmlHttp.open("GET", url, true);
@@ -1030,52 +1035,91 @@ and open the template in the editor.
             }
 
         </script>
-        <div class="container" id="suggestSupplies">
+        <div id="suggestSuppliesContainer" class="container" style="display: none; background-color: #e0a800">
+            <div class="row align-items-center" id="suggestSupplies">
 
+            </div>  
         </div>
         <script>
+            var budget = 0;
             function getSupplies() {
-                var budget = document.getElementById("budget").value;
+                budget = document.getElementById("budget").value;
                 var xmlHttp = getXmlHttpObject();
+                var containerSupplies = null;
                 if (xmlHttp === null) {
-                    alert("Your browser does not support   AJAX!")
+                    alert("Your browser does not support AJAX!");
                 }
                 xmlHttp.onreadystatechange = function () {
                     if (this.readyState === 4 && this.status === 200) {
-                        document.getElementById("suggestSupplies").style.display = "block";
+                        document.getElementById("suggestSuppliesContainer").style.display = "block";
                         var parser = new DOMParser();
                         dogSuppliesDom = parser.parseFromString(this.responseText, "text/xml");
-                        drawSuppliesList();
-                        var containerDetail = document.getElementById("containerDetailDog");
-                        containerDetail.scrollIntoView();
+                        drawSuppliesList(budget);
+                        containerSupplies = document.getElementById("suggestSupplies");
+                        containerSupplies.scrollIntoView();
                     }
-                }
+                };
 
-                var url = "http://localhost:8080/FinalProject_Service/dog-supplies/recommendDog/recommendSupplies?sizeDog=" + sizeDog + "&priceHope=" + budget;
+                var url = "http://localhost:8080/FinalProject_Service/dog-supplies/recommendSupplies?sizeDog=" + sizeDog + "&priceHope=" + budget;
                 xmlHttp.open("GET", url, true);
                 xmlHttp.send(null);
             }
-            function drawSuppliesList() {
+            function drawSuppliesList(budget) {
                 var container = document.getElementById("suggestSupplies");
+                var containerTotal = document.getElementById("suggestSuppliesContainer");
+                container.innerHTML = "";
                 var combo = "";
+                var calculator = "";
+                var total = 0;
                 var suppliesNodes = dogSuppliesDom.firstChild.children;
                 for (var i = 0; i < suppliesNodes.length; i++) {
+                    total += parseFloat(suppliesNodes[i].children[6].firstChild.nodeValue);
                     combo +=
-                            "<div class=\"col-4 align-items-center\">" +
-                            "<div class=\"card\" style=\"width: 90%; height: 90%; align-content: center; margin: 5% 5% 5% 5%;\">" +
-                            "<img src=\"" + suppliesNodes[i].children[13].firstChild.nodeValue + "\" class=\"card-img-top\" style=\"height: 50%\">" +
-                            "<div class=\"card-body\">" +
-                            "<h5 class=\"card-title\">" + suppliesNodes[i].children[12].firstChild.nodeValue + "</h5>" +
-                            "<p class=\"card-text\">Reference price: $" + suppliesNodes[i].children[15].firstChild.nodeValue + "</p>" +
-                            "</div>" +
-                            "<div class=\"card-footer text-center\">" +
-                            "<button class=\"btn btn-primary\" onClick=\"dogDetails(" + priceDog + ")\">Details</button>" +
-                            "</div>" +
-                            "</div>" +
-                            "</div>";
+                            "<div class=\"col-4 align-items-center\">"
+                            + "<div class=\"card\" style=\"width: 90%; height: 90%; align-content: center; margin: 5% 5% 5% 5%;\">"
+                            + "<div class=\"card-img\"  style=\"height: 250px;align-content: center;\">"
+                            + "<img src=\"" + suppliesNodes[i].children[5].firstChild.nodeValue + "\" class=\"card-img-top\" style=\"height: 100%;\">"
+                            + "</div>"
+                            + "<div class=\"card-body\">"
+                            + "<h5 class=\"card-title\">"
+                            + suppliesNodes[i].children[4].firstChild.nodeValue
+                            + "</h5>"
+                            + "<p class=\"card-text lead\">"
+                            + suppliesNodes[i].children[1].firstChild.nodeValue.substring(0, 50)
+                            + "...</p>"
+                            + "<p class=\"card-text\">Reference price: $"
+                            + suppliesNodes[i].children[6].firstChild.nodeValue
+                            + "</p>"
+                            + "</div>"
+                            + "<div class=\"card-footer text-center\">"
+                            + "<a href = '" + suppliesNodes[i].children[3].firstChild.nodeValue + "'>"
+                            + "<button class=\"btn btn-primary\" target=\"_blank\" id=\"goStore\">Go Store</button>"
+                            + "</a>"
+                            + "</div>"
+                            + "</div>"
+                            + "</div>";
                 }
-                container.innerHTML = container.innerHTML + content;
+                container.innerHTML = container.innerHTML + combo;
+                var excess = parseFloat(budget - total);
+                calculator += "<div class=\"row-12 align-items-center\">"
+                        + "<div class=\"col-4 align-items-center\">"
+                        + "<p class=\"font-weight-bold\"style=\"color: red; font-size: 20px\">Total</p>"
+                        + "</div>"
+                        + "<div class=\"col-8 align-items-end\">"
+                        + total.toFixed(2)
+                        + "</div>"
+                        + "</div>"
+                        + "<div class=\"row align-items-center\">"
+                        + "<div class=\"col-4 align-items-center\">"
+                        + "<p class=\"font-weight-bold\"style=\"color: red; font-size: 20px\">Excess</p>"
+                        + "</div>"
+                        + "<div class=\"col-8 align-items-end\">"
+                        + excess.toFixed(2)
+                        + "</div>"
+                        + "</div>";
+                containerTotal.innerHTML = containerTotal.innerHTML + calculator;
             }
+
         </script>
 
 
@@ -1132,7 +1176,7 @@ and open the template in the editor.
                 var pwd = document.getElementById("pwdAccount").value;
                 var xmlHttp = getXmlHttpObject();
                 if (xmlHttp === null) {
-                    alert("Your browser does not support AJAX!")
+                    alert("Your browser does not support AJAX!");
                 }
                 xmlHttp.onreadystatechange = function () {
                     if (this.readyState === 4 && this.status === 200) {
@@ -1149,7 +1193,7 @@ and open the template in the editor.
                     {
                         document.getElementById("warningLogin").style.display = "block";
                     }
-                }
+                };
                 xmlHttp.open("GET", "http://localhost:8080/FinalProject_Service/account?id=" + idAccount + "&pwd=" + pwd, true);
                 xmlHttp.send(null);
             }
@@ -1213,17 +1257,17 @@ and open the template in the editor.
                     var role = document.getElementById("roleRegister").value;
                     var xmlHttp = getXmlHttpObject();
                     if (xmlHttp === null) {
-                        alert("Your browser does not support AJAX!")
+                        alert("Your browser does not support AJAX!");
                     }
                     xmlHttp.onreadystatechange = function () {
                         if (this.readyState === 4 && this.status === 200) {
-                            if (this.responseText == 1) {
+                            if (this.responseText === 1) {
                                 document.getElementById("signup").click();
-                            } else if (this.responseText == 0) {
+                            } else if (this.responseText === 0) {
                                 document.getElementsByClassName("warningDuplicate")[0].style.display = "block";
                             }
                         }
-                    }
+                    };
                     xmlHttp.open("POST", "http://localhost:8080/FinalProject_Service/account?id=" + idAccount + "&pwd=" + pwd + "&fullname=" + fullname + "&role=" + role, true);
                     xmlHttp.send(null);
                 }
@@ -1238,17 +1282,17 @@ and open the template in the editor.
                 idaccount = getCookie("idaccount");
                 name = getCookie("name");
                 role = getCookie("role");
-                if (idaccount != "" && name != "") {
+                if (idaccount !== "" && name !== "") {
                     document.getElementById("welcomeName").style.visibility = "visible";
                     document.getElementById("welcomeName").innerHTML = "Welcome, " + name;
-                    if (role == 1) {
+                    if (role === 1) {
 
                     }
                 } else {
 
 
                 }
-            }
+            };
         </script>
         <script src="jquery.min.js"></script>
         <script src="bootstrap.min.js"></script>

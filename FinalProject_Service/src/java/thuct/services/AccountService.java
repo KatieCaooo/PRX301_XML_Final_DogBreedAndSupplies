@@ -31,14 +31,13 @@ public class AccountService {
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
-    public int register(@QueryParam("id") String id, @QueryParam("pwd") String pwd, @QueryParam("fullname") String fullname, @QueryParam("role") int role) {
+    public int register(@QueryParam("id") String id, @QueryParam("pwd") String pwd, @QueryParam("fullname") String fullname) {
         int register = 0;
         AccountDAO accountDAO = new AccountDAO();
         Account account = new Account();
         account.setIdaccount(id);
         account.setName(fullname);
         account.setPwd(pwd);
-        account.setRole(role);
         if (accountDAO.checkDuplicate(id) == true) {
             accountDAO.register(account);
             register = 1;

@@ -18,7 +18,6 @@ and open the template in the editor.
         <script>
             var idaccount = "";
             var name = "";
-            var role = 0;
             var row = 0;
             var item = 3;
             var dogBreedResultDom;
@@ -1185,9 +1184,8 @@ and open the template in the editor.
                         document.getElementById("openLogin").click();
                         document.getElementById("openLogin").style.display = "none";
                         document.getElementById("signup").style.display = "none";
-                        setCookie('idaccount', idAccount, 365);
-                        setCookie('name', xmlDom.firstChild.children[1].firstChild.nodeValue, 365);
-                        setCookie('role', xmlDom.firstChild.children[3].firstChild.nodeValue, 365);
+                        setCookie('idaccount', idAccount, 7);
+                        setCookie('name', xmlDom.firstChild.children[1].firstChild.nodeValue, 7);
                     }
                     if (this.readyState === 4 && this.status === 500)
                     {
@@ -1229,7 +1227,6 @@ and open the template in the editor.
                                     <input type="password" class="form-control" id="cpwdRegister" class="register" required="true">
                                     <label class="warningConfirm" style="display: none; color: red">Confirm password isn't matched! Try again!</label>
                                 </div>
-                                <input type="text" class="form-control" id="roleRegister" value="2" hidden="true">
 
                             </form>
                         </div>
@@ -1254,7 +1251,6 @@ and open the template in the editor.
                     document.getElementsByClassName("warningConfirm")[0].style.display = "block";
                 }
                 if (pwd !== null) {
-                    var role = document.getElementById("roleRegister").value;
                     var xmlHttp = getXmlHttpObject();
                     if (xmlHttp === null) {
                         alert("Your browser does not support AJAX!");
@@ -1268,7 +1264,7 @@ and open the template in the editor.
                             }
                         }
                     };
-                    xmlHttp.open("POST", "http://localhost:8080/FinalProject_Service/account?id=" + idAccount + "&pwd=" + pwd + "&fullname=" + fullname + "&role=" + role, true);
+                    xmlHttp.open("POST", "http://localhost:8080/FinalProject_Service/account?id=" + idAccount + "&pwd=" + pwd + "&fullname=" + fullname, true);
                     xmlHttp.send(null);
                 }
                 console.log("aaa");
@@ -1276,21 +1272,13 @@ and open the template in the editor.
             function logout() {
                 delete_cookie('idaccount');
                 delete_cookie('name');
-                delete_cookie('role');
             }
             window.onload = function () {
                 idaccount = getCookie("idaccount");
                 name = getCookie("name");
-                role = getCookie("role");
                 if (idaccount !== "" && name !== "") {
                     document.getElementById("welcomeName").style.visibility = "visible";
                     document.getElementById("welcomeName").innerHTML = "Welcome, " + name;
-                    if (role === 1) {
-
-                    }
-                } else {
-
-
                 }
             };
         </script>

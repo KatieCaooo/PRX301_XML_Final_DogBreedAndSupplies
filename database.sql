@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `finalproject` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `finalproject`;
--- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.20, for macos10.15 (x86_64)
 --
--- Host: 127.0.0.1    Database: finalproject
+-- Host: localhost    Database: finalproject
 -- ------------------------------------------------------
--- Server version	8.0.18
+-- Server version	8.0.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -27,8 +27,7 @@ DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `idaccount` varchar(45) NOT NULL,
   `pwd` varchar(45) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `role` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
   PRIMARY KEY (`idaccount`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +40,7 @@ DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `category` (
-  `idcategory` int(11) NOT NULL,
+  `idcategory` int NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idcategory`),
   UNIQUE KEY `name_UNIQUE` (`name`)
@@ -56,7 +55,7 @@ DROP TABLE IF EXISTS `dog_breed`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dog_breed` (
-  `iddog_breed` int(11) NOT NULL AUTO_INCREMENT,
+  `iddog_breed` int NOT NULL AUTO_INCREMENT,
   `photo` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `size` varchar(45) DEFAULT NULL,
@@ -81,7 +80,25 @@ CREATE TABLE `dog_breed` (
   `watchdog_ability` float DEFAULT NULL,
   PRIMARY KEY (`iddog_breed`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2877 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4607 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `dog_love`
+--
+
+DROP TABLE IF EXISTS `dog_love`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `dog_love` (
+  `idaccount` varchar(45) NOT NULL,
+  `iddog_breed` int NOT NULL,
+  PRIMARY KEY (`idaccount`,`iddog_breed`),
+  KEY `fk_dog_love_dog_breed_idx` (`iddog_breed`),
+  KEY `fk_dog_love_account_idx` (`idaccount`),
+  CONSTRAINT `fk_dog_love_account` FOREIGN KEY (`idaccount`) REFERENCES `account` (`idaccount`),
+  CONSTRAINT `fk_dog_love_dog_breed` FOREIGN KEY (`iddog_breed`) REFERENCES `dog_breed` (`iddog_breed`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,17 +109,18 @@ DROP TABLE IF EXISTS `dog_supplies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dog_supplies` (
-  `iddog_supplies` int(11) NOT NULL AUTO_INCREMENT,
+  `iddog_supplies` int NOT NULL AUTO_INCREMENT,
   `photo` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `content` varchar(255) DEFAULT NULL,
   `size` varchar(100) DEFAULT NULL,
-  `price` float DEFAULT NULL,
-  `category` int(11) NOT NULL,
+  `price` decimal(10,2) DEFAULT '0.00',
+  `category` int NOT NULL,
+  `linkBuy` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`iddog_supplies`,`category`),
   KEY `fk_dog_supplies_category1_idx` (`category`),
   CONSTRAINT `fk_dog_supplies_category1` FOREIGN KEY (`category`) REFERENCES `category` (`idcategory`)
-) ENGINE=InnoDB AUTO_INCREMENT=1402 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8158 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,4 +140,4 @@ CREATE TABLE `dog_supplies` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-19 16:46:03
+-- Dump completed on 2020-07-26 20:45:19

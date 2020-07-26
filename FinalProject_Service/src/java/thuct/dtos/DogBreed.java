@@ -6,17 +6,21 @@
 package thuct.dtos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -109,6 +113,8 @@ public class DogBreed implements Serializable {
     private Float trainability;
     @Column(name = "watchdog_ability")
     private Float watchdogAbility;
+    @ManyToMany(mappedBy = "dogBreedList")
+    private List<Account> accountList = new ArrayList<>();
 
     public DogBreed() {
     }
@@ -299,6 +305,15 @@ public class DogBreed implements Serializable {
 
     public void setWatchdogAbility(Float watchdogAbility) {
         this.watchdogAbility = watchdogAbility;
+    }
+
+    @XmlTransient
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
     }
 
     @Override

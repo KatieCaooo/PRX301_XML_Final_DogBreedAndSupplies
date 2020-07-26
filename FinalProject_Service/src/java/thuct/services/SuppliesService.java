@@ -7,6 +7,8 @@ package thuct.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
+import javax.persistence.NoResultException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -52,31 +54,30 @@ public class SuppliesService {
         List<DogSupplies> listSuppliesResult = new ArrayList<>();
         DogSupplies dogSupplies;
         List<DogSupplies> priceHopeList = new ArrayList<>();
-
         List<DogSupplies> minPriceList = new ArrayList<>();
+
         Float minPrice = 0F;
         for (int i = 1; i < 8; i++) {
             dogSupplies = dogSuppliesDAO.getMinPrice(sizeSupplies, i);
-            minPriceList.add(dogSupplies);
             minPrice += dogSupplies.getPrice();
         }
 
-        List<DogSupplies> maxPriceList = new ArrayList<>();
         Float maxPrice = 0F;
         for (int i = 1; i < 8; i++) {
             dogSupplies = dogSuppliesDAO.getMaxPrice(sizeSupplies, i);
-            maxPriceList.add(dogSupplies);
             maxPrice += dogSupplies.getPrice();
         }
 
         Float currentSum = 0F;
-        int position = 0;
-        int sizeList = 0;
+        Float pricePossible = 0F;
+        Float priceRadio = 0F;
+
         if (priceHope >= maxPrice) {
-            listSuppliesResult = maxPriceList;
-        } else if (priceHope == minPrice) {
-            listSuppliesResult = minPriceList;
-        } else if (priceHope < minPrice) {
+            for (int i = 1; i < 8; i++) {
+                dogSupplies = dogSuppliesDAO.getMaxPrice(sizeSupplies, i);
+                listSuppliesResult.add(dogSupplies);
+            }
+        } else if (priceHope <= minPrice) {
             for (int i = 1; i < 8; i++) {
                 dogSupplies = dogSuppliesDAO.getMinPrice(sizeSupplies, i);
                 currentSum += dogSupplies.getPrice();
@@ -86,32 +87,53 @@ public class SuppliesService {
                     currentSum -= dogSupplies.getPrice();
                 }
             }
-        } else if (priceHope < maxPrice) { //nếu giá mong muốn < MAX
-            Float priceExcess = priceHope; //Tiền thừa hiện = HOPE
+        } else if (priceHope < maxPrice && priceHope > minPrice) { //nếu giá mong muốn < MAX
+            priceRadio = priceHope / maxPrice; //Tỉ lệ giữa MAX với EXCESS
             for (int i = 1; i < 8; i++) { //chạy category
                 if (currentSum < priceHope) { //Nếu tiền tạm tính < HOPE
-                    priceHopeList = dogSuppliesDAO.getSuppliesForPrice(sizeSupplies, i, priceExcess);//Lấy list hàng từ tiền có thể mua
-                    position = getRandomNumber(0, priceHopeList.size() - 1);//set về 0 khi chạy category mới
-                    while (sizeList < i && position < priceHopeList.size()) { //Nếu listSuppliesResult < vòng lặp thì chạy && position list<size priceHopeList
-                        if (priceHopeList.get(position).getPrice() <= priceExcess) { //nếu tiền của thứ đó <= có thể mua
-                            currentSum += priceHopeList.get(position).getPrice(); //tính tiền
-                            listSuppliesResult.add(priceHopeList.get(position)); //mua
-                            sizeList++; //listSuppliesResult tăng
-                            priceExcess = priceHope - currentSum; //tính tiền thừa
-                        } else {//nếu không đủ tiền thì không mua
-                            currentSum -= priceHopeList.get(position).getPrice();//trừ tiền lại
-                            position += 1; //tăng position của priceHopeList để duyệt lại
-                        }
+                    dogSupplies = dogSuppliesDAO.getMaxPrice(sizeSupplies, i);
+                    pricePossible = dogSupplies.getPrice() * priceRadio; //Tiền có thể dùng để mua
+                    priceHopeList = dogSuppliesDAO.getSuppliesForPrice(sizeSupplies, i, pricePossible);//Lấy list hàng từ tiền có thể mua
+                    if (!priceHopeList.isEmpty()) {
+                        listSuppliesResult.add(priceHopeList.get(0)); //mua
+                        currentSum += priceHopeList.get(0).getPrice(); //tính tiền
+                    } else {
+                        minPriceList.add(dogSuppliesDAO.getMinPrice(sizeDog, i));
+                        listSuppliesResult.add(minPriceList.get(0));
+                        currentSum += minPriceList.get(0).getPrice();
                     }
                 }
             }
-            System.out.println("priceExcess " + priceExcess);
+            boolean[] status = new boolean[7];
+            for (int i = 0; i < status.length; i++) {
+                status[i] = false;
+            }
+            while (!IntStream.range(0, status.length).allMatch(i -> status[i])) {
+                for (int i = 0; i < listSuppliesResult.size(); i++) {
+                    if (!status[i]) {
+                        dogSupplies = null;
+                        try {
+                            dogSupplies = dogSuppliesDAO.getFirstGreater(sizeDog, i + 1, listSuppliesResult.get(i).getPrice());
+                        } catch (NoResultException e) {
+                            status[i] = true;
+                        }
+                        if (!status[i]) {
+                            currentSum += (dogSupplies.getPrice() - listSuppliesResult.get(i).getPrice());
+                            if (currentSum <= priceHope) {
+                                listSuppliesResult.set(i, dogSupplies);
+                            } else {
+                                currentSum -= (dogSupplies.getPrice() - listSuppliesResult.get(i).getPrice());
+                                status[i] = true;
+                            }
+                        }
+                    }
+                    System.out.println(currentSum);
+                }
+            }
+            Float excess = priceHope - currentSum;
+            System.out.println("excess: " + excess);
         }
         return listSuppliesResult;
-    }
-
-    public static int getRandomNumber(int min, int max) {
-        return (int) ((Math.random() * (max - min)) + min);
     }
 
 }

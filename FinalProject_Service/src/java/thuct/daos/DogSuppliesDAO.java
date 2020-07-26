@@ -21,7 +21,7 @@ public class DogSuppliesDAO implements Serializable {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
 
-        List<DogSupplies> priceSupplies =  em.createQuery(
+        List<DogSupplies> priceSupplies = em.createQuery(
                 "SELECT d FROM DogSupplies d "
                 + "WHERE d.size IN (:size, 'For all dogs') "
                 + "AND d.dogSuppliesPK.category = :category "
@@ -70,6 +70,28 @@ public class DogSuppliesDAO implements Serializable {
         em.getTransaction().commit();
         em.close();
         return minPrice;
+    }
+
+    public DogSupplies getFirstGreater(String sizeDog, int category, Float priceGreater) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        em.getTransaction().begin();
+
+        DogSupplies greater = (DogSupplies) em.createQuery(
+                "SELECT d FROM DogSupplies d "
+                + "WHERE d.size IN (:size, 'For all dogs') "
+                + "AND d.dogSuppliesPK.category = :category "
+                + "AND d.price > :price "
+                + "ORDER BY d.price ASC")
+                .setMaxResults(1)
+                .setParameter("size", sizeDog)
+                .setParameter("category", category)
+                .setParameter("price", priceGreater)
+                .getSingleResult();
+
+        em.getTransaction().commit();
+        em.close();
+        return greater;
+
     }
 
 }

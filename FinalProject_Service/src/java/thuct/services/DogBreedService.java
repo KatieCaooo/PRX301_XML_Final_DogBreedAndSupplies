@@ -39,12 +39,6 @@ public class DogBreedService {
     private static final int BSHED = 2;
     private static final int BWATCH = 4;
 
-//    @GET
-//    @Produces(MediaType.APPLICATION_XML)
-//    public List<DogBreed> getAllDogBreeds() {
-//        GenericDAO<DogBreed> genericDAO = new GenericDAO<>(DogBreed.class);
-//        return genericDAO.findAll();
-//    }
     @GET
     @Path("/recommendDog")
     @Produces(MediaType.APPLICATION_XML)

@@ -11,7 +11,6 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="bootstrap.min.css">    
-        <link rel="stylesheet" href="font-awesome.min.css">
         <link rel="stylesheet" href="main.css">
         <script src="font-awesome.min.js"></script>
 
@@ -35,23 +34,7 @@ and open the template in the editor.
                 }
                 return xmlHttp;
             }
-//            function loadAllDogBreed() {
-//                var xmlHttp = getXmlHttpObject();
-//                if (xmlHttp === null) {
-//                    alert("Your browser does not support AJAX!")
-//                }
-//                xmlHttp.onreadystatechange = function () {
-//                    if (this.readyState === 4 && this.status === 200) {
-//                        console.log(this.responseText);
-//                        //  alert("Done");
-//                    }
-//                }
-//                xmlHttp.open("GET", "http://localhost:8080/FinalProject_Service/dog-breed?", true);
-//                xmlHttp.send(null);
-//            }
-//            window.onload = function () {
-//                loadAllDogBreed();
-//            }
+            
             function setCookie(cname, cvalue, exdays) {
                 var d = new Date();
                 d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -825,7 +808,8 @@ and open the template in the editor.
                             + "</p>"
                             + "</div>"
                             + "<div class=\"card-footer text-center\">"
-                            + "<button class=\"btn btn-primary\" onClick=\"dogDetails(" + idDog + ")\">Details</button>"
+                            + "<button class=\"btn btn-primary fas fa-info\" onClick=\"dogDetails(" + idDog + ")\"style=\"margin-right: 5px;\">Details</button>"
+                            + "<button class=\"btn btn-danger fas fa-heart\" onClick=\"dogLove(" + idDog + ")\"style=\"margin-left 5px\">Love</button>"
                             + "</div>"
                             + "</div>"
                             + "</div>";

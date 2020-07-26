@@ -78,5 +78,5 @@ public class DogSuppliesPK implements Serializable {
     public String toString() {
         return "thuct.dtos.DogSuppliesPK[ iddogSupplies=" + iddogSupplies + ", category=" + category + " ]";
     }
-    
+
 }

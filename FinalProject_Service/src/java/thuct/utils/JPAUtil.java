@@ -13,6 +13,7 @@ import javax.persistence.Persistence;
  * @author kloecao
  */
 public class JPAUtil {
+
     private static final String PERSISTENCE_UNIT_NAME = "FinalProject_ServicePU";
     private static EntityManagerFactory factory;
 

@@ -84,7 +84,7 @@ public class DogSupplyTask implements Runnable {
                         size = "For all dogs";
                     }
                     dogSupplies.setSize(size);
-                    
+
                     //linkbuy
                     dogSupplies.setLinkBuy(link);
 
@@ -97,9 +97,7 @@ public class DogSupplyTask implements Runnable {
                     } else {
                         dogSupplies.setName("[" + size + "] " + name);
                     }
-                    if (name.contains("Shotshell Collar and Leash breeds")) {
-                        System.out.println("a");
-                    }
+
                     //Set photo
                     String photo = nodePhotos.item(i).getAttributes().getNamedItem("src").getNodeValue();
                     photo = domainPhoto + photo;
@@ -128,7 +126,7 @@ public class DogSupplyTask implements Runnable {
                     dogSuppliesPK.setCategory(category.getIdcategory());
                     dogSupplies.setDogSuppliesPK(dogSuppliesPK);
                     //insert
-                    System.out.println("Inserted " + (DogSupplyCrawler.count++) + " - " + dogSupplies.getName() + " breeds");
+                    System.out.println("Inserted " + (DogSupplyCrawler.count++) + " - " + dogSupplies.getName() + " supplies");
 
                     dogSuppliesDAO.insertDogSupplies(dogSupplies);
                 }

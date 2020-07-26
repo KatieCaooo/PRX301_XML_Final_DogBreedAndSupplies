@@ -160,5 +160,5 @@ public class DogSupplies implements Serializable {
     public String toString() {
         return "thuct.dtos.DogSupplies[ dogSuppliesPK=" + dogSuppliesPK + " ]";
     }
-    
+
 }

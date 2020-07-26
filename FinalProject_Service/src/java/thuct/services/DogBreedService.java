@@ -406,7 +406,6 @@ public class DogBreedService {
                     / (rAdap + rHome + rCat + rChildren + rStranger + rBark + rHealth + rDog + rTrain + rWatch + rGroom + rShed + rSmart + rPlay + rExercise);
             listDogScore.add(new DogBreedScore(listSizeResult.get(i), avgScore));
         }
-        System.out.println("a");
         Collections.sort(listDogScore, (DogBreedScore o1, DogBreedScore o2) -> o2.getScore().compareTo(o1.getScore()));
         List<DogBreed> listResult = new ArrayList<>();
         for (int i = row * item; i < row * item + item; i++) {
@@ -442,4 +441,5 @@ public class DogBreedService {
         DogBreed breed = breedDAO.getDogID(idDog);
         return breed;
     }
+
 }

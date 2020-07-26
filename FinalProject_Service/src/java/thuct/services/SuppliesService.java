@@ -127,11 +127,8 @@ public class SuppliesService {
                             }
                         }
                     }
-                    System.out.println(currentSum);
                 }
             }
-            Float excess = priceHope - currentSum;
-            System.out.println("excess: " + excess);
         }
         return listSuppliesResult;
     }

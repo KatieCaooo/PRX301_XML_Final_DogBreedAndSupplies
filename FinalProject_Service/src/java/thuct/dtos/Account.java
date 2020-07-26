@@ -54,9 +54,11 @@ public class Account implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @JoinTable(name = "dog_love", joinColumns = {
-        @JoinColumn(name = "idaccount", referencedColumnName = "idaccount")}, inverseJoinColumns = {
-        @JoinColumn(name = "iddog_breed", referencedColumnName = "iddog_breed")})
+    @JoinTable(name = "dog_love",
+            joinColumns = {
+                @JoinColumn(name = "idaccount", referencedColumnName = "idaccount")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "iddog_breed", referencedColumnName = "iddog_breed")})
     @ManyToMany
     private List<DogBreed> dogBreedList = new ArrayList<>();
 
@@ -130,5 +132,5 @@ public class Account implements Serializable {
     public String toString() {
         return "thuct.dtos.Account[ idaccount=" + idaccount + " ]";
     }
-    
+
 }

@@ -48,5 +48,4 @@ public class AccountDAO implements Serializable {
         em.close();
         return check;
     }
-
 }

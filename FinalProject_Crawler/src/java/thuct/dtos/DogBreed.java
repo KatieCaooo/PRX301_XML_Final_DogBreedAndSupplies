@@ -325,5 +325,5 @@ public class DogBreed implements Serializable {
     public String toString() {
         return "thuct.dtos.DogBreed[ iddogBreed=" + iddogBreed + " ]";
     }
-    
+
 }

@@ -79,12 +79,23 @@ and open the template in the editor.
         </script>
     </head>
     <body style="background-color: #4e4c4c">
-        <nav class="navbar navbar-dark bg-dark justify-content-end">
+        <nav class="navbar navbar-dark bg-dark justify-content-start">
             <ul class="nav">
                 <li class="nav-item">
-                    <button type="button" class="btn btn-outline-warning" id="welcomeName" style="visibility: hidden"></button>
-                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#loginForm" data-whatever="@fat" id="openLogin">Login</button>
-                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#registerForm" data-whatever="@fat" id="signup">Sign Up</button>
+
+                    <div class="btn-group" id="welcomeName" style="display: none">
+                        <button type="button" class="btn btn-outline-warning dropdown-toggle" id="nameUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" onclick="favoriteDog()">My Favorite Dog</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" onclick="logout()">Sign out</a>
+                        </div>
+                    </div>
+                    <div class="btn-group" id="signInUp" style="display: block">
+                        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#loginForm" data-whatever="@fat" id="openLogin">Sign in</button>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#registerForm" data-whatever="@fat" id="openSignup">Sign Up</button>
+                    </div>
                 </li>
             </ul>
         </nav>
@@ -1170,6 +1181,7 @@ and open the template in the editor.
         </div>
         <script>
             var idAccount;
+            var name;
             function login() {
                 idAccount = document.getElementById("idAccount").value;
                 var pwd = document.getElementById("pwdAccount").value;
@@ -1179,16 +1191,17 @@ and open the template in the editor.
                 }
                 xmlHttp.onreadystatechange = function () {
                     if (this.readyState === 4 && this.status === 200) {
-                        document.getElementById("welcomeName").style.visibility = "visible";
-                        document.getElementById("welcomeName").innerHTML = "Welcome, " + idAccount;
+                        name = getCookie("name");
+                        document.getElementById("welcomeName").style.display = "block";
                         document.getElementById("openLogin").click();
-                        document.getElementById("openLogin").style.display = "none";
-                        document.getElementById("signup").style.display = "none";
+                        document.getElementById("signInUp").style.display = "none";
+                        var parser = new DOMParser();
+                        var xmlDom = parser.parseFromString(this.responseText, "application/xml");
                         setCookie('idaccount', idAccount, 7);
                         setCookie('name', xmlDom.firstChild.children[1].firstChild.nodeValue, 7);
+                        document.getElementById("nameUser").innerHTML = "Welcome, " + xmlDom.firstChild.children[1].firstChild.nodeValue;
                     }
-                    if (this.readyState === 4 && this.status === 500)
-                    {
+                    if (this.readyState === 4 && this.status === 500) {
                         document.getElementById("warningLogin").style.display = "block";
                     }
                 };
@@ -1258,7 +1271,7 @@ and open the template in the editor.
                     xmlHttp.onreadystatechange = function () {
                         if (this.readyState === 4 && this.status === 200) {
                             if (this.responseText === 1) {
-                                document.getElementById("signup").click();
+                                document.getElementById("openSignup").click();
                             } else if (this.responseText === 0) {
                                 document.getElementsByClassName("warningDuplicate")[0].style.display = "block";
                             }
@@ -1272,13 +1285,17 @@ and open the template in the editor.
             function logout() {
                 delete_cookie('idaccount');
                 delete_cookie('name');
+
+                document.getElementById("welcomeName").style.display = "none";
+                document.getElementById("signInUp").style.display = "block";
             }
             window.onload = function () {
                 idaccount = getCookie("idaccount");
                 name = getCookie("name");
                 if (idaccount !== "" && name !== "") {
-                    document.getElementById("welcomeName").style.visibility = "visible";
-                    document.getElementById("welcomeName").innerHTML = "Welcome, " + name;
+                    document.getElementById("welcomeName").style.display = "block";
+                    document.getElementById("signInUp").style.display = "none";
+                    document.getElementById("nameUser").innerHTML = "Welcome, " + name;
                 }
             };
         </script>

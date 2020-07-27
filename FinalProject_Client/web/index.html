@@ -34,7 +34,7 @@ and open the template in the editor.
                 }
                 return xmlHttp;
             }
-            
+
             function setCookie(cname, cvalue, exdays) {
                 var d = new Date();
                 d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -70,7 +70,6 @@ and open the template in the editor.
                         <button type="button" class="btn btn-outline-warning dropdown-toggle" id="nameUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" onclick="favoriteDog()">My Favorite Dog</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" onclick="logout()">Sign out</a>
                         </div>
@@ -808,8 +807,7 @@ and open the template in the editor.
                             + "</p>"
                             + "</div>"
                             + "<div class=\"card-footer text-center\">"
-                            + "<button class=\"btn btn-primary fas fa-info\" onClick=\"dogDetails(" + idDog + ")\"style=\"margin-right: 5px;\">Details</button>"
-                            + "<button class=\"btn btn-danger fas fa-heart\" onClick=\"dogLove(" + idDog + ")\"style=\"margin-left 5px\">Love</button>"
+                            + "<button class=\"btn btn-primary\" onClick=\"dogDetails(" + idDog + ")\">Details</button>"
                             + "</div>"
                             + "</div>"
                             + "</div>";
@@ -845,12 +843,13 @@ and open the template in the editor.
                 xmlHttp.open("GET", url, true);
                 xmlHttp.send(null);
             }
+            var priceDog=0;
             function drawDogDetails() {
                 var containerDetail = document.getElementById("containerDetailDog");
                 var detail = "";
                 var askBudget = "";
                 var breedNode = dogBreedDetailDom.firstChild;
-                var priceDog = breedNode.children[15].firstChild.nodeValue;
+                priceDog = breedNode.children[15].firstChild.nodeValue;
                 if (priceDog === 0 || priceDog === null) {
                     priceDog === "Unknown";
                 }
@@ -1032,7 +1031,10 @@ and open the template in the editor.
         <div id="suggestSuppliesContainer" class="container" style="display: none; background-color: #e0a800">
             <div class="row align-items-center" id="suggestSupplies">
 
-            </div>  
+            </div> 
+            <div id="totalSupplies">
+
+            </div> 
         </div>
         <script>
             var budget = 0;
@@ -1058,12 +1060,13 @@ and open the template in the editor.
                 xmlHttp.open("GET", url, true);
                 xmlHttp.send(null);
             }
+            
             function drawSuppliesList(budget) {
                 var container = document.getElementById("suggestSupplies");
-                var containerTotal = document.getElementById("suggestSuppliesContainer");
+                var containerTotal = document.getElementById("totalSupplies");
                 container.innerHTML = "";
+                containerTotal.innerHTML="";
                 var combo = "";
-                var calculator = "";
                 var total = 0;
                 var suppliesNodes = dogSuppliesDom.firstChild.children;
                 for (var i = 0; i < suppliesNodes.length; i++) {
@@ -1095,42 +1098,27 @@ and open the template in the editor.
                 }
                 container.innerHTML = container.innerHTML + combo;
                 var excess = parseFloat(budget - total);
-                calculator += "<div class=\"row-12 align-items-center\">"
-                        + "<div class=\"col-4 align-items-center\">"
-                        + "<p class=\"font-weight-bold\"style=\"color: red; font-size: 20px\">Total</p>"
+                var calculator = "";
+                calculator = "<div class=\"row bg-danger\">"
+                        + "<div class=\"col-4\">"
+                        + "<p class=\"font-weight-bold text-left\"style=\"color: white; font-size: 20px\">Total supplies</p>"
                         + "</div>"
-                        + "<div class=\"col-8 align-items-end\">"
+                        + "<div class=\"col-8 text-right font-weight-bold\"style=\"color: white; font-size: 20px\">"
                         + total.toFixed(2)
                         + "</div>"
                         + "</div>"
-                        + "<div class=\"row align-items-center\">"
-                        + "<div class=\"col-4 align-items-center\">"
-                        + "<p class=\"font-weight-bold\"style=\"color: red; font-size: 20px\">Excess</p>"
+                        + "<div class=\"row bg-success\">"
+                        + "<div class=\"col-4\">"
+                        + "<p class=\"font-weight-bold text-left\"style=\"color: white; font-size: 20px\">Excess</p>"
                         + "</div>"
-                        + "<div class=\"col-8 align-items-end\">"
+                        + "<div class=\"col-8 text-right font-weight-bold\"style=\"color: white; font-size: 20px\">"
                         + excess.toFixed(2)
                         + "</div>"
                         + "</div>";
-                containerTotal.innerHTML = containerTotal.innerHTML + calculator;
+                containerTotal.innerHTML = calculator;
             }
 
         </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         <!--Login-->
         <div class="modal fade" id="loginForm" tabindex="-1" role="dialog" aria-hidden="true">

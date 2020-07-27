@@ -98,7 +98,7 @@ public class SuppliesService {
                         listSuppliesResult.add(priceHopeList.get(0)); //mua
                         currentSum += priceHopeList.get(0).getPrice(); //tính tiền
                     } else {
-                        minPriceList.add(dogSuppliesDAO.getMinPrice(sizeDog, i));
+                        minPriceList.add(dogSuppliesDAO.getMinPrice(sizeSupplies, i));
                         listSuppliesResult.add(minPriceList.get(0));
                         currentSum += minPriceList.get(0).getPrice();
                     }
@@ -113,7 +113,7 @@ public class SuppliesService {
                     if (!status[i]) {
                         dogSupplies = null;
                         try {
-                            dogSupplies = dogSuppliesDAO.getFirstGreater(sizeDog, i + 1, listSuppliesResult.get(i).getPrice());
+                            dogSupplies = dogSuppliesDAO.getFirstGreater(sizeSupplies, i + 1, listSuppliesResult.get(i).getPrice());
                         } catch (NoResultException e) {
                             status[i] = true;
                         }

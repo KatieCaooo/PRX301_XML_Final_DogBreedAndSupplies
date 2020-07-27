@@ -86,7 +86,7 @@ public class DogBreedTask implements Runnable {
             Unmarshaller um = jAXBContext.createUnmarshaller();
             DogBreed tmp = (DogBreed) um.unmarshal(new StringReader(xmlBreed));
             String schemaPath = System.getProperty("user.dir") + "/web/WEB-INF/dogBreed.xsd";
-            if (checkXMLWithDTD(xmlBreed) && checkXMLWithSchema(xmlBreed, schemaPath)) {
+            if (checkXMLWithDTD(xmlBreed) && checkXMLWithSchema(xmlBreed, schemaPath)) { //check validate => JPA convert to Object => insert DB
                 //insert
                 System.out.println("Inserted " + (++DogBreedCrawler.count) + " - " + breed.getName() + " breeds");
                 breedDAO.insertDogBreed(tmp);
